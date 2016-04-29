@@ -44,6 +44,7 @@
 		</div>
 	</div>
 		<div id="menuBlock">
+			<input class = "input search" id="searchField" type="text" placeholder="6521555100:07:049:0017" name="searchField" />
 			<div id="leftVerticalMenu">
 				<ul>
 					<c:forEach var="item" items="${menuItems }">
@@ -66,10 +67,11 @@
             <label for="polygonToggle">Редактор</label>
         </li>
         <li>
-            <input type="checkbox" name="allow-pan" value="allow-pan" id="allowPanCheckbox" checked=true onclick="allowPan(this);" />
+            <input type="checkbox" name="allow-pan" value="allow-pan" id="allowPanCheckbox" checked onclick="allowPan(this);" />
             <label for="allowPanCheckbox">Позволить навигацию во время редактирования</label>
         </li>
     </ul>
 </div>
+<input type="hidden" id="fieldsArray" value='${fields}'>
 </body>
 </html>
