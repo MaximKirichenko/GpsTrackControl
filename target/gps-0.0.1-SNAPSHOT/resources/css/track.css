@@ -1,0 +1,146 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	font: 36px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica;
+	margin: 0;
+}
+
+#map {
+	height: 100%;
+	z-index: 1;
+}
+
+#loading{
+	color: black;
+	position:absolute;
+	left: 48%;
+	bottom: 48%;
+	z-index: 0;
+}
+
+#back-button{
+	position:absolute;
+	right: 50px;
+	top: 10px;
+	z-index: 2;
+	
+	background-color: #ffb94b;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fddb6f),
+		to(#ffb94b));
+	background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+	background-image: -moz-linear-gradient(top, #fddb6f, #ffb94b);
+	background-image: -ms-linear-gradient(top, #fddb6f, #ffb94b);
+	background-image: -o-linear-gradient(top, #fddb6f, #ffb94b);
+	background-image: linear-gradient(top, #fddb6f, #ffb94b);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0
+		rgba(255, 255, 255, 0.3) inset;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0
+		rgba(255, 255, 255, 0.3) inset;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3)
+		inset;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #d69e31 #e3a037 #d5982d #e3a037;
+	float: left;
+	height: 35px;
+	margin: 10px;
+/* 	padding: 0; */
+	width: 120px;
+	
+	cursor: pointer;
+	font: bold 15px Arial, Helvetica;
+	color: #8f5a0a;
+	opacity: 1;
+}
+#back-button a{
+	padding-top: 8px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+}
+#back-button a:FOCUS{
+	color: black;
+}
+#back-button a:HOVER{
+	color: black;
+}
+#back-button a:AFTER{
+	color: black;
+}
+#pathLength{
+	display: block;
+	position:absolute;
+	left: 10px;
+	bottom: 10px;
+	z-index: 2;
+	opacity: 0.8;
+	
+	font: bold 15px Arial, Helvetica;
+	
+	background: #4E5066;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#575e63), to(#3f4347));
+	background: -webkit-linear-gradient(top, #575e63, #3f4347);
+	background: -moz-linear-gradient(top, #575e63, #3f4347);
+	background: -ms-linear-gradient(top, #575e63, #3f4347);
+	background: -o-linear-gradient(top, #575e63, #3f4347);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	padding: 5px; 
+	-webkit-box-shadow : 0 0 2px rgba( 0, 0, 0, 0.2), 0 1px
+	1px rgba( 0, 0, 0, .2), 0 3px 0 #fff, 0 4px 0 rgba( 0, 0, 0, .2), 0 6px
+	0 #fff, 0 7px 0 rgba( 0, 0, 0, .2);
+	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(0, 0, 0, .1),
+		3px 3px 0 rgba(255, 255, 255, 1), 4px 4px 0 rgba(0, 0, 0, .1), 6px 6px
+		0 rgba(255, 255, 255, 1), 7px 7px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, .2), 0
+		3px 0 #fff, 0 4px 0 rgba(0, 0, 0, .2), 0 6px 0 #fff, 0 7px 0
+		rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 1px 1px
+		rgba(0, 0, 0, .2), 0 3px 0 #fff, 0 4px 0 rgba(0, 0, 0, .2), 0 6px 0
+		#fff, 0 7px 0 rgba(0, 0, 0, .2);
+}
+#empty{
+	display: block;
+	position:absolute;
+	left: 30%;
+	top: 48%;
+	z-index: 2;
+	opacity: 0.8;
+	
+	font: bold 15px Arial, Helvetica;
+	
+	background: #4E5066;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#575e63), to(#3f4347));
+	background: -webkit-linear-gradient(top, #575e63, #3f4347);
+	background: -moz-linear-gradient(top, #575e63, #3f4347);
+	background: -ms-linear-gradient(top, #575e63, #3f4347);
+	background: -o-linear-gradient(top, #575e63, #3f4347);
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	padding: 5px; 
+	-webkit-box-shadow : 0 0 2px rgba( 0, 0, 0, 0.2), 0 1px
+	1px rgba( 0, 0, 0, .2), 0 3px 0 #fff, 0 4px 0 rgba( 0, 0, 0, .2), 0 6px
+	0 #fff, 0 7px 0 rgba( 0, 0, 0, .2);
+	-moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(0, 0, 0, .1),
+		3px 3px 0 rgba(255, 255, 255, 1), 4px 4px 0 rgba(0, 0, 0, .1), 6px 6px
+		0 rgba(255, 255, 255, 1), 7px 7px 0 rgba(0, 0, 0, .1);
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, .2), 0
+		3px 0 #fff, 0 4px 0 rgba(0, 0, 0, .2), 0 6px 0 #fff, 0 7px 0
+		rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.2), 0 1px 1px
+		rgba(0, 0, 0, .2), 0 3px 0 #fff, 0 4px 0 rgba(0, 0, 0, .2), 0 6px 0
+		#fff, 0 7px 0 rgba(0, 0, 0, .2);
+	
+}
+
+

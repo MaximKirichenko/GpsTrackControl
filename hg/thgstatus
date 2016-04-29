@@ -1,0 +1,13 @@
+msrc/main/java
+msrc/main/java/com/ksgagro/gps/controller
+rsrc/main/java/com/ksgagro/gps/domain
+msrc/main/java/com/ksgagro/gps/domain/repository
+msrc/main/java/com/ksgagro/gps/domain/repository/impl
+msrc/main/java/com/ksgagro/gps/domain/service
+msrc/main/java/com/ksgagro/gps/domain/service/impl
+msrc/main/java/com/ksgagro/gps/interceptor
+msrc/main/webapp/WEB-INF/spring/webcontext
+msrc/main/webapp/WEB-INF/views
+msrc/main/webapp/resources/JS
+msrc/main/webapp/resources/JS/theme/default
+rsrc/main/webapp/resources/css

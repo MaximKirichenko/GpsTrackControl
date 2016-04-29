@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ksgagro.gps.domain">
+	<class name="Pay" table="AG_PAY">
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<many-to-one name="emp" column="EMP" unique="false" 
+		class="Emp" not-null="true" lazy="false"/>
+		<property name="nameR" column="NAME_R" />
+		<property name="docNumber" column="PAY_DOC_NUMBER" />
+		<property name="docDate" column="PAY_DOC_DATE" />
+		<property name="area" column="PAY_AREA" />
+	</class>
+</hibernate-mapping>
