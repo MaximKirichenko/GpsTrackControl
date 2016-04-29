@@ -11,19 +11,17 @@ var periodDto = {
 	};
 var lastPointContent;
 $("document").ready(function(){
-	//window.alert("hello");
-    $("#searchField").keyup(function(e){
-        if(e.keyCode == 13){
-            searchKadNumber($("#searchField").val());
-            $(this).blur();
-            return false;
-        }
-    });
+	LoadMap()
+//    $("#searchField").keyup(function(e){
+//        if(e.keyCode == 13){
+//            searchKadNumber($("#searchField").val());
+//            $(this).blur();
+//            return false;
+//        }
+//    });
    
 });
-function loadSuccess(){
-	console.log("Load succesful");
-}
+
 function LoadMap(){
     //Границы задаются для проекции EPSG:900913.
     var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508);
