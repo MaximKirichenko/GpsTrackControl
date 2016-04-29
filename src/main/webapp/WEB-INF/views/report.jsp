@@ -30,7 +30,7 @@
 					<li><a href="<spring:url value="/"/>">Карта</a></li>
 					<li><a href="<spring:url value="/chart"/>">Графики</a></li>
 					<li><a href="<spring:url value="/report"/>">Отчеты</a></li>
-					<li><a href="<spring:url value="report/trackPage?terminalNumber=82"/>">Администрирование</a></li> 
+					<li><a href="<spring:url value="/adminPage"/>">Администрирование</a></li> 
 					<li><a href="<spring:url value="/logout"/>">Выход</a></li>  
 				</ul>
 			</div>

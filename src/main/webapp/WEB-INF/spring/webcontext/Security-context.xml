@@ -63,6 +63,7 @@
 				<security:user name="RVV" password="888791" authorities="ROLE_AGRO_USER" />
 				<security:user name="KAE" password="775364" authorities="ROLE_AGRO_USER" />
 				<security:user name="YAN" password="111183" authorities="ROLE_AGRO_USER" />
+				<security:user name="AIL" password="Djkuf" authorities="ROLE_AGRO_USER" />
 				
 			</security:user-service>
 		</security:authentication-provider>
