@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -250,40 +252,9 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	public List<Refueling> getRefulingDate(List<List<TerminalDate>> stops, int terminalNumber){
 
 		List<Refueling> refulings = new ArrayList<>();
-		boolean isLeftRefuling = false;
-		boolean isRightRefuling = false;
-		System.out.println("**************** Stops ***********************");
-		for(List<TerminalDate> stopsList: stops){
-			System.out.println("start: " + new Date(stopsList.get(0).getMessageDate()) + " end " + new Date(stopsList.get(stopsList.size()-1).getMessageDate()));
-		}
+		
 		for(List<TerminalDate> stopDateList: stops){
-			TerminalDate previous = null;
-			List<TerminalDate> refulingLeftDates = new ArrayList<>();
-			List<TerminalDate> refulingRightDates = new ArrayList<>();
-			for(TerminalDate current: stopDateList){
-				
-				if(previous == null){
-					previous = current;
-					continue;
-				}
-				//left tank
-				if(previous.getLeftGasTank()<current.getLeftGasTank()){
-					isLeftRefuling = true;
-					refulingLeftDates.add(previous);
-				}else if(isLeftRefuling && previous.getLeftGasTank()>=current.getLeftGasTank()){
-					isLeftRefuling = false;
-					refulingLeftDates.add(current);
-				}
-				//right tank
-				if(previous.getRightGasTank()<current.getRightGasTank()){
-					isRightRefuling = true;
-					refulingRightDates.add(previous);
-				}else if(isRightRefuling && previous.getRightGasTank()>=current.getRightGasTank()){
-					isRightRefuling = false;
-					refulingRightDates.add(current);
-				}
-				previous = current;
-			}
+			DataAboutRefuling refData = getRefulingFromStopList(stopDateList);
 			Refueling refuling = new Refueling();
 			
 			long refulingLeftStartTime = Long.MAX_VALUE;
@@ -298,17 +269,17 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			
 
 
-			if(refulingLeftDates.size()>0){
-				refulingLeftStartTime = refulingLeftDates.get(0).getMessageDate();
-				refulingLeftEndTime = refulingLeftDates.get(refulingLeftDates.size()-1).getMessageDate();
-				leftFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 1, refulingLeftDates.get(0).getLeftGasTank());
-				leftFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 1, refulingLeftDates.get(refulingLeftDates.size()-1).getLeftGasTank());
+			if(refData.leftTanks.size()>0){
+				refulingLeftStartTime = refData.leftTanks.get(0).getMessageDate();
+				refulingLeftEndTime = refData.leftTanks.get(refData.leftTanks.size()-1).getMessageDate();
+				leftFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 1, refData.leftTanks.get(0).getLeftGasTank());
+				leftFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 1, refData.leftTanks.get(refData.leftTanks.size()-1).getLeftGasTank());
 			}
-			if(refulingRightDates.size()>0){
-				refulingRightStartTime = refulingRightDates.get(0).getMessageDate();
-				refulingRightEndTime = refulingRightDates.get(refulingRightDates.size()-1).getMessageDate();
-				rightFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 2, refulingRightDates.get(0).getRightGasTank());
-				rightFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 2, refulingRightDates.get(refulingRightDates.size()-1).getRightGasTank());
+			if(refData.rightTanks.size()>0){
+				refulingRightStartTime = refData.rightTanks.get(0).getMessageDate();
+				refulingRightEndTime = refData.rightTanks.get(refData.rightTanks.size()-1).getMessageDate();
+				rightFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 2, refData.rightTanks.get(0).getRightGasTank());
+				rightFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 2, refData.rightTanks.get(refData.rightTanks.size()-1).getRightGasTank());
 
 			}
 			
@@ -341,6 +312,94 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		}
 		
 		return refulings;
+	}
+	private DataAboutRefuling getRefulingFromStopList(List<TerminalDate> stopList){
+
+		DataAboutRefuling curentRefuling = new DataAboutRefuling();
+	
+		for(int i = 0; i<stopList.size(); i++){
+			if(i>0){
+				curentRefuling = analizeAndAddLeftTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i));
+				curentRefuling = analizeAndAddRightTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i));
+			}
+			
+		}
+		
+		return curentRefuling;
+	}
+	private DataAboutRefuling analizeAndAddLeftTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent){
+		if(refulingIsActive(previous.getLeftGasTank(), curent.getLeftGasTank())){
+			refuling.startLeftRefuling();
+			refuling.addLeftTanksData(previous);
+		
+		}else if(refulingIsFinished(refuling.isLeftRefulingActive(), previous.getLeftGasTank(), curent.getRightGasTank())){
+			refuling.finishedLeftRefuling();
+			refuling.addLeftTanksData(curent);
+		}
+		return refuling;
+	}
+	private DataAboutRefuling analizeAndAddRightTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent){
+		
+		int previousFuelLevel = previous.getRightGasTank();
+		int curentFuelLevel = curent.getRightGasTank();
+		
+		if(refulingIsActive(previousFuelLevel, curentFuelLevel)){
+			refuling.startRightRefuling();
+			refuling.addRightTanksData(previous);
+		
+		}else if(refulingIsFinished(refuling.isRightRefulingActive(), previousFuelLevel, curentFuelLevel)){
+			refuling.finishedRightRefuling();
+			refuling.addRightTanksData(curent);
+		}
+		return refuling;
+	}
+	
+	private boolean refulingIsFinished(boolean isRefuling, int previous, int curent){
+		return isRefuling && previous>=curent;
+	}
+
+	private boolean refulingIsActive(int previous, int curent){
+		return previous<curent;
+	}
+
+	
+	private class DataAboutRefuling{
+		List<TerminalDate> leftTanks;
+		List<TerminalDate> rightTanks;
+		Boolean isLeftRefuling;
+		Boolean isRightRefuling;
+		
+		public DataAboutRefuling() {
+			leftTanks = new ArrayList<>();
+			rightTanks = new ArrayList<>();
+			isLeftRefuling = false;
+			isRightRefuling = false;
+		}
+		public void addLeftTanksData(TerminalDate data){
+			leftTanks.add(data);
+		}
+		public void addRightTanksData(TerminalDate data){
+			rightTanks.add(data);
+		}
+		public void finishedLeftRefuling(){
+			isLeftRefuling = false;
+		}
+		public void startLeftRefuling(){
+			isLeftRefuling = true;
+		}
+		public boolean isLeftRefulingActive(){
+			return this.isLeftRefuling;
+		}
+		public void finishedRightRefuling(){
+			isRightRefuling = false;
+		}
+		public void startRightRefuling(){
+			isRightRefuling =true;
+		}
+		public boolean isRightRefulingActive(){
+			return isRightRefuling;
+		}
+		
 	}
 	
 
