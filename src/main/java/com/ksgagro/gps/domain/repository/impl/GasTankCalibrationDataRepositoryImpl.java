@@ -17,12 +17,16 @@ import com.ksgagro.gps.domain.GasTankCalibrationData;
 import com.ksgagro.gps.domain.GasTankPosition;
 import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.repository.GasTankCalibrationDataRepository;
+import com.ksgagro.gps.domain.service.VehicleService;
 
 @Repository
 public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationDataRepository{
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	VehicleService vehicleService;
 	
 	public GasTankCalibrationDataRepositoryImpl(){};
 
@@ -39,20 +43,20 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 		return list;
 	}
 	
+	//TODO refactor this
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<GasTankCalibrationData> getValues(int terminal){
+	public List<GasTankCalibrationData> getCalibrationDataByVehicleId(int vehicleId){
 		Session session = sessionFactory.getCurrentSession();
 		
-		Criteria vehicleCriteria = session.createCriteria(Vehicle.class);
 		Criteria calibrationDataCriteria= session.createCriteria(GasTankCalibrationData.class);
 		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
 		
-		vehicleCriteria.add(Restrictions.eq("numberTerminal", terminal));
-		Vehicle vehicle = (Vehicle)vehicleCriteria.uniqueResult();
+		Vehicle vehicle = vehicleService.getVehicleById(vehicleId);
 		
 		gasTankCriteria.add(Restrictions.eq("vehicle", vehicle));
 		List<GasTank> gasTanks = gasTankCriteria.list();
+		
 		if(gasTanks.size()>0){
 			calibrationDataCriteria.add(Restrictions.in("gasTank", gasTanks));
 			return calibrationDataCriteria.list();
@@ -61,6 +65,7 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 		return null;
 		
 	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<GasTankCalibrationData> getLeftValues(int terminal){

@@ -2,6 +2,7 @@ package com.ksgagro.gps.domain.repository.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -20,6 +21,8 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	private Logger logger = Logger.getLogger(VehicleRepositoryImpl.class);
 	
 	public VehicleRepositoryImpl(){}
 	
@@ -63,12 +66,18 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 		return result;
 	}
 
+	@Override
 	@Transactional
-	public Vehicle getVehicleByNumberTerminal(int terminalNumber) {
+	public Vehicle getVehicleById(int vehicleId) {
 		Session session = sessionFactory.getCurrentSession();
-		Vehicle vehicle = (Vehicle)session.get(Vehicle.class, terminalNumber);
+		Criteria criteria = session.createCriteria(Vehicle.class);
+		SimpleExpression getVehicleByIdExpression = Restrictions.eq("id", vehicleId);
+		criteria.add(getVehicleByIdExpression);
+		Vehicle vehicle = (Vehicle)criteria.uniqueResult();
+		logger.info("vehicleById " + vehicle);
 		return vehicle;
 	}
-	
+
+
 	
 }

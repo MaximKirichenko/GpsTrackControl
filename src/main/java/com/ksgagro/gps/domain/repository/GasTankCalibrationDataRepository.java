@@ -6,7 +6,7 @@ import com.ksgagro.gps.domain.GasTankCalibrationData;
 
 public interface GasTankCalibrationDataRepository {
 	List<GasTankCalibrationData> getValues();
-	List<GasTankCalibrationData> getValues(int terminal);
+	List<GasTankCalibrationData> getCalibrationDataByVehicleId(int terminal);
 	List<GasTankCalibrationData> getLeftValues(int terminal);
 	List<GasTankCalibrationData> getRightValues(int terminal);
 }

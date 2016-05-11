@@ -61,7 +61,7 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 	}
 	
 	private List<GasTankCalibrationData> filteringData(int terminalNumber, int gasTankPosition) {
-		List<GasTankCalibrationData> list = calibrationDataRepository.getValues(terminalNumber);
+		List<GasTankCalibrationData> list = calibrationDataRepository.getCalibrationDataByVehicleId(terminalNumber);
 		if(list == null || list.size()==0){
 			return null;
 		}
@@ -128,7 +128,7 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 	}
 	public List<GasTankCalibrationData> getValues(int terminal) {
 		
-		return calibrationDataRepository.getValues(terminal);
+		return calibrationDataRepository.getCalibrationDataByVehicleId(terminal);
 	}
 	public List<GasTankCalibrationData> getLeftValues(int terminal) {
 		

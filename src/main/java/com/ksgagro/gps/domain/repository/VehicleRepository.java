@@ -8,6 +8,6 @@ public interface VehicleRepository {
 	List<Vehicle> getList();
 	List<Vehicle> getListFromGroup(int grouId);
 	List<Vehicle> getListFromLocation(int locationId);
-	Vehicle getVehicleByNumberTerminal(int terminalNumber);
+	Vehicle getVehicleById(int vehicleId);
 
 }

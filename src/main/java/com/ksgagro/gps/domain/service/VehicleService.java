@@ -6,4 +6,6 @@ import com.ksgagro.gps.domain.Vehicle;
 
 public interface VehicleService {
 	List<Vehicle> getList();
+	Vehicle getVehicleById(int vehicleId);
+	List<Vehicle> getListFromLocation(int locationId);
 }

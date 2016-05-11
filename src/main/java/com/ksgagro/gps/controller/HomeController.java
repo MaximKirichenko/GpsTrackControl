@@ -34,6 +34,7 @@ import com.ksgagro.gps.domain.service.AgroFieldsService;
 import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.domain.service.TerminalDateService;
 import com.ksgagro.gps.domain.service.TerminalService;
+import com.ksgagro.gps.domain.service.VehicleService;
 
 @Controller
 public class HomeController {
@@ -45,7 +46,7 @@ public class HomeController {
 	private VehicleGroupRepository vehicleGroupRepository;
 	
 	@Autowired
-	private VehicleRepository vehicleRepository;
+	private VehicleService vehicleService;
 	
 	@Autowired
 	private TerminalDateService terminalDateService;
@@ -76,8 +77,8 @@ public class HomeController {
 
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
-		List<Vehicle> listVehicle = vehicleRepository.getList();
-		List<Vehicle> vehicleInEnterprise = vehicleRepository.getListFromLocation(1);
+		List<Vehicle> listVehicle = vehicleService.getList();
+		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
 
 		model.addObject("listLocation", listLocation);
 		model.addObject("listGroup", listGroup);
@@ -104,7 +105,8 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value="/carInfo")
 	public @ResponseBody Vehicle getCarInfo(@RequestBody int terminalNumber){
-		Vehicle vehicle = vehicleRepository.getVehicleByNumberTerminal(terminalNumber);
+		logger.info("Selected vehicle id: " + terminalNumber);
+		Vehicle vehicle = vehicleService.getVehicleById(terminalNumber);
 		return vehicle;
 	}
 	
@@ -114,7 +116,7 @@ public class HomeController {
 		VehicleDetailsTable table = new VehicleDetailsTable();
 		TerminalDate terminalDate = terminalDateService.getLastSignal(vehicleId);		
 		table.setTerminalDate(terminalDateService.getLastSignal(vehicleId));
-		table.setVehicle(vehicleRepository.getVehicleByNumberTerminal(vehicleId));
+		table.setVehicle(vehicleService.getVehicleById(vehicleId));
 		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getLeftGasTank()));
 		table.setFuelLevelRight(calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getRightGasTank()));
 		table.setTerminal(terminalService.getTerminal(vehicleId));
@@ -125,11 +127,11 @@ public class HomeController {
 	
 	@RequestMapping("/build")
 	public String buildrTreck(Model model){
-		Vehicle car = vehicleRepository.getVehicleByNumberTerminal(82);
+		Vehicle car = vehicleService.getVehicleById(82);
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
-		List<Vehicle> listVehicle = vehicleRepository.getList();
-		List<Vehicle> vehicleInEnterprise = vehicleRepository.getListFromLocation(1);
+		List<Vehicle> listVehicle = vehicleService.getList();
+		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
 		
 		String carName = car.getName() + " (" + car.getRegNumber() + ")";
 		//model.addAttribute("numberTerminal", car.getNumberTerminal());
@@ -151,7 +153,7 @@ public class HomeController {
 	@RequestMapping("/carDetails")
 	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
 		TerminalDate terminalDate = terminalDateService.getLastSignal(terminalNumber);
-		Vehicle car = vehicleRepository.getVehicleByNumberTerminal(terminalNumber);
+		Vehicle car = vehicleService.getVehicleById(terminalNumber);
 		String status;
 		Date date = new Date(terminalDate.getMessageDate());
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");

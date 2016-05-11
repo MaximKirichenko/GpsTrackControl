@@ -92,7 +92,7 @@ public class ChartController {
 		model.addAttribute("listGroup", listGroup);
 		model.addAttribute("listVehicle", listVehicle);
 		model.addAttribute("vehicleInEnterprise", vehicleInEnterprise);
-		Vehicle car = vehicleRepository.getVehicleByNumberTerminal(terminalNumber);
+		Vehicle car = vehicleRepository.getVehicleById(terminalNumber);
 		String carName = car.getName() + " " + car.getRegNumber();
 		model.addAttribute("carName", carName);
 //		model.addAttribute("numberTerminal", car.getNumberTerminal());

@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 
 	@Autowired
 	TerminalRepository terminalRepository;
+	
+	Logger logger = Logger.getLogger(TerminalDateServiceImpl.class);
 	
 	public List<TerminalDate> getVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
 		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
@@ -152,6 +155,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	
 	public TerminalDate getLastSignal(int vehicleId){
 		Terminal terminal = terminalRepository.getTerminalByVehicleId(vehicleId);
+		//logger.info(terminal);
 		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
 		return point;
 	}

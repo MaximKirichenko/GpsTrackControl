@@ -19,4 +19,14 @@ public class VehicleServiceImpl implements VehicleService{
 		return vehicleRepository.getList();
 	}
 
+	@Override
+	public Vehicle getVehicleById(int vehicleId) {
+		return vehicleRepository.getVehicleById(vehicleId);
+	}
+
+	@Override
+	public List<Vehicle> getListFromLocation(int locationId) {
+		return vehicleRepository.getListFromLocation(locationId);
+	}
+
 }
