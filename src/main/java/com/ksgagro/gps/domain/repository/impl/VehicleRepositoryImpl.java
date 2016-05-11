@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,13 +40,14 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 	@Transactional
 	public List<Vehicle> getListFromGroup(int groupId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "FROM Vehicle vehicle WHERE vehicle.group.id = :group_id";
-		Query query = session.createQuery(hql);
-		query.setParameter("group_id", groupId);
-		@SuppressWarnings("unchecked")
-		List<Vehicle> result = query.list();
+		Criteria criteria = session.createCriteria(Vehicle.class);
+		SimpleExpression getVehicleInGroupExcpression = Restrictions.eq("groupId", groupId);
+		criteria.add(getVehicleInGroupExcpression);
 		
-		return result;
+		@SuppressWarnings("unchecked")
+		List<Vehicle> vehicles = criteria.list();
+		
+		return vehicles;
 	}
 
 
@@ -62,8 +65,9 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 
 	@Transactional
 	public Vehicle getVehicleByNumberTerminal(int terminalNumber) {
-		// TODO Auto-generated method stub
-		return (Vehicle) sessionFactory.getCurrentSession().get(Vehicle.class, terminalNumber);
+		Session session = sessionFactory.getCurrentSession();
+		Vehicle vehicle = (Vehicle)session.get(Vehicle.class, terminalNumber);
+		return vehicle;
 	}
 	
 	

@@ -39,8 +39,8 @@
 </head>
 <body>
 <div id="map"></div>
-<input id="terminalNumber" type="hidden" name="terminalNumber"
-				value="${numberTerminal}" /> 
+<input id="terminalNumber" type="hidden" name="vehicleId"
+				value="${vehicleId}" /> 
 <input id="selectedTerminalNumber" type="hidden" name="selectedTerminalNumber"
 				value="" /> 
 	<div id="pop-up-window" style="display: none;">
@@ -99,8 +99,8 @@
 					</label>
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
-								<c:if test="${group.id == car.group.id && car.numberTerminal != 72}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+								<c:if test="${group.id == car.group.id && car.id != 72}">
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>

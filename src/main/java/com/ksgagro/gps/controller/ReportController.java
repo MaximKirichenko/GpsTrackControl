@@ -55,13 +55,13 @@ public class ReportController {
 		for(Vehicle vehicle: vehicleList){
 			ReportGroupDTO item = new ReportGroupDTO();
 			
-			List<TerminalDate> terminalDates = terminalDateService.getVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getNumberTerminal());
-			terminalDates = terminalDateService.filterData(terminalDates);
-			double consumption = terminalDateService.getCanConsumption(terminalDates);
-			double mileage = terminalDateService.getPathLength(terminalDates);
-			item.setVehicle(vehicle);
-			item.setConsumption(consumption);
-			item.setMileage(mileage);
+//			List<TerminalDate> terminalDates = terminalDateService.getVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getNumberTerminal());
+//			terminalDates = terminalDateService.filterData(terminalDates);
+//			double consumption = terminalDateService.getCanConsumption(terminalDates);
+//			double mileage = terminalDateService.getPathLength(terminalDates);
+//			item.setVehicle(vehicle);
+//			item.setConsumption(consumption);
+//			item.setMileage(mileage);
 			report.add(item);
 			
 		}

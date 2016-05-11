@@ -95,7 +95,7 @@ public class ChartController {
 		Vehicle car = vehicleRepository.getVehicleByNumberTerminal(terminalNumber);
 		String carName = car.getName() + " " + car.getRegNumber();
 		model.addAttribute("carName", carName);
-		model.addAttribute("numberTerminal", car.getNumberTerminal());
+//		model.addAttribute("numberTerminal", car.getNumberTerminal());
 		
 		/*Detail table filing*/
 		String status;

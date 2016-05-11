@@ -126,9 +126,10 @@ public class HomeController {
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
 		List<Vehicle> listVehicle = vehicleRepository.getList();
-		List<Vehicle> vehicleInEnterprise = vehicleRepository.getListFromLocation(1);	
+		List<Vehicle> vehicleInEnterprise = vehicleRepository.getListFromLocation(1);
+		
 		String carName = car.getName() + " (" + car.getRegNumber() + ")";
-		model.addAttribute("numberTerminal", car.getNumberTerminal());
+		//model.addAttribute("numberTerminal", car.getNumberTerminal());
 		model.addAttribute("carName", carName);
 		model.addAttribute("listLocation", listLocation);
 		model.addAttribute("listGroup", listGroup);

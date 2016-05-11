@@ -38,7 +38,6 @@
 				<security:user name="Lada" password="7777" authorities="ROLE_ADMIN" />
 				<security:user name="PrNa" password="666666" authorities="ROLE_ADMIN" />
 				<security:user name="NMO" password="5432" authorities="ROLE_ADMIN" />
-				<security:user name="GOAA" password="842654" authorities="ROLE_ADMIN" />
 				
 				<security:user name="LAM" password="620113" authorities="ROLE_AGRO_USER" />
 				<security:user name="VSA" password="431374" authorities="ROLE_AGRO_USER" />

@@ -6,7 +6,7 @@ public class Vehicle implements Serializable{
 	
 	private static final long serialVersionUID = 4604304450106985899L;
 	
-	private int numberTerminal;
+	private int id;
 	private String name;
 	private String regNumber;
 	private VehicleGroup group;
@@ -14,29 +14,16 @@ public class Vehicle implements Serializable{
 	
 	public Vehicle(){}
 	
-	public Vehicle(int numberTerminal, String name, String regNumber, VehicleGroup group, Location enterprise) {
-		super();
-		this.numberTerminal = numberTerminal;
-		this.name = name;
-		this.regNumber = regNumber;
-		this.group = group;
-		this.enterprise = enterprise;
+	
+	public int getId() {
+		return id;
 	}
 
-	public Vehicle(Vehicle vehicle) {
-		this.numberTerminal = vehicle.numberTerminal;
-		this.name = vehicle.name;
-		this.regNumber = vehicle.regNumber;
-		this.group = new VehicleGroup(vehicle.getGroup());
-		this.enterprise = new Location(vehicle.getEnterprise());
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getNumberTerminal() {
-		return numberTerminal;
-	}
-	public void setNumberTerminal(int numberTerminal) {
-		this.numberTerminal = numberTerminal;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,13 +49,19 @@ public class Vehicle implements Serializable{
 		this.enterprise = enterprise;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + numberTerminal;
+		result = prime * result + ((enterprise == null) ? 0 : enterprise.hashCode());
+		result = prime * result + ((group == null) ? 0 : group.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((regNumber == null) ? 0 : regNumber.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -79,15 +72,41 @@ public class Vehicle implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vehicle other = (Vehicle) obj;
-		if (numberTerminal != other.numberTerminal)
+		if (enterprise == null) {
+			if (other.enterprise != null)
+				return false;
+		} else if (!enterprise.equals(other.enterprise))
+			return false;
+		if (group == null) {
+			if (other.group != null)
+				return false;
+		} else if (!group.equals(other.group))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (regNumber == null) {
+			if (other.regNumber != null)
+				return false;
+		} else if (!regNumber.equals(other.regNumber))
 			return false;
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Vehicle [numberTerminal=" + numberTerminal + ", name=" + name + ", regNumber=" + regNumber + ", group="
-				+ group + ", enterprise=" + enterprise + "]";
+		return "Vehicle [id=" + id + ", name=" + name + ", regNumber=" + regNumber + ", group=" + group
+				+ ", enterprise=" + enterprise + "]";
 	}
+
+	
+	
+
+
 	
 }

@@ -13,13 +13,6 @@ public class GasTankCalibrationData implements Serializable{
 		super();
 	}
 	
-	public GasTankCalibrationData(GasTankCalibrationData data) {
-		this.id = data.id;
-		this.gasTank = new GasTank(data.gasTank);
-		this.fuelLevel = data.fuelLevel;
-		this.data = data.data;
-		System.out.println("Create GasTankCalibrationData " + this.toString());
-	}
 	
 	public GasTankCalibrationData(int id, GasTank gasTank, int fuelLevel, int data) {
 		super();

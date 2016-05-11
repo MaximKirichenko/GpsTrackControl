@@ -59,6 +59,7 @@ public class ChartServiceImpl implements ChartService{
 		for(TerminalDate data: terminalDates){
 			leftTankDatas.add(gasTankService.getFuelLevel(data.getLeftGasTank(), fuelDataLeft));
 			rightTankDatas.add(gasTankService.getFuelLevel(data.getRightGasTank(), fuelDataRight));
+			System.out.println(data);
 //			leftTankDatas.add((double)data.getLeftGasTank());
 //			rightTankDatas.add((double)data.getRightGasTank());
 			engineSpeedDatas.add(data.getEngineSpeed()/(4*10));

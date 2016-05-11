@@ -17,12 +17,6 @@ public class GasTank implements Serializable{
 		this.vehicle = vehicle;
 		this.gasTankPosition = gasTankPosition;
 	}
-	public GasTank(GasTank gasTank) {
-		this.id = gasTank.id;
-		this.vehicle = new Vehicle(gasTank.vehicle);
-		this.gasTankPosition = new GasTankPosition(gasTankPosition);
-		System.out.println("GasTank: " + this.toString());
-	}
 	public int getId() {
 		return id;
 	}
