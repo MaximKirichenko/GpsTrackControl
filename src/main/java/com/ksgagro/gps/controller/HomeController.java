@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +60,8 @@ public class HomeController {
 	@Autowired
 	private TerminalService terminalService;
 	
+	Logger logger = Logger.getLogger(HomeController.class);
+	
 	@RequestMapping("/home")
 	public ModelAndView helloPage(){
 		ModelAndView model = new ModelAndView("home");
@@ -106,15 +109,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
-	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int terminalNumber){
-		System.out.println("Номер терминала: " + terminalNumber);
+	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
+		logger.info("Номер терминала: " + vehicleId);
 		VehicleDetailsTable table = new VehicleDetailsTable();
-		TerminalDate terminalDate = terminalDateService.getLastSignal(terminalNumber);		
-		table.setTerminalDate(terminalDateService.getLastSignal(terminalNumber));
-		table.setVehicle(vehicleRepository.getVehicleByNumberTerminal(terminalNumber));
-		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(terminalNumber, 1, terminalDate.getLeftGasTank()));
-		table.setFuelLevelRight(calibrationDataService.getFuelLevel(terminalNumber, 2, terminalDate.getRightGasTank()));
-		table.setTerminal(terminalService.getTerminal(terminalNumber));
+		TerminalDate terminalDate = terminalDateService.getLastSignal(vehicleId);		
+		table.setTerminalDate(terminalDateService.getLastSignal(vehicleId));
+		table.setVehicle(vehicleRepository.getVehicleByNumberTerminal(vehicleId));
+		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getLeftGasTank()));
+		table.setFuelLevelRight(calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getRightGasTank()));
+		table.setTerminal(terminalService.getTerminal(vehicleId));
 		return table;
 	}
 

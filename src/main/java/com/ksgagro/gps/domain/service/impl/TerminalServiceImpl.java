@@ -15,7 +15,7 @@ public class TerminalServiceImpl implements TerminalService{
 	
 	@Override
 	public Terminal getTerminal(int id) {
-		return terminalRepository.getTerminalById(id);
+		return terminalRepository.getTerminalByVehicleId(id);
 	}
 
 }

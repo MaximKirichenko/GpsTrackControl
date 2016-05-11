@@ -13,7 +13,7 @@ public interface TerminalDateService {
 			String dateFrom, String timeFrom, String dateTo, String timeTo, int terminalNumber);
 	public double getPathLength(List<TerminalDate> terminalDate);
 	public Date getLastSignalDate(int terminalNumber);
-	public TerminalDate getLastSignal(int terminalNumber);
+	public TerminalDate getLastSignal(int vehicleId);
 	public List<TerminalDate> filterData(List<TerminalDate> inputList);
 	public double getCanConsumption(List<TerminalDate> terminalDates);
 	public Date getStartMovementTime(List<TerminalDate> terminalDate);

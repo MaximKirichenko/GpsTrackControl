@@ -12,5 +12,6 @@
 		<property name="name" column="NAME" />
 		<property name="soft" column="SOFT" />
 		<property name="telephone" column="TELEPHONE_NUMBER" />
+		<property name="vehicle" column="VEHICLE" />
 	</class>
 </hibernate-mapping>

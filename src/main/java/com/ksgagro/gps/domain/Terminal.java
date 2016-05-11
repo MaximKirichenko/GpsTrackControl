@@ -11,6 +11,7 @@ public class Terminal implements Serializable{
 	private String name;
 	private String soft;
 	private String telephone;
+	private int vehicle;
 	
 	public Terminal() {}
 	public Terminal(int id, String imei, String name, String soft, String telephone) {
@@ -51,6 +52,14 @@ public class Terminal implements Serializable{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	
+	
+	public int getVehicle() {
+		return vehicle;
+	}
+	public void setVehicle(int vehicle) {
+		this.vehicle = vehicle;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,6 +80,12 @@ public class Terminal implements Serializable{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Terminal [id=" + id + ", imei=" + imei + ", name=" + name + ", soft=" + soft + ", telephone="
+				+ telephone + ", vehicle=" + vehicle + "]";
+	}
+	
 	
 	
 

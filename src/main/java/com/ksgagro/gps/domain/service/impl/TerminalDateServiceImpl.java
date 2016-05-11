@@ -37,7 +37,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	TerminalRepository terminalRepository;
 	
 	public List<TerminalDate> getVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
-		Terminal terminal = terminalRepository.getTerminalById(terminalNumber);
+		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
 
 		List<TerminalDate> inputList = terminalDateRepository.getListFromPeriod(millisFrom, millisTo,
 				terminal.getImei());
@@ -97,7 +97,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		ZonedDateTime toZdt = timeToLTD.atZone(ZoneId.systemDefault());
 		long millisTo = toZdt.toInstant().toEpochMilli();
 
-		Terminal terminal = terminalRepository.getTerminalById(terminalNumber);
+		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
 
 		List<TerminalDate> inputList = terminalDateRepository.getListFromPeriod(millisFrom, millisTo,
 				terminal.getImei());
@@ -144,14 +144,14 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	}
 	
 	public Date getLastSignalDate(int terminalNumber) {
-		Terminal terminal = terminalRepository.getTerminalById(terminalNumber);
+		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
 		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
 		
 		return new Date(point.getMessageDate());
 	}
 	
-	public TerminalDate getLastSignal(int terminalNumber){
-		Terminal terminal = terminalRepository.getTerminalById(terminalNumber);
+	public TerminalDate getLastSignal(int vehicleId){
+		Terminal terminal = terminalRepository.getTerminalByVehicleId(vehicleId);
 		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
 		return point;
 	}

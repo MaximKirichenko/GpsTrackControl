@@ -1,7 +1,10 @@
 package com.ksgagro.gps.domain.repository.impl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +19,13 @@ public class TerminalRepositoryImpl implements TerminalRepository{
 	SessionFactory sessionFactory;
 	
 	@Transactional
-	public Terminal getTerminalById(int id) {
+	public Terminal getTerminalByVehicleId(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Terminal)session.get(Terminal.class, id);
+		Criteria criteria = session.createCriteria(Terminal.class);
+		SimpleExpression getTerminalByVehicleIdExcpression = Restrictions.eq("vehicle", id);
+		criteria.add(getTerminalByVehicleIdExcpression);
+		Terminal terminal = (Terminal)criteria.uniqueResult();
+		return terminal;
 	}
 
 }
