@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,6 +28,8 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 	
 	@Autowired
 	VehicleService vehicleService;
+	
+	Logger logger = Logger.getLogger(GasTankCalibrationDataRepositoryImpl.class);
 	
 	public GasTankCalibrationDataRepositoryImpl(){};
 
@@ -68,23 +71,30 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<GasTankCalibrationData> getLeftValues(int terminal){
+	public List<GasTankCalibrationData> getLeftValues(int id){
 		Session session = sessionFactory.getCurrentSession();
 		
-		Criteria vehicleCriteria = session.createCriteria(Vehicle.class);
+		
 		Criteria calibrationDataCriteria= session.createCriteria(GasTankCalibrationData.class);
 		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
+		
+		
+		
+		Vehicle vehicle = vehicleService.getVehicleById(id);
+		logger.info(vehicle);
+		
 		Criteria gasTankPositionCriteria = session.createCriteria(GasTankPosition.class);
-		
-		vehicleCriteria.add(Restrictions.eq("numberTerminal", terminal));
-		Vehicle vehicle = (Vehicle)vehicleCriteria.uniqueResult();
-		
 		gasTankPositionCriteria.add(Restrictions.eq("position", "LEFT"));
 		GasTankPosition gasTankPosition = (GasTankPosition)gasTankPositionCriteria.uniqueResult();
+		logger.info(gasTankPosition);
 		
 		gasTankCriteria.add(Restrictions.eq("vehicle", vehicle));
-		gasTankCriteria.add(Restrictions.eq("gasTankPosition", gasTankPosition));
 		List<GasTank> gasTanks = gasTankCriteria.list();
+		logger.info(gasTanks);
+		
+		gasTankCriteria.add(Restrictions.eq("gasTankPosition", gasTankPosition));
+		gasTanks = gasTankCriteria.list();
+		logger.info(gasTanks);
 		if(gasTanks.size()>0){
 			calibrationDataCriteria.add(Restrictions.in("gasTank", gasTanks)).addOrder(Order.asc("fuelLevel"));
 			
@@ -96,16 +106,15 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 	}
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<GasTankCalibrationData> getRightValues(int terminal){
+	public List<GasTankCalibrationData> getRightValues(int id){
 		Session session = sessionFactory.getCurrentSession();
 		
-		Criteria vehicleCriteria = session.createCriteria(Vehicle.class);
+		
 		Criteria calibrationDataCriteria= session.createCriteria(GasTankCalibrationData.class);
 		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
 		Criteria gasTankPositionCriteria = session.createCriteria(GasTankPosition.class);
 		
-		vehicleCriteria.add(Restrictions.eq("numberTerminal", terminal));
-		Vehicle vehicle = (Vehicle)vehicleCriteria.uniqueResult();
+		Vehicle vehicle = vehicleService.getVehicleById(id);
 		
 		gasTankPositionCriteria.add(Restrictions.eq("position", "RIGHT"));
 		GasTankPosition gasTankPosition = (GasTankPosition)gasTankPositionCriteria.uniqueResult();

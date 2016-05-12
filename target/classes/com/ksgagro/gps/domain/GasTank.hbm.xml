@@ -9,7 +9,7 @@
 			<generator class="native" />
 		</id>
 		
-		<many-to-one name="vehicle" column="OWNER" unique="false" 
+		<many-to-one name="vehicle" column="vehicle" unique="false" 
 		class="Vehicle" not-null="true" lazy="false"/>
 		
 		<many-to-one name="gasTankPosition" column="POSITION" unique="false"
