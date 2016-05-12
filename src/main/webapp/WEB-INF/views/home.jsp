@@ -121,7 +121,7 @@
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
 								<c:if test="${group.id == car.group.id && group.id == 1}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>

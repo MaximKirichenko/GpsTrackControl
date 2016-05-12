@@ -29,11 +29,10 @@ import com.ksgagro.gps.domain.VehicleDetailsTable;
 import com.ksgagro.gps.domain.VehicleGroup;
 import com.ksgagro.gps.domain.repository.LocationRepository;
 import com.ksgagro.gps.domain.repository.VehicleGroupRepository;
-import com.ksgagro.gps.domain.repository.VehicleRepository;
 import com.ksgagro.gps.domain.service.AgroFieldsService;
 import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.domain.service.TerminalDateService;
-import com.ksgagro.gps.domain.service.TerminalService;
+import com.ksgagro.gps.domain.service.VehicleDetailsTableService;
 import com.ksgagro.gps.domain.service.VehicleService;
 
 @Controller
@@ -49,6 +48,9 @@ public class HomeController {
 	private VehicleService vehicleService;
 	
 	@Autowired
+	private VehicleDetailsTableService vehicleDetailsTableService;
+	
+	@Autowired
 	private TerminalDateService terminalDateService;
 	
 	@Autowired
@@ -58,8 +60,6 @@ public class HomeController {
 	@Autowired
 	private AgroFieldsService agroFieldsService;
 	
-	@Autowired
-	private TerminalService terminalService;
 	
 	Logger logger = Logger.getLogger(HomeController.class);
 	
@@ -113,13 +113,7 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
 	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
 		logger.info("Номер терминала: " + vehicleId);
-		VehicleDetailsTable table = new VehicleDetailsTable();
-		TerminalDate terminalDate = terminalDateService.getLastSignal(vehicleId);		
-		table.setTerminalDate(terminalDateService.getLastSignal(vehicleId));
-		table.setVehicle(vehicleService.getVehicleById(vehicleId));
-		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getLeftGasTank()));
-		table.setFuelLevelRight(calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getRightGasTank()));
-		table.setTerminal(terminalService.getTerminal(vehicleId));
+		VehicleDetailsTable table = vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
 		return table;
 	}
 

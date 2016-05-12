@@ -35,7 +35,7 @@
 	  console.log(data);
 	  $("#carInfoTable tbody").append("<tr>" +
 	  		"<td>IMEI</td><td>"+data.terminalDate.imei+"</td>" +
-	  		"<td>Номер терминала</td><td>"+data.vehicle.numberTerminal+"</td>" +
+	  		"<td>ID автомобиля</td><td>"+data.vehicle.id+"</td>" +
 	  		"</tr>");
 	  $("#carInfoTable tr:last").after("<tr>" +
 		  		"<td>Наименование</td><td>"+data.vehicle.name+"</td>" +
