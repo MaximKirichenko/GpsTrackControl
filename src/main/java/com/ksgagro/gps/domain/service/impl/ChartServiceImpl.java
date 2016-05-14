@@ -23,16 +23,11 @@ public class ChartServiceImpl implements ChartService{
 	private TerminalDateService terminalDataService;
 
 	
-	public FuelChartDTO getFuelChartData(int numberTerminal, long from, long to) {
+	public FuelChartDTO getFuelChartData(int vehicleId, long from, long to) {
 		FuelChartDTO fuelChartDTO = new FuelChartDTO();
 		
-		List<TerminalDate> terminalDates = terminalDataService.getVehicleFromPeriod(from, to, numberTerminal);
-
-		List<GasTankCalibrationData> fuelDataLeft = gasTankService.getLeftValues(numberTerminal);
-		List<GasTankCalibrationData> fuelDataRight = gasTankService.getRightValues(numberTerminal);
-		
-		List<Double> leftTankDatas = new ArrayList<Double>();
-		List<Double> rightTankDatas = new ArrayList<Double>();
+		List<GasTankCalibrationData> leftTankCalibrationData = gasTankService.getLeftTankCalibrationDataValues(vehicleId, from);
+		List<GasTankCalibrationData> rightTankCalibrationData = gasTankService.getRighTankCalibrationDatatValues(vehicleId, from);
 		
 		List<Integer> engineSpeedDatas = new ArrayList<Integer>();
 		List<Long> messageDate= new ArrayList<Long>();
@@ -40,16 +35,18 @@ public class ChartServiceImpl implements ChartService{
 		List<Integer> voltage = new ArrayList<Integer>();
 		
 		List<Refueling> refuelings = terminalDataService.getRefulingDate(
-				terminalDataService.getStops(from, to, numberTerminal), numberTerminal);
+				terminalDataService.getStops(from, to, vehicleId), vehicleId);
 		
-		for(TerminalDate data: terminalDates){
-			leftTankDatas.add(gasTankService.getFuelLevel(data.getLeftGasTank(), fuelDataLeft));
-			rightTankDatas.add(gasTankService.getFuelLevel(data.getRightGasTank(), fuelDataRight));
+		List<TerminalDate> terminalDataList = terminalDataService.getTerminalDateAboutVehicleFromPeriod(from, to, vehicleId);
+		List<Double> leftTankDatas = new ArrayList<Double>();
+		List<Double> rightTankDatas = new ArrayList<Double>();
+		for(TerminalDate data: terminalDataList){
+			leftTankDatas.add(gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData));
+			rightTankDatas.add(gasTankService.getFuelLevel(data.getRightGasTank(), rightTankCalibrationData));
 			engineSpeedDatas.add(data.getEngineSpeed()/(4*10));
 			messageDate.add(data.getMessageDate());
 			speeds.add(data.getSpeed());
 			voltage.add(data.getPsv()/1000);
-			
 		}
 		
 		fuelChartDTO.setRefuelings(refuelings);
@@ -57,7 +54,7 @@ public class ChartServiceImpl implements ChartService{
 		fuelChartDTO.setRightTankDatas(rightTankDatas);
 		fuelChartDTO.setEngineSpeedDatas(engineSpeedDatas);
 		fuelChartDTO.setMessageData(messageDate);
-		fuelChartDTO.setFuelConsumptionFromCan(terminalDataService.getCanConsumption(terminalDates));
+		fuelChartDTO.setFuelConsumptionFromCan(terminalDataService.getCanConsumption(terminalDataList));
 		fuelChartDTO.setSpeeds(speeds);
 		fuelChartDTO.setVoltage(voltage);
 		

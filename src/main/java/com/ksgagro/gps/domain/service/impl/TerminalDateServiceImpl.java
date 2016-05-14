@@ -39,7 +39,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	
 	Logger logger = Logger.getLogger(TerminalDateServiceImpl.class);
 	
-	public List<TerminalDate> getVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
+	public List<TerminalDate> getTerminalDateAboutVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
 		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
 
 		List<TerminalDate> inputList = terminalDateRepository.getListFromPeriod(millisFrom, millisTo,
@@ -231,7 +231,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	}
 	
 	public List<List<TerminalDate>> getStops(long millisFrom, long millisTo, int terminalNumber){
-		List<TerminalDate> allDateFromTerminal = getVehicleFromPeriod(millisFrom, millisTo, terminalNumber);
+		List<TerminalDate> allDateFromTerminal = getTerminalDateAboutVehicleFromPeriod(millisFrom, millisTo, terminalNumber);
 		boolean stop = false;
 		List<List<TerminalDate>> stops = new ArrayList<>();
 		List<TerminalDate> stopList = new ArrayList<>();

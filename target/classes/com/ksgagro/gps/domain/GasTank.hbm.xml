@@ -8,7 +8,7 @@
 		<id name="id" column="ID">
 			<generator class="native" />
 		</id>
-		
+		<property name="calibrationDate" column="CALIBRATION_DATE" />
 		<many-to-one name="vehicle" column="vehicle" unique="false" 
 		class="Vehicle" not-null="true" lazy="false"/>
 		

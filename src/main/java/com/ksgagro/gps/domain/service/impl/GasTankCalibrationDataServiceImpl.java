@@ -130,13 +130,11 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 		
 		return calibrationDataRepository.getCalibrationDataByVehicleId(terminal);
 	}
-	public List<GasTankCalibrationData> getLeftValues(int terminal) {
-		
-		return calibrationDataRepository.getLeftValues(terminal);
+	public List<GasTankCalibrationData> getLeftTankCalibrationDataValues(int vehicleId, long date) {
+		return calibrationDataRepository.getLeftTankCalibrationDataValues(vehicleId, date);
 	}
-	public List<GasTankCalibrationData> getRightValues(int terminal) {
-		
-		return calibrationDataRepository.getRightValues(terminal);
+	public List<GasTankCalibrationData> getRighTankCalibrationDatatValues(int vehicleId, long date) {
+		return calibrationDataRepository.getRighTankCalibrationDatatValues(vehicleId, date);
 	}
 
 }

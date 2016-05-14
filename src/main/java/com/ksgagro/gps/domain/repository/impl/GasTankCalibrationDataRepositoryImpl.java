@@ -9,6 +9,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,16 +73,14 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<GasTankCalibrationData> getLeftValues(int id){
+	public List<GasTankCalibrationData> getLeftTankCalibrationDataValues(int vehicleId, long date){
+		logger.info("getLeftTankCalibrationDataValues INVOKED");
 		Session session = sessionFactory.getCurrentSession();
-		
-		
 		Criteria calibrationDataCriteria= session.createCriteria(GasTankCalibrationData.class);
 		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
 		
-		
-		
-		Vehicle vehicle = vehicleService.getVehicleById(id);
+		logger.info(vehicleId);
+		Vehicle vehicle = vehicleService.getVehicleById(vehicleId);
 		logger.info(vehicle);
 		
 		Criteria gasTankPositionCriteria = session.createCriteria(GasTankPosition.class);
@@ -89,16 +89,20 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 		logger.info(gasTankPosition);
 		
 		gasTankCriteria.add(Restrictions.eq("vehicle", vehicle));
-		List<GasTank> gasTanks = gasTankCriteria.list();
+		gasTankCriteria.add(Restrictions.le("calibrationDate", date));
+		gasTankCriteria.add(Restrictions.eq("gasTankPosition", gasTankPosition));
+		gasTankCriteria.addOrder(Order.desc("calibrationDate")).setMaxResults(1);
+		
+		GasTank gasTanks = (GasTank)gasTankCriteria.uniqueResult();
 		logger.info(gasTanks);
 		
-		gasTankCriteria.add(Restrictions.eq("gasTankPosition", gasTankPosition));
-		gasTanks = gasTankCriteria.list();
-		logger.info(gasTanks);
-		if(gasTanks.size()>0){
-			calibrationDataCriteria.add(Restrictions.in("gasTank", gasTanks)).addOrder(Order.asc("fuelLevel"));
-			
-			return calibrationDataCriteria.list();
+		
+		
+		
+		if(gasTanks!=null){
+			calibrationDataCriteria.add(Restrictions.eq("gasTank", gasTanks)).addOrder(Order.asc("fuelLevel"));
+			List<GasTankCalibrationData> result = calibrationDataCriteria.list();
+			return result;
 		}
 				
 		return null;
@@ -106,25 +110,33 @@ public class GasTankCalibrationDataRepositoryImpl implements GasTankCalibrationD
 	}
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<GasTankCalibrationData> getRightValues(int id){
+	public List<GasTankCalibrationData> getRighTankCalibrationDatatValues(int vehicleId, long date){
 		Session session = sessionFactory.getCurrentSession();
 		
 		
 		Criteria calibrationDataCriteria= session.createCriteria(GasTankCalibrationData.class);
-		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
+		
 		Criteria gasTankPositionCriteria = session.createCriteria(GasTankPosition.class);
 		
-		Vehicle vehicle = vehicleService.getVehicleById(id);
+		Vehicle vehicle = vehicleService.getVehicleById(vehicleId);
 		
 		gasTankPositionCriteria.add(Restrictions.eq("position", "RIGHT"));
 		GasTankPosition gasTankPosition = (GasTankPosition)gasTankPositionCriteria.uniqueResult();
 		
+		Criteria gasTankCriteria = session.createCriteria(GasTank.class);
+		
 		gasTankCriteria.add(Restrictions.eq("vehicle", vehicle));
+		gasTankCriteria.add(Restrictions.le("calibrationDate", date));
 		gasTankCriteria.add(Restrictions.eq("gasTankPosition", gasTankPosition));
-		List<GasTank> gasTanks = gasTankCriteria.list();
-		if(gasTanks.size()>0){
-			calibrationDataCriteria.add(Restrictions.in("gasTank", gasTanks)).addOrder(Order.asc("fuelLevel"));
-			return calibrationDataCriteria.list();
+		gasTankCriteria.addOrder(Order.desc("calibrationDate")).setMaxResults(1);
+		
+		GasTank gasTanks = (GasTank)gasTankCriteria.uniqueResult();
+		logger.info(gasTanks);
+		
+		if(gasTanks!=null){
+			calibrationDataCriteria.add(Restrictions.eq("gasTank", gasTanks)).addOrder(Order.asc("fuelLevel"));
+			List<GasTankCalibrationData> result = calibrationDataCriteria.list();
+			return result;
 		}
 				
 		return null;

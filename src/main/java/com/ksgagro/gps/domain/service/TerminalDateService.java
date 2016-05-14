@@ -7,7 +7,7 @@ import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.TerminalDate;
 
 public interface TerminalDateService {
-	public List<TerminalDate> getVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber);
+	public List<TerminalDate> getTerminalDateAboutVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber);
 	
 	public List<TerminalDate> getVehicleFromPeriod(
 			String dateFrom, String timeFrom, String dateTo, String timeTo, int terminalNumber);

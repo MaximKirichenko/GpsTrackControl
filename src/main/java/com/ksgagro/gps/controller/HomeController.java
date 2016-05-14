@@ -91,7 +91,7 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
 	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TerminalDateDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
-		List<TerminalDate> list = terminalDateService.getVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
+		List<TerminalDate> list = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 	
 		list = terminalDateService.filterData(list);
 		Collections.reverse(list);

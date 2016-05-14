@@ -8,6 +8,7 @@ public class GasTank implements Serializable{
 	private int id;
 	private Vehicle vehicle;
 	private GasTankPosition gasTankPosition;
+	private long calibrationDate;
 	public GasTank() {
 		super();
 	}
@@ -35,6 +36,13 @@ public class GasTank implements Serializable{
 	public void setGasTankPosition(GasTankPosition gasTankPosition) {
 		this.gasTankPosition = gasTankPosition;
 	}
+	
+	public long getCalibrationDate() {
+		return calibrationDate;
+	}
+	public void setCalibrationDate(long calibrationDate) {
+		this.calibrationDate = calibrationDate;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,8 +65,10 @@ public class GasTank implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "GasTank [id=" + id + ", vehicle=" + vehicle + ", gasTankPosition=" + gasTankPosition + "]";
+		return "GasTank [id=" + id + ", vehicle=" + vehicle + ", gasTankPosition=" + gasTankPosition
+				+ ", calibrationDate=" + calibrationDate + "]";
 	}
+	
 	
 	
 
