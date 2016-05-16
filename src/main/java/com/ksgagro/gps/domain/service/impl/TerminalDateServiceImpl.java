@@ -7,22 +7,22 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksgagro.gps.domain.GasTankCalibrationData;
 import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.Terminal;
 import com.ksgagro.gps.domain.TerminalDate;
 import com.ksgagro.gps.domain.repository.TerminalDateRepository;
 import com.ksgagro.gps.domain.repository.TerminalRepository;
+import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.domain.service.TerminalDateService;
 
 @Service
@@ -32,7 +32,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	TerminalDateRepository terminalDateRepository;
 	
 	@Autowired
-	GasTankCalibrationDataServiceImpl gasCalibration;
+	GasTankCalibrationDataService gasCalibration;
 
 	@Autowired
 	TerminalRepository terminalRepository;
@@ -232,6 +232,9 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	
 	public List<List<TerminalDate>> getStops(long millisFrom, long millisTo, int terminalNumber){
 		List<TerminalDate> allDateFromTerminal = getTerminalDateAboutVehicleFromPeriod(millisFrom, millisTo, terminalNumber);
+//		for(TerminalDate data: allDateFromTerminal){
+//			System.out.println(data);
+//		}
 		boolean stop = false;
 		List<List<TerminalDate>> stops = new ArrayList<>();
 		List<TerminalDate> stopList = new ArrayList<>();
@@ -248,8 +251,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		
 		//Leaving only element with size > 1
 		List<List<TerminalDate>> result = new ArrayList<>();
-		for(List<TerminalDate> currentDate: stops){
-			if(currentDate.size()>1) result.add(currentDate);
+		for(List<TerminalDate> currentData: stops){
+			if(currentData.size()>1) result.add(currentData);
 		}
 		return result;
 	}
@@ -257,6 +260,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	public List<Refueling> getRefulingDate(List<List<TerminalDate>> stops, int terminalNumber){
 
 		List<Refueling> refulings = new ArrayList<>();
+		
 		
 		for(List<TerminalDate> stopDateList: stops){
 			DataAboutRefuling refData = getRefulingFromStopList(stopDateList);
@@ -277,14 +281,21 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			if(refData.leftTanks.size()>0){
 				refulingLeftStartTime = refData.leftTanks.get(0).getMessageDate();
 				refulingLeftEndTime = refData.leftTanks.get(refData.leftTanks.size()-1).getMessageDate();
-				leftFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 1, refData.getStartFuelLevelLeftTank());
-				leftFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 1, refData.getLeftMaxFuelLevel());
+				
+				List<GasTankCalibrationData> leftTankCalibrationData = gasCalibration.getLeftTankCalibrationDataValues(terminalNumber, refulingLeftStartTime);
+				leftFuelDataAtStart = gasCalibration.getFuelLevel(refData.getStartFuelLevelLeftTank(), leftTankCalibrationData);
+				
+				System.out.println("Left fuel data level: " + leftFuelDataAtStart);
+				leftFuelDataAtEnd = gasCalibration.getFuelLevel( refData.getLeftMaxFuelLevel(), leftTankCalibrationData);
 			}
 			if(refData.rightTanks.size()>0){
 				refulingRightStartTime = refData.rightTanks.get(0).getMessageDate();
+				
+				List<GasTankCalibrationData> rightTankCalibrationData = gasCalibration.getRighTankCalibrationDatatValues(terminalNumber, refulingRightStartTime);
 				refulingRightEndTime = refData.rightTanks.get(refData.rightTanks.size()-1).getMessageDate();
-				rightFuelDataAtStart = gasCalibration.getFuelLevel(terminalNumber, 2, refData.getStartFuelLevelRightTank());
-				rightFuelDataAtEnd = gasCalibration.getFuelLevel(terminalNumber, 2, refData.getRightMaxFuelLevel());
+				rightFuelDataAtStart = gasCalibration.getFuelLevel(refData.getStartFuelLevelRightTank(), rightTankCalibrationData);
+				System.out.println("Right fuel data level: " + rightFuelDataAtStart);
+				rightFuelDataAtEnd = gasCalibration.getFuelLevel(refData.getRightMaxFuelLevel(), rightTankCalibrationData);
 
 			}
 			
@@ -321,52 +332,72 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	private DataAboutRefuling getRefulingFromStopList(List<TerminalDate> stopList){
 
 		DataAboutRefuling curentRefuling = new DataAboutRefuling();
-	
+		
 		for(int i = 0; i<stopList.size(); i++){
-			if(i>0){
-				curentRefuling = analizeAndAddLeftTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i));
-				curentRefuling = analizeAndAddRightTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i));
+			if(i>0&&i<stopList.size()-1){
+				curentRefuling = analizeAndAddLeftTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i), false);
+				curentRefuling = analizeAndAddRightTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i), false);
+			}else if(i==stopList.size()-1){
+				curentRefuling = analizeAndAddLeftTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i), true);
+				curentRefuling = analizeAndAddRightTankDataIfRefulingActive(curentRefuling, stopList.get(i-1), stopList.get(i), true);
 			}
 			
 		}
-		
+		System.out.println("Current refuling: " + curentRefuling);
 		return curentRefuling;
 	}
-	private DataAboutRefuling analizeAndAddLeftTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent){
-		if(refulingIsActive(previous.getLeftGasTank(), curent.getLeftGasTank())){
-			refuling.startLeftRefuling();
-			refuling.setStartFuelLevelLeftTank(previous.getLeftGasTank());
-			refuling.addLeftTanksData(previous);
+	private DataAboutRefuling analizeAndAddLeftTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previousDataInArray, TerminalDate curentDataInArray, boolean isLastData){
 		
-		}else if(refulingIsFinished(refuling.isLeftRefulingActive(), previous.getLeftGasTank(), curent.getRightGasTank())){
+		int previousFuelLevel = previousDataInArray.getLeftGasTank();
+		int curentFuelLevel = curentDataInArray.getLeftGasTank();
+		refuling.setStartFuelLevelLeftTank(previousFuelLevel);
+//		logger.info("Input refuling in left gas tank with data: " + previousFuelLevel + " " + 
+//				curentFuelLevel + " at " + new Date(previousDataInArray.getMessageDate()) + " isLastData " + isLastData + "\ncurrent refuling object " + refuling);
+		if(refulingIsActive(previousFuelLevel, curentFuelLevel, isLastData)){
+//			logger.info("Start refuling in left gas tank with data: " + previousFuelLevel + " " + 
+//					curentFuelLevel + " at " + new Date(previousDataInArray.getMessageDate()));
+			refuling.startLeftRefuling();
+//			refuling.setStartFuelLevelLeftTank(previousFuelLevel);
+			refuling.addLeftTanksData(previousDataInArray);
+			//logger.info(refuling);
+		
+		}else if(refulingIsFinished(refuling.isLeftRefulingActive(), previousFuelLevel, curentFuelLevel, isLastData)){
 			refuling.finishedLeftRefuling();
-			refuling.addLeftTanksData(curent);
+//			logger.info("Finish refuling in left gas tank with data: " + previousFuelLevel + " " + 
+//					curentFuelLevel + " between " + previousDataInArray.getMessageDate() + " and " + curentDataInArray.getMessageDate());
+			refuling.addLeftTanksData(curentDataInArray);
 		}
 		return refuling;
 	}
-	private DataAboutRefuling analizeAndAddRightTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent){
+	private DataAboutRefuling analizeAndAddRightTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent, boolean isLastData){
 		
 		int previousFuelLevel = previous.getRightGasTank();
 		int curentFuelLevel = curent.getRightGasTank();
-		
-		if(refulingIsActive(previousFuelLevel, curentFuelLevel)){
+		refuling.setStartFuelLevelRightTank(previousFuelLevel);
+//		logger.info("Input refuling in right gas tank with data: " + previousFuelLevel + " " + curentFuelLevel
+//				+ " at " + new Date(previous.getMessageDate()));
+		if(refulingIsActive(previousFuelLevel, curentFuelLevel, isLastData)){
+//			logger.info("Start refuling in right gas tank with data: " + previousFuelLevel + " " + curentFuelLevel
+//					+ " at " + new Date(previous.getMessageDate()));
 			refuling.startRightRefuling();
-			refuling.setStartFuelLevelRightTank(previous.getRightGasTank());
+//			refuling.setStartFuelLevelRightTank(previousFuelLevel);
 			refuling.addRightTanksData(previous);
 		
-		}else if(refulingIsFinished(refuling.isRightRefulingActive(), previousFuelLevel, curentFuelLevel)){
+		}else if(refulingIsFinished(refuling.isRightRefulingActive(), previousFuelLevel, curentFuelLevel, isLastData)){
 			refuling.finishedRightRefuling();
+//			logger.info("Finish refuling in right gas tank with data: " + previousFuelLevel + " " + curentFuelLevel
+//					+ " at " + new Date(previous.getMessageDate()));
 			refuling.addRightTanksData(curent);
 		}
 		return refuling;
 	}
 	
-	private boolean refulingIsFinished(boolean isRefuling, int previous, int curent){
-		return isRefuling && previous>=curent;
+	private boolean refulingIsFinished(boolean isRefuling, int previous, int curent, boolean isLast){
+		return isLast&&isRefuling||isRefuling && previous>=curent;
 	}
 
-	private boolean refulingIsActive(int previous, int curent){
-		return previous<curent;
+	private boolean refulingIsActive(int previous, int curent, boolean isLastData){
+		return !isLastData||previous<curent;
 	}
 
 	
@@ -375,28 +406,33 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		List<TerminalDate> rightTanks;
 		Boolean isLeftRefuling;
 		Boolean isRightRefuling;
-		int startFuelLevelLeftTank = 0;
-		int startFuelRightLeftTank = 0;
-		int endFuelLevel = 0;
 		
-		public void setStartFuelLevelLeftTank(int fuelLevel){
-			if(startFuelLevelLeftTank == 0) startFuelLevelLeftTank = fuelLevel;
-		}
-		public int getStartFuelLevelLeftTank(){
-			return this.startFuelLevelLeftTank;
-		}
-		public void setStartFuelLevelRightTank(int fuelLevel){
-			if(startFuelRightLeftTank == 0) startFuelRightLeftTank = fuelLevel;
-		}
-		public int getStartFuelLevelRightTank(){
-			return this.startFuelRightLeftTank;
-		}
+		int startFuelLevelLeftTank = 0;
+		int startFuelLevelRightTank = 0;
+		
 		public DataAboutRefuling() {
 			leftTanks = new ArrayList<>();
 			rightTanks = new ArrayList<>();
 			isLeftRefuling = false;
 			isRightRefuling = false;
 		}
+		
+		public void setStartFuelLevelLeftTank(int fuelLevel){
+			if(startFuelLevelLeftTank == 0) {
+				startFuelLevelLeftTank = fuelLevel;
+			}
+		}
+		public int getStartFuelLevelLeftTank(){
+			return this.startFuelLevelLeftTank;
+		}
+		public void setStartFuelLevelRightTank(int fuelLevel){
+			if(startFuelLevelRightTank == 0) startFuelLevelRightTank = fuelLevel;
+		}
+		public int getStartFuelLevelRightTank(){
+			return this.startFuelLevelRightTank;
+		}
+		
+		
 		public int getLeftMaxFuelLevel(){
 			int maxValue = Integer.MIN_VALUE;
 			for(TerminalDate curent: leftTanks){
@@ -406,6 +442,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			}
 			return maxValue;
 		}
+		
 		public int getRightMaxFuelLevel(){
 			int maxValue = Integer.MIN_VALUE;
 			for(TerminalDate curent: rightTanks){
@@ -415,6 +452,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			}
 			return maxValue;
 		}
+		
 		public void addLeftTanksData(TerminalDate data){
 			leftTanks.add(data);
 		}
@@ -439,6 +477,14 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		public boolean isRightRefulingActive(){
 			return isRightRefuling;
 		}
+
+		@Override
+		public String toString() {
+			return "DataAboutRefuling [isLeftRefuling="
+					+ isLeftRefuling + ", isRightRefuling=" + isRightRefuling + ", startFuelLevelLeftTank="
+					+ startFuelLevelLeftTank + ", startFuelLevelRightTank=" + startFuelLevelRightTank + "]";
+		}
+		
 		
 	}
 	

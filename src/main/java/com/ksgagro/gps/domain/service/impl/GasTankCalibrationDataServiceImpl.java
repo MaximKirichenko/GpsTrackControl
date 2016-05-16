@@ -19,24 +19,23 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 	GasTankCalibrationDataRepository calibrationDataRepository;
 	
 	public Double getFuelLevel(int data, List<GasTankCalibrationData> calibrationData){
-		if(data>0)
-		System.out.print("\nInput " + data);
+//		if(data>0)
+//		System.out.print("\nInput " + data);
 		GasTankCalibrationData previous = getPrevious(data, calibrationData);
 		GasTankCalibrationData next = getNext(data, calibrationData);
 		
 		if(previous==null ||data==0) {
 			return 0.0;
 		}
-		if(data<620) System.out.println("Input data: " + data);
+
 		if(next==null){
 			return (double)previous.getFuelLevel();
 		}
-		System.out.print(" previous " + previous.getData());
-		System.out.print(" next " + next.getData() + "\n");
+//		System.out.print(" previous " + previous.getData());
+//		System.out.print(" next " + next.getData() + "\n");
 		if(previous.getData()==0) return 0.0;
 		
 		//double fuelLevel = ((data*previous.getFuelLevel()/previous.getData())+(data*next.getFuelLevel()/next.getData()))/2;
-		
 		
 		double dataDifferent = next.getData() - previous.getData();
 		double fuelDifferent = next.getFuelLevel() - previous.getFuelLevel();

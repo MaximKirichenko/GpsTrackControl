@@ -34,15 +34,28 @@ public class ChartServiceImpl implements ChartService{
 		List<Integer> speeds = new ArrayList<Integer>();
 		List<Integer> voltage = new ArrayList<Integer>();
 		
-		List<Refueling> refuelings = terminalDataService.getRefulingDate(
-				terminalDataService.getStops(from, to, vehicleId), vehicleId);
+		List<List<TerminalDate>> stops = terminalDataService.getStops(from, to, vehicleId);
+		List<Refueling> refuelings = terminalDataService.getRefulingDate(stops, vehicleId);
 		
 		List<TerminalDate> terminalDataList = terminalDataService.getTerminalDateAboutVehicleFromPeriod(from, to, vehicleId);
 		List<Double> leftTankDatas = new ArrayList<Double>();
 		List<Double> rightTankDatas = new ArrayList<Double>();
+//		System.out.println("Left: ");
+//		for(GasTankCalibrationData calibrationData: leftTankCalibrationData){
+//			System.out.println(calibrationData.getFuelLevel() + " " + calibrationData.getData());
+//		}
+//		System.out.println("Right: ");
+//		for(GasTankCalibrationData calibrationData: rightTankCalibrationData){
+//			System.out.println(calibrationData.getFuelLevel() + " " + calibrationData.getData());
+//		}
 		for(TerminalDate data: terminalDataList){
-			leftTankDatas.add(gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData));
-			rightTankDatas.add(gasTankService.getFuelLevel(data.getRightGasTank(), rightTankCalibrationData));
+			
+			double leftTankLevel = gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData);
+			double rightTankLevel = gasTankService.getFuelLevel(data.getRightGasTank(), rightTankCalibrationData);
+//			System.out.println("Left: " + data.getLeftGasTank() + " - " + leftTankLevel + 
+//					" | Right: " +data.getRightGasTank() + " " + rightTankLevel);
+			leftTankDatas.add(leftTankLevel);
+			rightTankDatas.add(rightTankLevel);
 			engineSpeedDatas.add(data.getEngineSpeed()/(4*10));
 			messageDate.add(data.getMessageDate());
 			speeds.add(data.getSpeed());
