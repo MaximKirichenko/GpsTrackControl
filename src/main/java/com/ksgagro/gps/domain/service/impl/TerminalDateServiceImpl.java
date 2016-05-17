@@ -64,8 +64,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		List<TerminalDate> result = new ArrayList<TerminalDate>();
 
 		for (int i = 0; i < inputList.size(); i++) {
-
-			if (i == 0) {
+			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0) continue;
+			if (result.size()==0) {
 				result.add(inputList.get(i));
 			} else {
 				int lastElement = result.size() - 1;

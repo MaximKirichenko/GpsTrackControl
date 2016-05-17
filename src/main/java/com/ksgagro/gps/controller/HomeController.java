@@ -92,8 +92,16 @@ public class HomeController {
 	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TerminalDateDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
 		List<TerminalDate> list = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
-	
+
+		System.out.println("NOT FILTERED: ");
+		for(TerminalDate data: list){
+			System.out.println(data);
+		}
 		list = terminalDateService.filterData(list);
+		System.out.println("FILTERED: ");
+		for(TerminalDate data: list){
+			System.out.println(data);
+		}
 		Collections.reverse(list);
 		report.setTerminalDateList(list);
 		report.setPathLength(terminalDateService.getPathLength(list));
@@ -110,6 +118,7 @@ public class HomeController {
 		return vehicle;
 	}
 	
+	
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
 	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
 		logger.info("Номер терминала: " + vehicleId);
@@ -118,31 +127,7 @@ public class HomeController {
 	}
 
 	
-	
-	@RequestMapping("/build")
-	public String buildrTreck(Model model){
-		Vehicle car = vehicleService.getVehicleById(82);
-		List<Location> listLocation = locationRepository.getList();	
-		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
-		List<Vehicle> listVehicle = vehicleService.getList();
-		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
-		
-		String carName = car.getName() + " (" + car.getRegNumber() + ")";
-		//model.addAttribute("numberTerminal", car.getNumberTerminal());
-		model.addAttribute("carName", carName);
-		model.addAttribute("listLocation", listLocation);
-		model.addAttribute("listGroup", listGroup);
-		model.addAttribute("listVehicle", listVehicle);
-		model.addAttribute("vehicleInEnterprise", vehicleInEnterprise);
-		model.addAttribute("fields", agroFieldsService.getJsonFields());
-		
-		return "home";
-	}
-	
-//	@RequestMapping("/kadastrova-karta/find-Parcel")
-//	public void doSomething(){
-//		System.out.println("Access");
-//	}
+
 	
 	@RequestMapping("/carDetails")
 	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
