@@ -420,13 +420,15 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		public void setStartFuelLevelLeftTank(int fuelLevel){
 			if(startFuelLevelLeftTank == 0) {
 				startFuelLevelLeftTank = fuelLevel;
-			}
+			}else 
+				if(startFuelLevelLeftTank>fuelLevel) startFuelLevelLeftTank = fuelLevel;
 		}
 		public int getStartFuelLevelLeftTank(){
 			return this.startFuelLevelLeftTank;
 		}
 		public void setStartFuelLevelRightTank(int fuelLevel){
 			if(startFuelLevelRightTank == 0) startFuelLevelRightTank = fuelLevel;
+			else if(startFuelLevelRightTank>fuelLevel) startFuelLevelRightTank = fuelLevel;
 		}
 		public int getStartFuelLevelRightTank(){
 			return this.startFuelLevelRightTank;
