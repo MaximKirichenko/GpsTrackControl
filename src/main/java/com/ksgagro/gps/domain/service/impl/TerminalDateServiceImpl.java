@@ -298,13 +298,14 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 				rightFuelDataAtEnd = gasCalibration.getFuelLevel(refData.getRightMaxFuelLevel(), rightTankCalibrationData);
 				refulingRightEndTime = refData.getRefulingRightFinishDate();
 				
-				System.out.println("Right fuel data level: " + rightFuelDataAtStart + " " + new Date(refulingRightEndTime));
+				System.out.println("Right fuel data at start: " + rightFuelDataAtStart + " " + new Date(refulingRightStartTime));
+				System.out.println("Right fuel data at end: " + rightFuelDataAtEnd + " " + new Date(refulingRightEndTime));
 
 			}
 			
 			Date startDate = new Date(refulingLeftStartTime<=refulingRightStartTime?refulingLeftStartTime:refulingRightStartTime);	
 			
-			Date endDate = new Date(refulingLeftEndTime>=refulingRightEndTime?refulingRightEndTime:refulingLeftEndTime);
+			Date endDate = new Date(refulingLeftEndTime>=refulingRightEndTime?refulingLeftEndTime:refulingRightEndTime);
 			
 			if(startDate.before(endDate)){
 				refuling.setStartTime(startDate);
