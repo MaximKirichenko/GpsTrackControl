@@ -93,15 +93,15 @@ public class HomeController {
 		ReportTrackDto report = new ReportTrackDto();
 		List<TerminalDate> list = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 
-		System.out.println("NOT FILTERED: ");
-		for(TerminalDate data: list){
-			System.out.println(data);
-		}
+//		System.out.println("NOT FILTERED: ");
+//		for(TerminalDate data: list){
+//			System.out.println(data);
+//		}
 		list = terminalDateService.filterData(list);
-		System.out.println("FILTERED: ");
-		for(TerminalDate data: list){
-			System.out.println(data);
-		}
+//		System.out.println("FILTERED: ");
+//		for(TerminalDate data: list){
+//			System.out.println(data);
+//		}
 		Collections.reverse(list);
 		report.setTerminalDateList(list);
 		report.setPathLength(terminalDateService.getPathLength(list));
