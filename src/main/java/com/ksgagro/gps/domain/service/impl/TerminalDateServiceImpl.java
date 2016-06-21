@@ -62,8 +62,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	
 	public List<TerminalDate> filterData(List<TerminalDate> inputList){
 		List<TerminalDate> result = new ArrayList<TerminalDate>();
-
 		for (int i = 0; i < inputList.size(); i++) {
+			//System.out.println(inputList.get(i));
 			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0) continue;
 			if (result.size()==0) {
 				result.add(inputList.get(i));
@@ -75,7 +75,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 					double difLat = Math.abs(result.get(lastElement).getLatitude() - inputList.get(i).getLatitude());
 					double difLong = Math.abs(result.get(lastElement).getLongitude() - inputList.get(i).getLongitude());
 
-					if ((difLat < 0.01) && (difLong < 0.01)) {
+					if ((difLat < 0.01) && (difLong < 0.01)||inputList.get(i).getNumberSatellite()<3) {
 						result.add(inputList.get(i));
 					}
 					
@@ -218,9 +218,16 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 
 	public Date getStartMovementTime(List<TerminalDate> terminalDate) {
 		for(TerminalDate item: terminalDate){
+			double longitude = 0;
+			double latitude = 0;
 			if(item.getSpeed()>0){
 				return new Date(item.getMessageDate());
 			}
+			if(longitude-item.getLongitude()!=0||latitude-item.getLatitude()!=0){
+				return new Date(item.getMessageDate());
+			}
+			longitude = item.getLongitude();
+			latitude = item.getLatitude();
 		}
 		return null;
 	}
@@ -286,7 +293,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 				leftFuelDataAtStart = gasCalibration.getFuelLevel(refData.getStartFuelLevelLeftTank(), leftTankCalibrationData);
 				leftFuelDataAtEnd = gasCalibration.getFuelLevel( refData.getLeftMaxFuelLevel(), leftTankCalibrationData);
 				refulingLeftEndTime = refData.getRefulingLeftFinishDate();
-				System.out.println("Left fuel data level: " + leftFuelDataAtStart + " " + new Date(refulingLeftEndTime));
+//				System.out.println("Left fuel data level: " + leftFuelDataAtStart + " " + new Date(refulingLeftEndTime));
 			}
 			if(refData.rightTanks.size()>0){
 				refulingRightStartTime = refData.getRefulingRightStartDate();
@@ -298,8 +305,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 				rightFuelDataAtEnd = gasCalibration.getFuelLevel(refData.getRightMaxFuelLevel(), rightTankCalibrationData);
 				refulingRightEndTime = refData.getRefulingRightFinishDate();
 				
-				System.out.println("Right fuel data at start: " + rightFuelDataAtStart + " " + new Date(refulingRightStartTime));
-				System.out.println("Right fuel data at end: " + rightFuelDataAtEnd + " " + new Date(refulingRightEndTime));
+//				System.out.println("Right fuel data at start: " + rightFuelDataAtStart + " " + new Date(refulingRightStartTime));
+//				System.out.println("Right fuel data at end: " + rightFuelDataAtEnd + " " + new Date(refulingRightEndTime));
 
 			}
 			
@@ -343,6 +350,10 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		return refulings;
 	}
 	private DataAboutRefuling getRefulingFromStopList(List<TerminalDate> stopList){
+
+		for(TerminalDate terminalDate: stopList){
+			System.out.println(terminalDate);
+		}
 
 		DataAboutRefuling curentRefuling = new DataAboutRefuling();
 		

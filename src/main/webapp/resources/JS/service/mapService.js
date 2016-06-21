@@ -273,10 +273,12 @@ function searchKadNumber(kadNumber){
     var cad_arr = cadnum.split(":");
     console.log("cadnum: " + cadnum);
     $.ajax({
-    	dataType: "json",
+    	type:"GET",
+    	dataType: "application/json",
     	url: 'http://212.26.144.110/kadastrova-karta/find-Parcel',
-//    	url: 'kadastrova-karta/find-Parcel',
-    	data: {'cadnum': cadnum},
+    	crossDomain: true,
+    	data:{'cadnum': cadnum,
+        	'activeArchLayer':1},
     	success: function (data) {
             //Устанавливаем границы
             var x1 = data['data'][0]['st_xmin'];
@@ -358,8 +360,7 @@ function addTrack(data, layr){
         point0.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
         if(i>0){
         	var stopTime = data[i].messageDate - oldData.messageDate;
-        	console.log(stopTime);
-        	if (stopTime > 300000) {
+        	if (stopTime > 180000) {
         		stopTimeInMinutes.push((stopTime/60000).toFixed(2));
         		pointContent.push("Остановился: " + new Date(oldData.messageDate).toLocaleString() + "</br>"+
         				"Поехал: " + new Date(data[i].messageDate).toLocaleString() + "</br>" + 
@@ -380,7 +381,6 @@ function addTrack(data, layr){
     console.log("Futures size");
     console.log(pointFutures.length);
     for(var i=0; i<pointFutures.length; i++){
-    	console.log(pointFutures[i]);
     	if(i==0){
     		pointFutures[i].data.label = "Start";
     		pointFutures[i].attributes.label = "Start";

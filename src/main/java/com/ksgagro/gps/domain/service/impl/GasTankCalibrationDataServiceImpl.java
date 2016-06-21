@@ -31,9 +31,11 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 		if(next==null){
 			return (double)previous.getFuelLevel();
 		}
+		
+		if(previous.getData()==next.getData()) return 0.0;
 //		System.out.print(" previous " + previous.getData());
 //		System.out.print(" next " + next.getData() + "\n");
-		if(previous.getData()==0) return 0.0;
+//		if(previous.getData()==0) return 0.0;
 		
 		//double fuelLevel = ((data*previous.getFuelLevel()/previous.getData())+(data*next.getFuelLevel()/next.getData()))/2;
 		
@@ -45,8 +47,6 @@ public class GasTankCalibrationDataServiceImpl implements GasTankCalibrationData
 		double fuelLevel = previous.getFuelLevel() + fuelFromPrevious;
 		
 		return new BigDecimal(fuelLevel).setScale(3, RoundingMode.UP).doubleValue();
-		
-		
 		
 	}
 	

@@ -13,7 +13,7 @@
 		<security:intercept-url pattern="/" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_AGRO_USER_VEHICLE" />
 		<security:intercept-url pattern="/chart" access="ROLE_ADMIN, ROLE_AGRO_USER" />
 		<security:intercept-url pattern="/report" access="ROLE_ADMIN" />
-		
+		<security:intercept-url pattern="/adminPage" access="ROLE_ADMIN" />
 		
 		<security:form-login login-page="/login" 
                default-target-url="/"   
@@ -33,6 +33,7 @@
 				<security:user name="KSP" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="KKV" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="KNS" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="LVP" password="rcufuhj" authorities="ROLE_ADMIN" />
 				
 				<security:user name="VEV" password="889977" authorities="ROLE_ADMIN" />
 				<security:user name="Lada" password="7777" authorities="ROLE_ADMIN" />

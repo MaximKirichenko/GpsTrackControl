@@ -48,10 +48,19 @@ public class ChartServiceImpl implements ChartService{
 //		for(GasTankCalibrationData calibrationData: rightTankCalibrationData){
 //			System.out.println(calibrationData.getFuelLevel() + " " + calibrationData.getData());
 //		}
+		double previousLeftTankLevel = 0;
+		double previousRightTankLevel = 0;
+		double canConsumption = 0;
+		int count=0;
 		for(TerminalDate data: terminalDataList){
+			//System.out.println(data);
 			
 			double leftTankLevel = gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData);
 			double rightTankLevel = gasTankService.getFuelLevel(data.getRightGasTank(), rightTankCalibrationData);
+			if(count>0){
+				canConsumption = canConsumption + (previousLeftTankLevel-leftTankLevel) + (previousRightTankLevel - rightTankLevel);
+			}
+			
 //			System.out.println("Left: " + data.getLeftGasTank() + " - " + leftTankLevel + 
 //					" | Right: " +data.getRightGasTank() + " " + rightTankLevel);
 			leftTankDatas.add(leftTankLevel);
@@ -60,7 +69,11 @@ public class ChartServiceImpl implements ChartService{
 			messageDate.add(data.getMessageDate());
 			speeds.add(data.getSpeed());
 			voltage.add(data.getPsv()/1000);
+			previousLeftTankLevel = leftTankLevel;
+			previousRightTankLevel = rightTankLevel;
+			count++;
 		}
+		System.out.println("Can consumption: " + canConsumption);
 		
 		fuelChartDTO.setRefuelings(refuelings);
 		fuelChartDTO.setLeftTankDatas(leftTankDatas);

@@ -272,8 +272,8 @@ function searchKadNumber(kadNumber){
     $.ajax({
     	dataType: "json",
     	url: 'http://212.26.144.110/kadastrova-karta/find-Parcel',
-//    	url: 'kadastrova-karta/find-Parcel',
-    	data: {'cadnum': cadnum},
+    	data:{'cadnum': cadnum,
+        	'activeArchLayer':0},
     	success: function (data) {
             //Устанавливаем границы
             var x1 = data['data'][0]['st_xmin'];

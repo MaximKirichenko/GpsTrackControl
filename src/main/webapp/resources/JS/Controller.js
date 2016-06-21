@@ -262,8 +262,10 @@ function searchKadNumber(kadNumber){
     var cadnum = kadNumber;
     var cad_arr = cadnum.split(":");
     $.getJSON('http://212.26.144.110/kadastrova-karta/find-Parcel',
-        {'cadnum': cadnum},
+        {'cadnum': cadnum,
+    	'activeArchLayer':0},
         function (data) {
+    		console.log(data);
             //Устанавливаем границы
             var x1 = data['data'][0]['st_xmin'];
             var y1 = data['data'][0]['st_ymin'];
