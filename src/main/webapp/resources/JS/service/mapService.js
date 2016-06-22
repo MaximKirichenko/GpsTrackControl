@@ -1,16 +1,23 @@
 var map, drawControls;
-var trackLayer, tmsoverlay_orto, kadpodil, polygonLayer, vectorStartPoint, mapNik, googleMap;
+var trackLayer, tmsoverlay_orto, kadpodil, polygonLayer, vectorStartPoint, mapNik;
 
 var kadastrNumber, use, area;
 var pointContent = new Array();
 var mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
+
 var periodDto = {
 		dataFrom : 0,
 		dataTo : 0,
 		terminalNumber : 0
 	};
 var lastPointContent;
+
+//Load on start page
 $("document").ready(function(){
+	$("#datepickerFrom" ).datepicker({dateFormat: 'dd/mm/yy'});
+	$("#datepickerTo" ).datepicker({dateFormat: 'dd/mm/yy'});
+	loadTabs();
+	loadCarMenu();
     $("#searchField").keyup(function(e){
         if(e.keyCode == 13){
             searchKadNumber($("#searchField").val());
@@ -22,11 +29,15 @@ $("document").ready(function(){
     LoadMap();
     getFields($("#fieldsArray").val());
 });
+
+//Add JQuery UI tabs on page
+function loadTabs(){
+	$( "#tabs" ).tabs();
+}
+function loadCarMenu(){
+	$( "#accordion" ).accordion();
+}
 function initLayer(){
-	googleMap = new OpenLayers.Layer.Google(
-			"Google Hybrid",
-    	{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 8}
-	);
 	var stylePoint = new OpenLayers.Style(
             {
                 pointRadius: 8,
@@ -124,7 +135,6 @@ function LoadMap(){
     //Create a map
     map = new OpenLayers.Map('map', options);
     
-    
    
 //    if (OpenLayers.Util.alphaHack() == false) {
 //        tmsoverlay_orto.setOpacity(0.7);
@@ -137,7 +147,7 @@ function LoadMap(){
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
   //Add all created layers
-    map.addLayers([mapNik, kadpodil, tmsoverlay_orto, trackLayer, polygonLayer, vectorStartPoint, googleMap]);
+    map.addLayers([mapNik, kadpodil, tmsoverlay_orto, trackLayer, polygonLayer, vectorStartPoint]);
 
     //Centered map
     var point0 = new OpenLayers.Geometry.Point(35.051746, 48.470277);
@@ -428,25 +438,27 @@ function addPoly(data, title, ident, layr){
 }
 
 function getFields(fields){
-	
-	 polygonLayer = new OpenLayers.Layer.Vector("Кадастры", {
-	        renderers: ['SVGExtended', 'VMLExtended', 'CanvasExtended'],
-	        styleMap: new OpenLayers.StyleMap({
-	            'default': OpenLayers.Util.extend({
-	                orientation: true
-	            }, OpenLayers.Feature.Vector.style['default']),
-	            'temporary': OpenLayers.Util.extend({
-	                orientation: true
-	            }, OpenLayers.Feature.Vector.style['temporary'])
-	        })
-	    });
-	 polygonLayer.setVisibility(false);
-	map.addLayer(polygonLayer);
-	var fields = JSON.parse(fields);
+	if(fields!=null){
+		 polygonLayer = new OpenLayers.Layer.Vector("Кадастры", {
+		        renderers: ['SVGExtended', 'VMLExtended', 'CanvasExtended'],
+		        styleMap: new OpenLayers.StyleMap({
+		            'default': OpenLayers.Util.extend({
+		                orientation: true
+		            }, OpenLayers.Feature.Vector.style['default']),
+		            'temporary': OpenLayers.Util.extend({
+		                orientation: true
+		            }, OpenLayers.Feature.Vector.style['temporary'])
+		        })
+		    });
+		 polygonLayer.setVisibility(false);
+		map.addLayer(polygonLayer);
+		var fields = JSON.parse(fields);
 
-	for(var i=0; i<fields.length; i++){
-		addPoly(fields[i].coordinates, "fields", fields[i].kadastr, polygonLayer);
-	}	
+		for(var i=0; i<fields.length; i++){
+			addPoly(fields[i].coordinates, "fields", fields[i].kadastr, polygonLayer);
+		}	
+	}
+	
 }
 //function sendTimeInterval() {
 //

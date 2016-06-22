@@ -164,4 +164,9 @@ public class HomeController {
 		System.out.println(car);
 		return "carDetails";
 	}
+	@RequestMapping("/home_new")
+	public String getHomeNew(){
+		
+		return "home_new";
+	}
 }
