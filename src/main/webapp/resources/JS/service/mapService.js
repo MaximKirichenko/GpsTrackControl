@@ -14,10 +14,6 @@ var lastPointContent;
 
 //Load on start page
 $("document").ready(function(){
-	$("#datepickerFrom" ).datepicker({dateFormat: 'dd/mm/yy'});
-	$("#datepickerTo" ).datepicker({dateFormat: 'dd/mm/yy'});
-	loadTabs();
-	loadCarMenu();
     $("#searchField").keyup(function(e){
         if(e.keyCode == 13){
             searchKadNumber($("#searchField").val());
@@ -25,18 +21,10 @@ $("document").ready(function(){
             return false;
         }
     });
-    initLayer();
-    LoadMap();
-    getFields($("#fieldsArray").val());
 });
 
-//Add JQuery UI tabs on page
-function loadTabs(){
-	$( "#tabs" ).tabs();
-}
-function loadCarMenu(){
-	$( "#accordion" ).accordion();
-}
+
+
 function initLayer(){
 	var stylePoint = new OpenLayers.Style(
             {
@@ -106,6 +94,8 @@ function initLayer(){
 	
 }
 function LoadMap(){
+	initLayer();
+	getFields($("#fieldsArray").val());
     //Границы задаются для проекции EPSG:900913.
     var maxExtent = new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508);
     var restrictedExtent = maxExtent.clone();

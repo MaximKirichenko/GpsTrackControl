@@ -19,6 +19,7 @@
 	
 	<script src="<c:url value="/resource/JS/OpenLayers.js"/>"></script>
 	<script src="<c:url value="/resource/JS/ExtendedRenderers.js"/>"></script>
+	<script src="<c:url value="/resource/JS/controller/homePageBuilder.js"/>"></script>
 	<script src="<c:url value="/resource/JS/service/mapService.js"/>"></script>
 	<title>KSG Agro</title>
 </head>
@@ -113,13 +114,21 @@
 			<div id="tabs">
   				<ul>
     				<li><a href="#tabs-1">Карта</a></li>
-    				<li><a href="#tabs-2">Отчет по выбранным</a></li>
+    				<li><a href="#tabs-2">Информация о выбранных ТС</a></li>
+    				<li><a href="#tabs-3">Отчет по выбранным ТС</a></li>
+    				<li><a href="#tabs-4">График</a></li>
   				</ul>
   				<div id="tabs-1">
     				<div id="map"></div>
   				</div>
   				<div id="tabs-2">
+    				<h1>Car info</h1>
+  				</div>
+  				<div id="tabs-3">
     				<h1>Report content</h1>
+  				</div>
+  				<div id="tabs-4">
+    				<h1>Chart</h1>
   				</div>
 			</div>
 		</div>
