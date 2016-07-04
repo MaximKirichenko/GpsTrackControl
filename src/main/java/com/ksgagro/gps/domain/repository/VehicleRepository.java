@@ -9,5 +9,6 @@ public interface VehicleRepository {
 	List<Vehicle> getListFromGroup(int grouId);
 	List<Vehicle> getListFromLocation(int locationId);
 	Vehicle getVehicleById(int vehicleId);
+	List<Vehicle> getVehicles(List<Integer> terminalNumbers);
 
 }

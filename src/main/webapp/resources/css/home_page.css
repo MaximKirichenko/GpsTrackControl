@@ -28,12 +28,13 @@ html, body {
 }
 
 .left-col {
-    width: 19.7%;
+	font: 10px 'Lucida Sans Unicode', 'Trebuchet MS', Arial, Helvetica;
+    width: 24.7%;
     height: 84%;
     float: left;
 }
 .right-col {
-    width: 79.7%;
+    width: 74.7%;
     height: 84%;
     float: right;
 }

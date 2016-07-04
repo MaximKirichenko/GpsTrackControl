@@ -13,5 +13,7 @@
 		<property name="soft" column="SOFT" />
 		<property name="telephone" column="TELEPHONE_NUMBER" />
 		<property name="vehicle" column="VEHICLE" />
+		<property name="instal_date" column="INSTALL_DATE" />
+		<property name="uninstal_date" column="UNINSTALL_DATE" />
 	</class>
 </hibernate-mapping>

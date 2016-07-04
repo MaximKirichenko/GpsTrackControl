@@ -1,21 +1,23 @@
 package com.ksgagro.gps.controller.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class TerminalDateDTO implements Serializable{
+public class MulitiTrackRequestDTO implements Serializable{
 	
 	private static final long serialVersionUID = 74398488174553047L;
 	
-	private int terminalNumber;
+	private List<Integer> terminalNumbers;
 	private long dataFrom;
 	private long dataTo;
 	
 	
-	public int getTerminalNumber() {
-		return terminalNumber;
+	
+	public List<Integer> getTerminalNumbers() {
+		return terminalNumbers;
 	}
-	public void setTerminalNumber(int terminalNumber) {
-		this.terminalNumber = terminalNumber;
+	public void setTerminalNumbers(List<Integer> terminalNumbers) {
+		this.terminalNumbers = terminalNumbers;
 	}
 	public long getDataFrom() {
 		return dataFrom;
@@ -29,15 +31,13 @@ public class TerminalDateDTO implements Serializable{
 	public void setDataTo(long dataTo) {
 		this.dataTo = dataTo;
 	}
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (dataFrom ^ (dataFrom >>> 32));
 		result = prime * result + (int) (dataTo ^ (dataTo >>> 32));
-		result = prime * result + terminalNumber;
+		result = prime * result + ((terminalNumbers == null) ? 0 : terminalNumbers.hashCode());
 		return result;
 	}
 	@Override
@@ -48,20 +48,27 @@ public class TerminalDateDTO implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TerminalDateDTO other = (TerminalDateDTO) obj;
+		MulitiTrackRequestDTO other = (MulitiTrackRequestDTO) obj;
 		if (dataFrom != other.dataFrom)
 			return false;
 		if (dataTo != other.dataTo)
 			return false;
-		if (terminalNumber != other.terminalNumber)
+		if (terminalNumbers == null) {
+			if (other.terminalNumbers != null)
+				return false;
+		} else if (!terminalNumbers.equals(other.terminalNumbers))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "TerminalDateDTO [terminalNumber=" + terminalNumber + ", dataFrom=" + dataFrom + ", dataTo=" + dataTo
-				+ "]";
+		return "MulitiTrackRequestDTO [terminalNumbers=" + terminalNumbers + ", dataFrom=" + dataFrom + ", dataTo="
+				+ dataTo + "]";
 	}
+	
+	
+	
+	
 	
 	
 	

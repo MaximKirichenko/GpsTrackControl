@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.ksgagro.gps.controller.dto.TerminalDateDTO;
+import com.ksgagro.gps.controller.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.AgroPayContract;
 import com.ksgagro.gps.domain.Location;
 import com.ksgagro.gps.domain.Pay;

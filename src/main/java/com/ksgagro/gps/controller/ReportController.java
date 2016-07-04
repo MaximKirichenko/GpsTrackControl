@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ksgagro.gps.controller.dto.ReportGroupDTO;
 import com.ksgagro.gps.controller.dto.ReportTrackDto;
-import com.ksgagro.gps.controller.dto.TerminalDateDTO;
+import com.ksgagro.gps.controller.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.AgroPayContract;
 import com.ksgagro.gps.domain.TerminalDate;
 import com.ksgagro.gps.domain.Vehicle;
@@ -49,7 +49,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/groupReport")
-	public @ResponseBody List<ReportGroupDTO> getGroupReport(@RequestBody TerminalDateDTO periodDtoJson){
+	public @ResponseBody List<ReportGroupDTO> getGroupReport(@RequestBody TrackRequestDTO periodDtoJson){
 		List<Vehicle> vehicleList = vehicleService.getList();
 		List<ReportGroupDTO> report = new ArrayList<ReportGroupDTO>();
 		for(Vehicle vehicle: vehicleList){

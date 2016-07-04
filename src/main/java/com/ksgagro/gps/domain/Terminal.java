@@ -12,6 +12,8 @@ public class Terminal implements Serializable{
 	private String soft;
 	private String telephone;
 	private int vehicle;
+	private long instal_date;
+	private long uninstal_date;
 	
 	public Terminal() {}
 	public Terminal(int id, String imei, String name, String soft, String telephone) {
@@ -59,6 +61,20 @@ public class Terminal implements Serializable{
 	}
 	public void setVehicle(int vehicle) {
 		this.vehicle = vehicle;
+	}
+	
+	
+	public long getInstal_date() {
+		return instal_date;
+	}
+	public void setInstal_date(long instal_date) {
+		this.instal_date = instal_date;
+	}
+	public long getUninstal_date() {
+		return uninstal_date;
+	}
+	public void setUninstal_date(long uninstal_date) {
+		this.uninstal_date = uninstal_date;
 	}
 	@Override
 	public int hashCode() {

@@ -320,6 +320,82 @@ function searchKadNumber(kadNumber){
 var linearRing2;
 var pointsVector,pointFutures; 
 
+function addTracks(data, layr){
+	console.log(data);
+//    var featuress = new Array();
+//    var pointsArray = new Array();
+    
+//    var layerListeners = {
+//    	    featureclick: function(e) {
+//    	        window.alert("Hello");
+//    	        return false;
+//    	    }
+//    	};
+    
+//    var pointNumber = 0;
+//    var stopTimeInMinutes= new Array();
+//    
+//    if(linearRing2!=null){
+//    	console.log("Clean point");
+//    	for(var i=0; i<pointFutures.length; i++){
+//        	vectorStartPoint.removeFeatures(pointFutures[i]);
+//        }
+//    }
+//    pointFutures = new Array();
+//    for(var i=0; i<data.length; i++){
+//    	var oldData;
+//        
+//    	var ttt = new OpenLayers.LonLat(data[i].longitude, data[i].latitude);
+//        var point0 = new OpenLayers.Geometry.Point(ttt.lon, ttt.lat);
+//        point0.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+//        if(i>0){
+//        	var stopTime = data[i].messageDate - oldData.messageDate;
+//        	if (stopTime > 300000) {
+//        		stopTimeInMinutes.push((stopTime/60000).toFixed(2));
+//        		pointContent.push("Остановился: " + new Date(oldData.messageDate).toLocaleString() + "</br>"+
+//        				"Поехал: " + new Date(data[i].messageDate).toLocaleString() + "</br>" + 
+//        				"Простоял: " + (stopTime/60000).toFixed(2));
+//        		pointFutures.push(new OpenLayers.Feature.Vector(point0, {label: "P" + pointNumber, title: "point", PointId: pointNumber}));
+//        		pointNumber++;
+//        		
+//			}
+//        }
+//        oldData = data[i];
+//        if(i==data.length-1){
+//        	map.setCenter(new OpenLayers.LonLat(point0.x, point0.y), 13);
+//        }
+//        featuress.push(point0);
+//    }
+//    
+//    for(var i=0; i<pointFutures.length; i++){
+//    	if(i==0){
+//    		pointFutures[i].data.label = "Start";
+//    		pointFutures[i].attributes.label = "Start";
+//
+//    		
+//    	}
+//    	if(i==pointFutures.length-1){
+//    		pointFutures[i].data.label = "Finish";
+//    		pointFutures[i].attributes.label = "Finish";
+//    	}
+//
+//    	vectorStartPoint.addFeatures(pointFutures[i]);
+//    	
+//    	
+//    }
+//   
+//    if(linearRing2 != null){
+//    	layr.removeFeatures(linearRing2);
+//    }
+//    var track = new OpenLayers.Geometry.LineString(featuress); 
+//    linearRing2=new OpenLayers.Feature.Vector(track);
+//    var length = (track.getLength()/1000).toFixed(2); 
+//    $('#lengthLabel').text('Длина пути: ' + length);
+//    console.log(length);
+//    layr.addFeatures(linearRing2);
+    
+}
+
 function addTrack(data, layr){
     var featuress = new Array();
     var pointsArray = new Array();

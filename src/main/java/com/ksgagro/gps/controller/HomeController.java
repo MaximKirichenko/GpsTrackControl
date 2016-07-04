@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ksgagro.gps.controller.dto.MulitiTrackRequestDTO;
+import com.ksgagro.gps.controller.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.controller.dto.ReportTrackDto;
-import com.ksgagro.gps.controller.dto.TerminalDateDTO;
+import com.ksgagro.gps.controller.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.Location;
 
 import com.ksgagro.gps.domain.TerminalDate;
@@ -28,11 +30,11 @@ import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.VehicleDetailsTable;
 import com.ksgagro.gps.domain.VehicleGroup;
 import com.ksgagro.gps.domain.repository.LocationRepository;
-import com.ksgagro.gps.domain.repository.VehicleGroupRepository;
 import com.ksgagro.gps.domain.service.AgroFieldsService;
 import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.domain.service.TerminalDateService;
 import com.ksgagro.gps.domain.service.VehicleDetailsTableService;
+import com.ksgagro.gps.domain.service.VehicleGroupService;
 import com.ksgagro.gps.domain.service.VehicleService;
 
 @Controller
@@ -42,7 +44,7 @@ public class HomeController {
 	private LocationRepository locationRepository;
 	
 	@Autowired
-	private VehicleGroupRepository vehicleGroupRepository;
+	private VehicleGroupService vehicleGroupService;
 	
 	@Autowired
 	private VehicleService vehicleService;
@@ -55,7 +57,6 @@ public class HomeController {
 	
 	@Autowired
 	private GasTankCalibrationDataService calibrationDataService;
-	
 	
 	@Autowired
 	private AgroFieldsService agroFieldsService;
@@ -71,44 +72,46 @@ public class HomeController {
 		return model;
 	}
 	
-	@RequestMapping("/")
-	public ModelAndView monitoring(){
-		ModelAndView model = new ModelAndView("home");
-
-		List<Location> listLocation = locationRepository.getList();	
-		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
-		List<Vehicle> listVehicle = vehicleService.getList();
-		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
-
-		model.addObject("listLocation", listLocation);
-		model.addObject("listGroup", listGroup);
-		model.addObject("listVehicle", listVehicle);
-		model.addObject("vehicleInEnterprise", vehicleInEnterprise);
-		model.addObject("fields", agroFieldsService.getJsonFields());
-		
-		return model;
-	}
+//	@RequestMapping("/")
+//	public ModelAndView monitoring(){
+//		ModelAndView model = new ModelAndView("home");
+//
+//		List<Location> listLocation = locationRepository.getList();	
+//		List<VehicleGroup> listGroup = vehicleGroupService.getList();
+//		List<Vehicle> listVehicle = vehicleService.getList();
+//		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
+//
+//		model.addObject("listLocation", listLocation);
+//		model.addObject("listGroup", listGroup);
+//		model.addObject("listVehicle", listVehicle);
+//		model.addObject("vehicleInEnterprise", vehicleInEnterprise);
+//		model.addObject("fields", agroFieldsService.getJsonFields());
+//		
+//		return model;
+//	}
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
-	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TerminalDateDTO periodDtoJson, Model model){
+	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TrackRequestDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
 		List<TerminalDate> list = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 
-//		System.out.println("NOT FILTERED: ");
-//		for(TerminalDate data: list){
-//			System.out.println(data);
-//		}
 		list = terminalDateService.filterData(list);
-//		System.out.println("FILTERED: ");
-//		for(TerminalDate data: list){
-//			System.out.println(data);
-//		}
+
 		Collections.reverse(list);
+		for(TerminalDate item: list){
+			System.out.println(item);
+		}
 		report.setTerminalDateList(list);
 		report.setPathLength(terminalDateService.getPathLength(list));
 		report.setCanConsumption(terminalDateService.getCanConsumption(list)*(-1));
 		report.setStartMovement(terminalDateService.getStartMovementTime(list));
 		report.setFinishMovement(terminalDateService.getFinishMovementTime(list));
 		return report;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
+	public @ResponseBody List<MultiTrackResponseDto> buildTracks(@RequestBody MulitiTrackRequestDTO trackRequest, Model model){
+		List<MultiTrackResponseDto> date = terminalDateService.getTerminalDateAboutVehiclesFromPeriod(trackRequest.getDataFrom(), trackRequest.getDataTo(), trackRequest.getTerminalNumbers());
+		return date;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/carInfo")
@@ -125,9 +128,6 @@ public class HomeController {
 		VehicleDetailsTable table = vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
 		return table;
 	}
-
-	
-
 	
 	@RequestMapping("/carDetails")
 	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
@@ -164,9 +164,10 @@ public class HomeController {
 		System.out.println(car);
 		return "carDetails";
 	}
-	@RequestMapping("/home_new")
-	public String getHomeNew(){
-		
+	@RequestMapping("/")
+	public String getHomeNew(Model model){
+		model.addAttribute("vehicleMenuItems", vehicleService.getVehicleMenuItems());
+		model.addAttribute("vehicleGroups", vehicleGroupService.getList());
 		return "home_new";
 	}
 }

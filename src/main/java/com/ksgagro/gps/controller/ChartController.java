@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ksgagro.gps.controller.dto.FuelChartDTO;
-import com.ksgagro.gps.controller.dto.TerminalDateDTO;
+import com.ksgagro.gps.controller.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.Location;
 import com.ksgagro.gps.domain.TerminalDate;
 import com.ksgagro.gps.domain.Vehicle;
@@ -66,7 +66,7 @@ public class ChartController {
 		return model;
 	}
 	@RequestMapping(method = RequestMethod.POST, value = "/chart/fuel/build")
-	public @ResponseBody FuelChartDTO buildFuelChart(@RequestBody TerminalDateDTO periodDtoJson){
+	public @ResponseBody FuelChartDTO buildFuelChart(@RequestBody TrackRequestDTO periodDtoJson){
 //		List<List<TerminalDate>> stops = terminalDateService.getStops(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 //		terminalDateService.getRefulingDate(stops, periodDtoJson.getTerminalNumber());
 //		System.out.println("Stops size: " + stops.size());

@@ -7,23 +7,31 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 
 import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ksgagro.gps.controller.dto.MultiTrackResponseDto;
+import com.ksgagro.gps.domain.DaysTrack;
 import com.ksgagro.gps.domain.GasTankCalibrationData;
 import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.Terminal;
 import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackInfo;
+import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.repository.TerminalDateRepository;
 import com.ksgagro.gps.domain.repository.TerminalRepository;
 import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.domain.service.TerminalDateService;
+import com.ksgagro.gps.domain.service.TerminalService;
+import com.ksgagro.gps.domain.service.VehicleService;
 
 @Service
 public class TerminalDateServiceImpl implements TerminalDateService {
@@ -36,6 +44,12 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 
 	@Autowired
 	TerminalRepository terminalRepository;
+	
+	@Autowired
+	TerminalService terminalService;
+	
+	@Autowired
+	VehicleService vehicleService;
 	
 	Logger logger = Logger.getLogger(TerminalDateServiceImpl.class);
 	
@@ -63,7 +77,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	public List<TerminalDate> filterData(List<TerminalDate> inputList){
 		List<TerminalDate> result = new ArrayList<TerminalDate>();
 		for (int i = 0; i < inputList.size(); i++) {
-			//System.out.println(inputList.get(i));
+			
 			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0) continue;
 			if (result.size()==0) {
 				result.add(inputList.get(i));
@@ -75,7 +89,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 					double difLat = Math.abs(result.get(lastElement).getLatitude() - inputList.get(i).getLatitude());
 					double difLong = Math.abs(result.get(lastElement).getLongitude() - inputList.get(i).getLongitude());
 
-					if ((difLat < 0.01) && (difLong < 0.01)||inputList.get(i).getNumberSatellite()<3) {
+					if ((difLat < 0.01) && (difLong < 0.02)||inputList.get(i).getNumberSatellite()>3) {
 						result.add(inputList.get(i));
 					}
 					
@@ -158,6 +172,10 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		//logger.info(terminal);
 		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
 		return point;
+	}
+	
+	public List<TerminalDate> getLastSignals(){
+		return terminalDateRepository.getLastSignals();
 	}
 	
 	public double getCanConsumption(List<TerminalDate> terminalDates){
@@ -554,6 +572,74 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		}
 		
 		
+	}
+
+
+	@Override
+	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(long millisFrom, long millisTo,
+			List<Integer> terminalNumbers) {
+		List<TerminalDate> data = terminalDateRepository.getTerminalDateAboutVehiclesFromPeriod(millisFrom, millisTo, terminalNumbers);
+		List<Terminal> terminals = terminalService.getTerminals(terminalNumbers);
+		List<Vehicle> vehicles = vehicleService.getVehicles(terminalNumbers);
+		List<MultiTrackResponseDto> result = new ArrayList<>();
+		
+		for(TerminalDate item: data){
+			boolean exist = false;
+			for(MultiTrackResponseDto response: result){
+				if(response.getTerminal().getImei().equals(item.getImei())){
+					response.addData(item);
+					exist = true;
+					continue;
+				}
+			}
+			if(!exist){
+				MultiTrackResponseDto multiTrackResponseDto = new MultiTrackResponseDto();
+				int curentVehicleID = -1;
+				for(Terminal terminal: terminals){
+					if(terminal.getImei().equals(item.getImei())){
+						multiTrackResponseDto.setTerminal(terminal);
+						curentVehicleID = terminal.getVehicle();
+					}
+				}
+				for(Vehicle vehicle: vehicles){
+					if(vehicle.getId()==curentVehicleID){
+						multiTrackResponseDto.setVehicle(vehicle);
+					}
+				}
+				List<TerminalDate> terminalDates = new ArrayList<>();
+				terminalDates.add(item);
+				multiTrackResponseDto.setData(terminalDates);
+				result.add(multiTrackResponseDto);
+				
+			}
+		}
+		for(MultiTrackResponseDto item: result){
+			List<TerminalDate> temp = filterData(item.getData());
+			item.setData(temp);
+			
+			TrackInfo trackInfo = new TrackInfo();
+			trackInfo.setTotalLength(getPathLength(item.getData()));
+//			List<DaysTrack> daysTracks = getDaysTracks(item.getData());
+//			trackInfo.setDaysTracks(daysTracks);
+			item.setTrackInfo(trackInfo);
+			
+		}
+		
+		return result;
+	}
+
+	private List<DaysTrack> getDaysTracks(List<TerminalDate> data) {
+//		Calendar hightBound = null;
+//		for(TerminalDate item: data){
+//			Calendar curent = Calendar.getInstance();
+//			curent.setTimeInMillis(item.getMessageDate());
+//			hightBound.setTimeInMillis(item.getMessageDate());
+//			hightBound.set()
+//			System.out.println(curent);
+//			
+//		}
+		
+		return null;
 	}
 	
 

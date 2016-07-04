@@ -21,6 +21,7 @@
 	<script src="<c:url value="/resource/JS/ExtendedRenderers.js"/>"></script>
 	<script src="<c:url value="/resource/JS/controller/homePageBuilder.js"/>"></script>
 	<script src="<c:url value="/resource/JS/service/mapService.js"/>"></script>
+	<script src="<c:url value="/resource/JS/service/dateMaintainingService.js"/>"></script>
 	<title>KSG Agro</title>
 </head>
 <body>
@@ -55,59 +56,26 @@
 		</div>
 		<div class="left-col">
 			<div id="cars_select_menu">
-				<div id="accordion">
-  <h3>Section 1</h3>
-  <div>
-    <ul class="accordion_menu">
-    	<li><input type="checkbox" name="item1">item 1</li>
-    	<li><input type="checkbox" name="item1">item 2</li>
-    	<li><input type="checkbox" name="item1">item 3</li>
-    	<li><input type="checkbox" name="item1">item 4</li>
-    	<li><input type="checkbox" name="item1">item 5</li>
-    	<li><input type="checkbox" name="item1">item 1</li>
-    	<li><input type="checkbox" name="item1">item 6</li>
-    	<li><input type="checkbox" name="item1">item 7</li>
-    	<li><input type="checkbox" name="item1">item 8</li>
-    	<li><input type="checkbox" name="item1">item 9</li>
-    	<li><input type="checkbox" name="item1">item 10</li>
-    	<li><input type="checkbox" name="item1">item 11</li>
-    	<li><input type="checkbox" name="item1">item 12</li>
-    	<li><input type="checkbox" name="item1">item 13</li>
-    	<li><input type="checkbox" name="item1">item 14</li>
-    	<li><input type="checkbox" name="item1">item 15</li>
-    </ul>
-  </div>
-  <h3>Section 2</h3>
-  <div>
-    <ul class="accordion_menu">
-    	<li><input type="checkbox" name="item1">item 1</li>
-    	<li><input type="checkbox" name="item1">item 2</li>
-    	<li><input type="checkbox" name="item1">item 3</li>
-    	<li><input type="checkbox" name="item1">item 4</li>
-    	<li><input type="checkbox" name="item1">item 5</li>
-    </ul>
-  </div>
-  <h3>Section 3</h3>
-  <div>
-    <ul class="accordion_menu">
-    	<li><input type="checkbox" name="item1">item 1</li>
-    	<li><input type="checkbox" name="item1">item 2</li>
-    	<li><input type="checkbox" name="item1">item 3</li>
-    	<li><input type="checkbox" name="item1">item 4</li>
-    	<li><input type="checkbox" name="item1">item 5</li>
-    </ul>
-  </div>
-  <h3>Section 4</h3>
-  <div>
-    <ul class="accordion_menu">
-    	<li><input type="checkbox" name="item1">item 1</li>
-    	<li><input type="checkbox" name="item1">item 2</li>
-    	<li><input type="checkbox" name="item1">item 3</li>
-    	<li><input type="checkbox" name="item1">item 4</li>
-    	<li><input type="checkbox" name="item1">item 5</li>
-    </ul>
-  </div>
-</div>
+			<div id="accordion">
+			<c:forEach var="groupItem" items="${vehicleGroups}" varStatus="loop">
+				<h3>${groupItem.groupName }</h3>
+				<div>
+				<ul class="accordion_menu" id="accordion_menu">	
+				<c:forEach var="menuItem" items="${vehicleMenuItems}" varStatus="loop">
+					<c:if test="${menuItem.vehicle.group.id==groupItem.id }">
+						<li><input type="checkbox" name="${menuItem.vehicle.id }_check" class="vehicle_checkbox"/>
+						<input type="hidden" class="vehicleId" value="${menuItem.vehicle.id }">
+						<input type="hidden" class="messageDateValue" value="${menuItem.lastSignal.messageDate }">
+						<input type="hidden" class="speedValue" value="${menuItem.lastSignal.speed }">
+							${menuItem.vehicle.name } (${menuItem.vehicle.regNumber })
+						</li>		
+					</c:if>
+				</c:forEach>
+				</ul>
+				</div>
+			</c:forEach>
+			</div>
+
 			</div>
 		</div>
 		<div class="right-col">
@@ -125,16 +93,13 @@
     				<h1>Car info</h1>
   				</div>
   				<div id="tabs-3">
-    				<h1>Report content</h1>
+    				
   				</div>
   				<div id="tabs-4">
     				<h1>Chart</h1>
   				</div>
 			</div>
 		</div>
-		
-		
-<!-- 		<div class="clear"></div> -->
 	</div>
 </body>
 </html>

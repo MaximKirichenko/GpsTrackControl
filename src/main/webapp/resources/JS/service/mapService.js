@@ -335,8 +335,67 @@ function searchKadNumber(kadNumber){
 
 
 var linearRing2;
-var pointsVector,pointFutures; 
+var pointsVector; 
 
+function addTracks(trackInfo, layr){
+	var labels = new Array();
+	console.log(trackLayer);
+	
+	trackLayer.removeAllFeatures();
+	trackLayer.destroyFeatures();
+	trackLayer.addFeatures([]);
+	
+	vectorStartPoint.removeAllFeatures();
+	vectorStartPoint.destroyFeatures();
+	vectorStartPoint.addFeatures([]);
+	console.log(trackLayer); 
+	if(linearRing2!=null){
+	    	console.log("Clean point");
+	    	for(var i=0; i<labels.length; i++){
+	        	vectorStartPoint.removeFeatures(labels[i]);
+	        }
+	    	
+	    }
+	
+	for(var j=0; j<trackInfo.length; j++){
+		var labelContent = new Array();
+		var trackPoints = new Array();
+		for(var i=0; i<trackInfo[j].data.length; i++){
+			var point = createPoint(trackInfo[j].data[i].longitude, trackInfo[j].data[i].latitude);
+			trackPoints.push(point);
+			
+	        if(i==trackInfo[j].data.length-1){
+	        	labelContent.push("Последняя точка");
+	    		labels.push(createLabel(point, trackInfo[j].vehicle.name, "point", j));
+	        	map.setCenter(new OpenLayers.LonLat(point.x, point.y));
+	        }
+	        
+		}
+		
+		for(var i=0; i<labels.length; i++){
+			vectorStartPoint.addFeatures(labels[i]);
+		}
+		
+		var track = new OpenLayers.Geometry.LineString(trackPoints); 
+        linearRing2=new OpenLayers.Feature.Vector(track);
+        trackLayer.addFeatures(linearRing2);
+	}
+	
+}
+function createLabel(point, text, title, id){
+	return new OpenLayers.Feature.Vector(point, 
+			{
+		label: text, 
+		title: title, 
+		PointId: id
+	});
+}
+function createPoint(longitude, latitude){
+	var lonLat = new OpenLayers.LonLat(longitude, latitude);
+	var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+	point.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+	return point;
+}
 function addTrack(data, layr){
 	
     var featuress = new Array();
@@ -346,11 +405,11 @@ function addTrack(data, layr){
     
     if(linearRing2!=null){
     	console.log("Clean point");
-    	for(var i=0; i<pointFutures.length; i++){
-        	vectorStartPoint.removeFeatures(pointFutures[i]);
+    	for(var i=0; i<labels.length; i++){
+        	vectorStartPoint.removeFeatures(labels[i]);
         }
     }
-    pointFutures = new Array();
+    labels = new Array();
     for(var i=0; i<data.length; i++){
     	
     	var oldData;
@@ -359,13 +418,13 @@ function addTrack(data, layr){
         var point0 = new OpenLayers.Geometry.Point(ttt.lon, ttt.lat);
         point0.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
         if(i>0){
-        	var stopTime = data[i].messageDate - oldData.messageDate;
+        	var smtopTime = data[i].messageDate - oldData.messageDate;
         	if (stopTime > 180000) {
         		stopTimeInMinutes.push((stopTime/60000).toFixed(2));
         		pointContent.push("Остановился: " + new Date(oldData.messageDate).toLocaleString() + "</br>"+
         				"Поехал: " + new Date(data[i].messageDate).toLocaleString() + "</br>" + 
         				"Простоял: " + (stopTime/60000).toFixed(2));
-        		pointFutures.push(new OpenLayers.Feature.Vector(point0, {label: "P" + pointNumber, title: "point", PointId: pointNumber}));
+        		labels.push(new OpenLayers.Feature.Vector(point0, {label: "P" + pointNumber, title: "point", PointId: pointNumber}));
         		pointNumber++;
         		
 			}
@@ -373,29 +432,26 @@ function addTrack(data, layr){
         oldData = data[i];
         if(i==data.length-1){
         	pointContent.push("Последняя точка");
-    		pointFutures.push(new OpenLayers.Feature.Vector(point0, {label: "F" + pointNumber, title: "point", PointId: pointNumber}));
+    		labels.push(new OpenLayers.Feature.Vector(point0, {label: "F" + pointNumber, title: "point", PointId: pointNumber}));
         	map.setCenter(new OpenLayers.LonLat(point0.x, point0.y));
         }
         featuress.push(point0);
     }
     console.log("Futures size");
-    console.log(pointFutures.length);
-    for(var i=0; i<pointFutures.length; i++){
+    console.log(labels.length);
+    for(var i=0; i<labels.length; i++){
     	if(i==0){
-    		pointFutures[i].data.label = "Start";
-    		pointFutures[i].attributes.label = "Start";
+    		labels[i].data.label = "Start";
+    		labels[i].attributes.label = "Start";
 
     		
     	}
-    	if(i==pointFutures.length-1){
-    		pointFutures[i].data.label = "Finish";
-    		pointFutures[i].attributes.label = "Finish";
+    	if(i==labels.length-1){
+    		labels[i].data.label = "Finish";
+    		labels[i].attributes.label = "Finish";
     	}
 
-    	vectorStartPoint.addFeatures(pointFutures[i]);
-    	
-    	
-    	
+    	vectorStartPoint.addFeatures(labels[i]);
     }
    
     if(linearRing2 != null){

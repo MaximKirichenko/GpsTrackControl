@@ -1,5 +1,7 @@
 package com.ksgagro.gps.domain.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class TerminalServiceImpl implements TerminalService{
 	@Override
 	public Terminal getTerminal(int id) {
 		return terminalRepository.getTerminalByVehicleId(id);
+	}
+
+	@Override
+	public List<Terminal> getTerminals(List<Integer> terminalNumbers) {
+		return terminalRepository.getTerminals(terminalNumbers);
 	}
 
 }

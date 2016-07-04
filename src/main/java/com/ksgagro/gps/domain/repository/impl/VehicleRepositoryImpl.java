@@ -79,5 +79,14 @@ public class VehicleRepositoryImpl implements VehicleRepository{
 	}
 
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Vehicle> getVehicles(List<Integer> terminalNumbers) {
+		return sessionFactory.getCurrentSession().createCriteria(Vehicle.class).add(Restrictions.in("id", terminalNumbers)).list();
+	}
+
+
 	
 }
