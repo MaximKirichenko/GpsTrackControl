@@ -75,16 +75,23 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	}
 	
 	public List<TerminalDate> filterData(List<TerminalDate> inputList){
+		boolean lastCoordinateIsZero = false;
 		List<TerminalDate> result = new ArrayList<TerminalDate>();
 		for (int i = 0; i < inputList.size(); i++) {
 			
-			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0) continue;
+			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0){
+				lastCoordinateIsZero = true;
+				continue;
+			}
 			if (result.size()==0) {
 				result.add(inputList.get(i));
 			} else {
 				int lastElement = result.size() - 1;
-				if ((result.get(lastElement).getLatitude() != inputList.get(i).getLatitude())
-						|| (result.get(lastElement).getLongitude() != inputList.get(i).getLongitude())) {
+				if (
+						!lastCoordinateIsZero &&
+						((result.get(lastElement).getLatitude() != inputList.get(i).getLatitude()) || 
+						(result.get(lastElement).getLongitude() != inputList.get(i).getLongitude()))
+						) {
 					
 					double difLat = Math.abs(result.get(lastElement).getLatitude() - inputList.get(i).getLatitude());
 					double difLong = Math.abs(result.get(lastElement).getLongitude() - inputList.get(i).getLongitude());
@@ -95,6 +102,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 					}
 					
 				}
+				lastCoordinateIsZero = false;
 			}
 		}
 
