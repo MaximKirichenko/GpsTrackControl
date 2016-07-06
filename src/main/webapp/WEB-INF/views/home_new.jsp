@@ -9,11 +9,10 @@
 	
 	<link rel="stylesheet" href="<c:url value="/resource/css/jquery-ui.css"/>">
 	<link rel="stylesheet" href="<c:url value="/resource/css/home_page.css"/>">
-
 	
-	<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD1fO8NBDPstlRrT0VDv7gVfsO19CTVV4g">
-     </script> 
-     
+	
+<!-- 	<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD1fO8NBDPstlRrT0VDv7gVfsO19CTVV4g"></script>   -->
+    <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script> 
 	<script src="<c:url value="/resource/JS/jquery-1.11.3.js"/>"></script>
 	<script src="<c:url value="/resource/JS/jquery-ui.js"/>"></script>
 	

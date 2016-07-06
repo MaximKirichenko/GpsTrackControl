@@ -89,7 +89,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 					double difLat = Math.abs(result.get(lastElement).getLatitude() - inputList.get(i).getLatitude());
 					double difLong = Math.abs(result.get(lastElement).getLongitude() - inputList.get(i).getLongitude());
 
-					if ((difLat < 0.01) && (difLong < 0.02)||inputList.get(i).getNumberSatellite()>3) {
+					if ((difLat < 0.01) && (difLong < 0.02)&&inputList.get(i).getNumberSatellite()>3) {
+						
 						result.add(inputList.get(i));
 					}
 					
@@ -619,6 +620,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			
 			TrackInfo trackInfo = new TrackInfo();
 			trackInfo.setTotalLength(getPathLength(item.getData()));
+			System.out.println("Пробег: " + trackInfo.getTotalLength() + " track: " + item.getVehicle());
 //			List<DaysTrack> daysTracks = getDaysTracks(item.getData());
 //			trackInfo.setDaysTracks(daysTracks);
 			item.setTrackInfo(trackInfo);

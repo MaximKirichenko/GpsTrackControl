@@ -1,5 +1,9 @@
 var map, drawControls;
-var trackLayer, tmsoverlay_orto, kadpodil, polygonLayer, vectorStartPoint, mapNik;
+
+var trackLayer, tmsoverlay_orto, kadpodil, polygonLayer, mapNik;
+var gmap;
+var vectorStartPoint;
+var stopMarkersLayer;
 
 var kadastrNumber, use, area;
 var pointContent = new Array();
@@ -26,17 +30,19 @@ $("document").ready(function(){
 
 
 function initLayer(){
+	
 	var stylePoint = new OpenLayers.Style(
             {
                 pointRadius: 8,
                 strokeColor: "red",
                 strokeWidth: 2,
-                fillColor: "lime",
+                fillColor: "blue",
                 labelYOffset: -16,
                 label: "${label}",
                 fontSize: 16
             }
         );
+// Marker layers	
    vectorStartPoint = new OpenLayers.Layer.Vector("Остановки",
     		{
     		        styleMap: new OpenLayers.StyleMap(
@@ -44,6 +50,9 @@ function initLayer(){
     		          "select": { pointRadius: 20}
     		        })
     		    });
+   stopMarkersLayer = new OpenLayers.Layer.Markers("Stop markers")
+   
+// Track layer	   
     trackLayer = new OpenLayers.Layer.Vector("Трэк", {
         renderers: ['SVGExtended', 'VMLExtended', 'CanvasExtended'],
         styleMap: new OpenLayers.StyleMap({
@@ -73,7 +82,10 @@ function initLayer(){
         alpha: true,
         isBaseLayer: true
     });
-    
+    gmap = new OpenLayers.Layer.Google(
+            "Google Hybrid",
+            {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20});
+        
     kadpodil = new OpenLayers.Layer.WMS(
             "Кадастровий поділ", "http://212.26.144.110/geowebcache/service/wms?tiled=true", {
                 LAYERS: 'kadastr',
@@ -137,7 +149,7 @@ function LoadMap(){
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     
   //Add all created layers
-    map.addLayers([mapNik, kadpodil, tmsoverlay_orto, trackLayer, polygonLayer, vectorStartPoint]);
+    map.addLayers([gmap, mapNik, kadpodil, tmsoverlay_orto, trackLayer, polygonLayer, vectorStartPoint, stopMarkersLayer]);
 
     //Centered map
     var point0 = new OpenLayers.Geometry.Point(35.051746, 48.470277);
@@ -339,36 +351,72 @@ var pointsVector;
 
 function addTracks(trackInfo, layr){
 	var labels = new Array();
-	console.log(trackLayer);
+	console.log(trackInfo);
 	
 	trackLayer.removeAllFeatures();
 	trackLayer.destroyFeatures();
 	trackLayer.addFeatures([]);
 	
-	vectorStartPoint.removeAllFeatures();
-	vectorStartPoint.destroyFeatures();
-	vectorStartPoint.addFeatures([]);
-	console.log(trackLayer); 
-	if(linearRing2!=null){
-	    	console.log("Clean point");
-	    	for(var i=0; i<labels.length; i++){
-	        	vectorStartPoint.removeFeatures(labels[i]);
-	        }
-	    	
-	    }
+//	vectorStartPoint.removeAllFeatures();
+//	vectorStartPoint.destroyFeatures();
+//	vectorStartPoint.addFeatures([]);
+	
+	stopMarkersLayer.clearMarkers();
+	clearPopUp();
+	
+//	if(linearRing2!=null){
+//	    	console.log("Clean point");
+//	    	for(var i=0; i<labels.length; i++){
+//	        	vectorStartPoint.removeFeatures(labels[i]);
+//	        }
+//	    	
+//	    }
 	
 	for(var j=0; j<trackInfo.length; j++){
 		var labelContent = new Array();
 		var trackPoints = new Array();
+		var oldData;
 		for(var i=0; i<trackInfo[j].data.length; i++){
 			var point = createPoint(trackInfo[j].data[i].longitude, trackInfo[j].data[i].latitude);
 			trackPoints.push(point);
-			
-	        if(i==trackInfo[j].data.length-1){
-	        	labelContent.push("Последняя точка");
-	    		labels.push(createLabel(point, trackInfo[j].vehicle.name, "point", j));
+			if(i==0){
+	    		var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate)/1000;
+	        	travelTime = travelTime.toString().toHHMMSS();
+	        	var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber + 
+	        		"</br>Время старта: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString();
+	        	stopMarkersLayer.addMarker(createStartMarker(point, "Start", popupContent));
+			}else if(i==trackInfo[j].data.length-1){
+	        	var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate)/1000;
+	        	travelTime = travelTime.toString().toHHMMSS();
+	        	var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber + 
+	        		"</br>Длина пути: " + trackInfo[j].trackInfo.totalLength + " км." + 
+	        		"</br>Время в пути: " + travelTime +
+	        		"</br>Время финиша: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString();
+	        	
+	        	stopMarkersLayer.addMarker(createFinishMarker(point, "Stop", popupContent));
 	        	map.setCenter(new OpenLayers.LonLat(point.x, point.y));
+	        }else if(i>0){
+	        	var stopTime = trackInfo[j].data[i].messageDate - oldData.messageDate;
+	        	if(stopTime>30000 && stopTime < 3600000){
+	        		var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate)/1000;
+	        		travelTime = travelTime.toString().toHHMMSS();
+	        		var stopDuration = (stopTime/1000).toString().toHHMMSS();
+	        		var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber + 
+	        		"</br>Время в пути: " + travelTime +
+	        		"</br>Время остановки: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString() +
+	        		"</br>продолжительность остановки: " + stopDuration;
+	        		stopMarkersLayer.addMarker(createStopMarker(point, stopTime, popupContent));
+	        	}else if(stopTime>=3600000){
+	        		var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate)/1000;
+	        		travelTime = travelTime.toString().toHHMMSS();
+	        		var stopDuration = (stopTime/1000).toString().toHHMMSS();
+	        		var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber + 
+	        		"Время парковки: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString()+
+	        		"</br>продолжительность стоянки: " + stopDuration;
+	        		stopMarkersLayer.addMarker(createStopMarker(point, stopTime, popupContent));
+	        	}
 	        }
+			oldData = trackInfo[j].data[i];
 	        
 		}
 		
@@ -382,86 +430,133 @@ function addTracks(trackInfo, layr){
 	}
 	
 }
-function createLabel(point, text, title, id){
-	return new OpenLayers.Feature.Vector(point, 
-			{
-		label: text, 
-		title: title, 
-		PointId: id
-	});
+function clearPopUp(){
+	if(map.popups.length!=0){
+		while(map.popups.length!=0){
+			map.removePopup(map.popups[0]);
+		}
+	}
 }
+function createPopup(point, text){
+	var popupId = 'point.x'+'point.y';
+	var lonLat = new OpenLayers.LonLat(point.x, point.y);
+	var size = new OpenLayers.Size(100, 50);
+	var closeButton = true;
+	
+	var popUp = new OpenLayers.Popup(popupId, lonLat, size, text, closeButton);
+	popUp.autoSize = true;
+	map.addPopup(popUp);
+}
+function createParkMarker(point, text, popupContent){
+    return createMarker(point,'/gps/resource/parkingIcon.png', text, popupContent);
+}
+function createStopMarker(point, text, popupContent){
+    return createMarker(point,'/gps/resource/stopIcon.png', text, popupContent);
+}
+function createStartMarker(point, text, popupContent){
+    return createMarker(point,'/gps/resource/startIcon.png', text, popupContent);
+}
+function createFinishMarker(point, text, popupContent){
+    return createMarker(point,'/gps/resource/finishIcon.png', text, popupContent);
+}
+function createMarker(point, img, text, popupContent){
+	var size = new OpenLayers.Size(30,30);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+    var icon = new OpenLayers.Icon(img,size,offset);
+    var marker = new OpenLayers.Marker(new OpenLayers.LonLat(point.x,point.y),icon);
+    marker.setOpacity(0.8);
+    marker.events.register('mousedown', marker, 
+			function(evt) { 
+    			createPopup(point, popupContent);
+				OpenLayers.Event.stop(evt); 
+			});
+    return marker;
+}
+
+function showMessage(text){
+	alert(text); 
+}
+
+//function createLabel(point, text, title, id){
+//	return new OpenLayers.Feature.Vector(point, 
+//			{
+//		label: text, 
+//		title: title, 
+//		PointId: id
+//	});
+//}
 function createPoint(longitude, latitude){
 	var lonLat = new OpenLayers.LonLat(longitude, latitude);
 	var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
 	point.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 	return point;
 }
-function addTrack(data, layr){
-	
-    var featuress = new Array();
-    var pointsArray = new Array();
-    var pointNumber = 0;
-    var stopTimeInMinutes= new Array();
-    
-    if(linearRing2!=null){
-    	console.log("Clean point");
-    	for(var i=0; i<labels.length; i++){
-        	vectorStartPoint.removeFeatures(labels[i]);
-        }
-    }
-    labels = new Array();
-    for(var i=0; i<data.length; i++){
-    	
-    	var oldData;
-        
-    	var ttt = new OpenLayers.LonLat(data[i].longitude, data[i].latitude);
-        var point0 = new OpenLayers.Geometry.Point(ttt.lon, ttt.lat);
-        point0.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
-        if(i>0){
-        	var smtopTime = data[i].messageDate - oldData.messageDate;
-        	if (stopTime > 180000) {
-        		stopTimeInMinutes.push((stopTime/60000).toFixed(2));
-        		pointContent.push("Остановился: " + new Date(oldData.messageDate).toLocaleString() + "</br>"+
-        				"Поехал: " + new Date(data[i].messageDate).toLocaleString() + "</br>" + 
-        				"Простоял: " + (stopTime/60000).toFixed(2));
-        		labels.push(new OpenLayers.Feature.Vector(point0, {label: "P" + pointNumber, title: "point", PointId: pointNumber}));
-        		pointNumber++;
-        		
-			}
-        }
-        oldData = data[i];
-        if(i==data.length-1){
-        	pointContent.push("Последняя точка");
-    		labels.push(new OpenLayers.Feature.Vector(point0, {label: "F" + pointNumber, title: "point", PointId: pointNumber}));
-        	map.setCenter(new OpenLayers.LonLat(point0.x, point0.y));
-        }
-        featuress.push(point0);
-    }
-    console.log("Futures size");
-    console.log(labels.length);
-    for(var i=0; i<labels.length; i++){
-    	if(i==0){
-    		labels[i].data.label = "Start";
-    		labels[i].attributes.label = "Start";
-
-    		
-    	}
-    	if(i==labels.length-1){
-    		labels[i].data.label = "Finish";
-    		labels[i].attributes.label = "Finish";
-    	}
-
-    	vectorStartPoint.addFeatures(labels[i]);
-    }
-   
-    if(linearRing2 != null){
-    	trackLayer.removeFeatures(linearRing2);
-    }
-    var track = new OpenLayers.Geometry.LineString(featuress); 
-    linearRing2=new OpenLayers.Feature.Vector(track);
-    trackLayer.addFeatures(linearRing2);
-    
-}
+//function addTrack(data, layr){
+//	
+//    var featuress = new Array();
+//    var pointsArray = new Array();
+//    var pointNumber = 0;
+//    var stopTimeInMinutes= new Array();
+//    
+//    if(linearRing2!=null){
+//    	console.log("Clean point");
+//    	for(var i=0; i<labels.length; i++){
+//        	vectorStartPoint.removeFeatures(labels[i]);
+//        }
+//    }
+//    labels = new Array();
+//    for(var i=0; i<data.length; i++){
+//    	
+//    	var oldData;
+//        
+//    	var ttt = new OpenLayers.LonLat(data[i].longitude, data[i].latitude);
+//        var point0 = new OpenLayers.Geometry.Point(ttt.lon, ttt.lat);
+//        point0.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+//        if(i>0){
+//        	var smtopTime = data[i].messageDate - oldData.messageDate;
+//        	if (stopTime > 180000) {
+//        		stopTimeInMinutes.push((stopTime/60000).toFixed(2));
+//        		pointContent.push("Остановился: " + new Date(oldData.messageDate).toLocaleString() + "</br>"+
+//        				"Поехал: " + new Date(data[i].messageDate).toLocaleString() + "</br>" + 
+//        				"Простоял: " + (stopTime/60000).toFixed(2));
+//        		labels.push(new OpenLayers.Feature.Vector(point0, {label: "P" + pointNumber, title: "point", PointId: pointNumber}));
+//        		pointNumber++;
+//        		
+//			}
+//        }
+//        oldData = data[i];
+//        if(i==data.length-1){
+//        	pointContent.push("Последняя точка");
+//    		labels.push(new OpenLayers.Feature.Vector(point0, {label: "F" + pointNumber, title: "point", PointId: pointNumber}));
+//        	map.setCenter(new OpenLayers.LonLat(point0.x, point0.y));
+//        }
+//        featuress.push(point0);
+//    }
+//    console.log("Futures size");
+//    console.log(labels.length);
+//    for(var i=0; i<labels.length; i++){
+//    	if(i==0){
+//    		labels[i].data.label = "Start";
+//    		labels[i].attributes.label = "Start";
+//
+//    		
+//    	}
+//    	if(i==labels.length-1){
+//    		labels[i].data.label = "Finish";
+//    		labels[i].attributes.label = "Finish";
+//    	}
+//
+//    	vectorStartPoint.addFeatures(labels[i]);
+//    }
+//   
+//    if(linearRing2 != null){
+//    	trackLayer.removeFeatures(linearRing2);
+//    }
+//    var track = new OpenLayers.Geometry.LineString(featuress); 
+//    linearRing2=new OpenLayers.Feature.Vector(track);
+//    trackLayer.addFeatures(linearRing2);
+//    
+//}
 
 function addPoly(data, title, ident, layr){
     var featuress = Array();
