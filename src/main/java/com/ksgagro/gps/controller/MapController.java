@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ksgagro.gps.domain.AgroFields;
 
-import com.ksgagro.gps.domain.service.AgroFieldsService;
+import com.ksgagro.gps.service.AgroFieldsService;
 
 
 

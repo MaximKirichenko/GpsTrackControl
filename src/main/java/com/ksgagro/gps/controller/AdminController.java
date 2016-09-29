@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ksgagro.gps.domain.MenuItem;
-import com.ksgagro.gps.domain.service.AgroFieldsService;
+import com.ksgagro.gps.service.AgroFieldsService;
 
 @Controller
 public class AdminController {

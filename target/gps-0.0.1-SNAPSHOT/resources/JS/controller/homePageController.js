@@ -55,6 +55,7 @@ function getTrackFromServer(dataFrom, dataTo, terminalNumber){
 				setPoint(data.terminalDateList[0]);
 			}
 			else{
+				console.log(data);
 				$("#durationMovement").text(((data.startMovement-data.finishMovement)/1000).toString().toHHMMSS());
 				$("#startMovement").text(new Date(data.finishMovement).toLocaleString());
 				$("#finishMovement").text(new Date(data.startMovement).toLocaleString());
@@ -66,3 +67,4 @@ function getTrackFromServer(dataFrom, dataTo, terminalNumber){
         }
 	});
 }
+

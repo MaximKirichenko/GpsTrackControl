@@ -1,31 +1,7 @@
 package com.ksgagro.gps.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.ksgagro.gps.controller.dto.TrackRequestDTO;
-import com.ksgagro.gps.domain.AgroPayContract;
-import com.ksgagro.gps.domain.Location;
-import com.ksgagro.gps.domain.Pay;
-import com.ksgagro.gps.domain.TerminalDate;
-import com.ksgagro.gps.domain.Vehicle;
-import com.ksgagro.gps.domain.VehicleGroup;
-import com.ksgagro.gps.domain.repository.AgroPayConractRepository;
-import com.ksgagro.gps.domain.repository.LocationRepository;
-import com.ksgagro.gps.domain.repository.PayRepository;
-import com.ksgagro.gps.domain.repository.VehicleGroupRepository;
-import com.ksgagro.gps.domain.repository.VehicleRepository;
-import com.ksgagro.gps.domain.service.AgroFieldsService;
-import com.ksgagro.gps.domain.service.TerminalDateService;
 
 @Controller
 @RequestMapping("/report")

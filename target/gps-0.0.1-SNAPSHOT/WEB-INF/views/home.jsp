@@ -39,8 +39,8 @@
 </head>
 <body>
 <div id="map"></div>
-<input id="terminalNumber" type="hidden" name="terminalNumber"
-				value="${numberTerminal}" /> 
+<input id="terminalNumber" type="hidden" name="vehicleId"
+				value="${vehicleId}" /> 
 <input id="selectedTerminalNumber" type="hidden" name="selectedTerminalNumber"
 				value="" /> 
 	<div id="pop-up-window" style="display: none;">
@@ -63,7 +63,7 @@
 				<li><a href="<spring:url value="/"/>">Карта</a></li>
 				<li><a href="<spring:url value="/chart"/>">Графики</a></li>
 				<li><a href="<spring:url value="/report"/>">Отчеты</a></li>
-				<li><a href="<spring:url value="report/trackPage?terminalNumber=82"/>">Администрирование</a></li> 
+				<li><a href="<spring:url value="/adminPage"/>">Администрирование</a></li> 
 				<li><a href="<spring:url value="/logout"/>">Выход</a></li> 
 			</ul>
 			</div>
@@ -99,8 +99,8 @@
 					</label>
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
-								<c:if test="${group.id == car.group.id && car.numberTerminal != 72}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+								<c:if test="${group.id == car.group.id && car.id != 72}">
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>
@@ -120,8 +120,8 @@
 					</label>
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
-								<c:if test="${group.id == car.group.id && group.id == 1}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+								<c:if test="${group.id == car.group.id && (group.id == 1 || group.id == 4)}">
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>

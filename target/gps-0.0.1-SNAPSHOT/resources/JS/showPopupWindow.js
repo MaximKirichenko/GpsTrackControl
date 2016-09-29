@@ -35,11 +35,15 @@
 	  console.log(data);
 	  $("#carInfoTable tbody").append("<tr>" +
 	  		"<td>IMEI</td><td>"+data.terminalDate.imei+"</td>" +
-	  		"<td>Номер терминала</td><td>"+data.vehicle.numberTerminal+"</td>" +
+	  		"<td>ID автомобиля</td><td>"+data.vehicle.id+"</td>" +
 	  		"</tr>");
 	  $("#carInfoTable tr:last").after("<tr>" +
 		  		"<td>Наименование</td><td>"+data.vehicle.name+"</td>" +
 		  		"<td>гос.номер</td><td>"+data.vehicle.regNumber+"</td>" +
+		  		"</tr>");
+	  $("#carInfoTable tr:last").after("<tr>" +
+		  		"<td>Терминал</td><td>"+data.terminal.name+"</td>" +
+		  		"<td>Номер сим</td><td>"+data.terminal.telephone+"</td>" +
 		  		"</tr>");
 	  $("#carInfoTable tr:last").after("<tr>" +
 		  		"<td>Левый бак</td><td>"+data.fuelLevelLeft+"</td>" +

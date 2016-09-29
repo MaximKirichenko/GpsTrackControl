@@ -132,3 +132,93 @@ html, body {
     text-decoration: none;
 }
 
+#map-tools{
+	position: absolute;
+	border-radius: 0 10px 10px 0;
+	top: 50px;
+	padding: 5px 10px 5px 5px;
+	background: url(images/bg.png) repeat;
+	border: 1px solid #808080;
+	z-index: 10;
+}
+#map-tools:HOVER {
+	cursor: pointer;
+}
+
+#tool-selector{
+	display: none;
+}
+
+#measure-window{
+	position: absolute;
+	border-radius: 0 10px 10px 0;
+	bottom: 50px;
+	padding: 5px 10px 5px 5px;
+	background: url(images/bg.png) repeat;
+	border: 1px solid #808080;
+	z-index: 10;
+}
+.car-selelect-field{
+	margin: 20px;
+	display:none;
+}
+select{
+	width: 200px;
+}
+#add-map-object-form{
+	border-radius: 10px 10px 10px 10px;
+	width: 350px;
+	border: 1px solid #808080;
+	background: url(images/bg.png) repeat;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 10px 5px 5px;
+	z-index: 10;
+}
+#view-window{
+	border-radius: 10px 10px 10px 10px;
+	width: 350px;
+	border: 1px solid #808080;
+	background: url(images/bg.png) repeat;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 10px 5px 5px;
+	z-index: 11;
+}
+#add-map-object-content{
+	float: left;
+}
+#view-window-content{
+	float: left;
+}
+#add-map-object-content .object-label{
+	display: block;
+	width: 100px;
+	clear: both;
+}
+#add-map-object-content .object-field{
+	float: left;
+} 
+#add-map-object-button-box{
+	margin: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 150px;
+	clear: both;
+}
+#add-map-object-button-box .button{
+	float: left;
+	width: 75px;
+}
+
+#view-window-button-box{
+	margin: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 150px;
+	clear: both;
+}
+#view-window-button-box .button{
+	float: left;
+	width: 75px;
+}

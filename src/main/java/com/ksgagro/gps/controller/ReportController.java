@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ksgagro.gps.controller.dto.ReportGroupDTO;
-import com.ksgagro.gps.controller.dto.ReportTrackDto;
-import com.ksgagro.gps.controller.dto.TrackRequestDTO;
+import com.ksgagro.gps.dto.ReportGroupDTO;
+import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.AgroPayContract;
 import com.ksgagro.gps.domain.TerminalDate;
 import com.ksgagro.gps.domain.Vehicle;
-import com.ksgagro.gps.domain.service.AgroFieldsService;
-import com.ksgagro.gps.domain.service.CarSignalService;
-import com.ksgagro.gps.domain.service.ContractService;
-import com.ksgagro.gps.domain.service.TerminalDateService;
-import com.ksgagro.gps.domain.service.VehicleService;
+import com.ksgagro.gps.service.AgroFieldsService;
+import com.ksgagro.gps.service.CarSignalService;
+import com.ksgagro.gps.service.ContractService;
+import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.VehicleService;
 
 @Controller
 public class ReportController {
@@ -50,7 +49,7 @@ public class ReportController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/groupReport")
 	public @ResponseBody List<ReportGroupDTO> getGroupReport(@RequestBody TrackRequestDTO periodDtoJson){
-		List<Vehicle> vehicleList = vehicleService.getList();
+		List<Vehicle> vehicleList = vehicleService.getFilteredList();
 		List<ReportGroupDTO> report = new ArrayList<ReportGroupDTO>();
 		for(Vehicle vehicle: vehicleList){
 			ReportGroupDTO item = new ReportGroupDTO();

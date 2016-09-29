@@ -10,8 +10,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 		
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_AGRO_USER_VEHICLE" />
-		<security:intercept-url pattern="/chart" access="ROLE_ADMIN, ROLE_AGRO_USER" />
+		<security:intercept-url pattern="/" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_AGRO_USER_VEHICLE, ROLE_RENT" />
+		<security:intercept-url pattern="/chart" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_RENT" />
 		<security:intercept-url pattern="/report" access="ROLE_ADMIN" />
 		<security:intercept-url pattern="/adminPage" access="ROLE_ADMIN" />
 		
@@ -34,6 +34,7 @@
 				<security:user name="KKV" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="KNS" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="LVP" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="KES" password="rcufuhj" authorities="ROLE_ADMIN" />
 				
 				<security:user name="VEV" password="889977" authorities="ROLE_ADMIN" />
 				<security:user name="Lada" password="7777" authorities="ROLE_ADMIN" />
@@ -65,6 +66,7 @@
 				<security:user name="KAE" password="775364" authorities="ROLE_AGRO_USER" />
 				<security:user name="YAN" password="111183" authorities="ROLE_AGRO_USER" />
 				<security:user name="AIL" password="Djkuf" authorities="ROLE_AGRO_USER" />
+				<security:user name="agroscope" password="TDsBuT" authorities="ROLE_RENT" />
 				
 			</security:user-service>
 		</security:authentication-provider>

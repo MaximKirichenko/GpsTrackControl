@@ -158,28 +158,98 @@ function buildChart(dataArray) {
 		console.log("speedCheckbox");
 		datasets.push(speed);
 	}
-	console.log(datasets);
+//	if(!isEmptyArray(dataArray.rightTankDatas)){
+//		$("#rightTankCheckbox").attr('checked', true);
+//		datasets.push(rightTankData);
+//	}else{
+//		$("#rightTankCheckbox").attr('checked', false);
+//	}
+//	if(!isEmptyArray(dataArray.leftTankDatas)){
+//		$("#leftTankCheckbox").attr('checked', true);
+//		datasets.push(leftTankData);
+//	}else{
+//		$("#leftTankCheckbox").attr('checked', false);
+//	}
+//	if(!isEmptyArray(dataArray.engineSpeedDatas)){
+//		$("#engineeCheckbox").attr('checked', true);
+//		datasets.push(engineeData);
+//	}else{
+//		$("#engineeCheckbox").attr('checked', false);
+//	}
+//	if(!isEmptyArray(dataArray.voltage)){
+//		$("#voltageCheckbox").attr('checked', true);
+//		datasets.push(voltage);
+//	}else{
+//		$("#voltageCheckbox").attr('checked', false);
+//	}
+//	if(!isEmptyArray(dataArray.speeds)){
+//		$("#speedCheckbox").attr('checked', true);
+//		datasets.push(speed);
+//	}else{
+//		$("#speedCheckbox").attr('checked', false);
+//	}
+//	if(datasets.length==0){
+//		window.alert("Нет данных для построения графика");
+//	}else{
+		var lineChartData = {
+				labels : time,
+				datasets :datasets
+			}
+			
+			var ctx;
+			if(myLineChart!=null) {
+				$('#fuelChart').remove();
+				$('#chart').append('<canvas id="fuelChart"></canvas>');
+			}
+			ctx = document.getElementById("fuelChart").getContext("2d");
+			myLineChart = new Chart(ctx);
+			myLineChart = new Chart(ctx);
+			myLineChart.Line(lineChartData, {
+				responsive : true,
+				showScale : true,
+				pointDot : false,
+				datasetStroke : true,
+				scaleUse2Y : true
+			});
+		
+	}
 	var lineChartData = {
-		labels : time,
-		datasets :datasets
-	}
-	
-	var ctx;
-	if(myLineChart!=null) {
-		$('#fuelChart').remove();
-		$('#chart').append('<canvas id="fuelChart"></canvas>');
-	}
-	ctx = document.getElementById("fuelChart").getContext("2d");
-	myLineChart = new Chart(ctx);
-	myLineChart = new Chart(ctx);
-	myLineChart.Line(lineChartData, {
-		responsive : true,
-		showScale : true,
-		pointDot : false,
-		datasetStroke : true,
-		scaleUse2Y : true
-	});
+	labels : time,
+	datasets :datasets
+}
 
+//var ctx;
+//if(myLineChart!=null) {
+//	$('#fuelChart').remove();
+//	$('#chart').append('<canvas id="fuelChart"></canvas>');
+//}
+//	var lineChartData = {
+//	labels : time,
+//	datasets :datasets
+//}
+//ctx = document.getElementById("fuelChart").getContext("2d");
+//myLineChart = new Chart(ctx);
+//myLineChart = new Chart(ctx);
+//myLineChart.Line(lineChartData, {
+//	responsive : true,
+//	showScale : true,
+//	pointDot : false,
+//	datasetStroke : true,
+//	scaleUse2Y : true
+//});
+//}
+function isEmptyArray(array){
+	if(getArraySumm(array)>0) return false;
+	return true;
+}
+function getArraySumm(array){
+	var sum = 0;
+	console.log(array.length);
+	for(var i = 0; i<array.length; i++){
+		sum = sum + array[i];
+	}
+	console.log(sum);
+	return sum;
 }
 
 

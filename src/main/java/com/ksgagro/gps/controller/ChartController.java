@@ -18,18 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ksgagro.gps.controller.dto.FuelChartDTO;
-import com.ksgagro.gps.controller.dto.TrackRequestDTO;
+import com.ksgagro.gps.dto.FuelChartDTO;
+import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.Location;
 import com.ksgagro.gps.domain.TerminalDate;
 import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.VehicleGroup;
-import com.ksgagro.gps.domain.repository.LocationRepository;
-import com.ksgagro.gps.domain.repository.VehicleGroupRepository;
-import com.ksgagro.gps.domain.repository.VehicleRepository;
-import com.ksgagro.gps.domain.service.ChartService;
-import com.ksgagro.gps.domain.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.domain.service.TerminalDateService;
+import com.ksgagro.gps.repository.LocationRepository;
+import com.ksgagro.gps.repository.VehicleGroupRepository;
+import com.ksgagro.gps.repository.VehicleRepository;
+import com.ksgagro.gps.service.ChartService;
+import com.ksgagro.gps.service.GasTankCalibrationDataService;
+import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.VehicleService;
 
 
 
@@ -48,13 +49,15 @@ public class ChartController {
 	private TerminalDateService terminalDateService;
 	@Autowired
 	private GasTankCalibrationDataService calibrationDataService;
+	@Autowired
+	private VehicleService vehicleService;
 	
 	@RequestMapping(value = "/chart")
 	public ModelAndView buildChartPage(){
 		ModelAndView model = new ModelAndView("fuelLineChart");
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
-		List<Vehicle> listVehicle = vehicleRepository.getList();
+		List<Vehicle> listVehicle = vehicleService.getFilteredList();
 		List<Vehicle> vehicleInEnterprise = vehicleRepository.getListFromLocation(1);	
 //		String carName = car.getName() + " (" + car.getRegNumber() + ")";
 //		model.addObject("numberTerminal", car.getNumberTerminal());

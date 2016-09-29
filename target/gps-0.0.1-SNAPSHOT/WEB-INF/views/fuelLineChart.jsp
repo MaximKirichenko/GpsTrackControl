@@ -33,8 +33,8 @@
 
 </head>
 <body>
-<input id="terminalNumber" type="hidden" name="terminalNumber"
-				value="${numberTerminal}" /> 
+<input id="terminalNumber" type="hidden" name="vehicleId"
+				value="${vehicleId}" />
 <input id="selectedTerminalNumber" type="hidden" name="selectedTerminalNumber"
 				value="" /> 
 	<div id="pop-up-window" style="display: none;">
@@ -57,7 +57,7 @@
 				<li><a href="<spring:url value="/"/>">Карта</a></li>
 				<li><a href="<spring:url value="/chart"/>">Графики</a></li>
 				<li><a href="<spring:url value="/report"/>">Отчеты</a></li>
-				<li><a href="<spring:url value="report/trackPage?terminalNumber=82"/>">Администрирование</a></li> 
+				<li><a href="<spring:url value="/adminPage"/>">Администрирование</a></li> 
 				<li><a href="<spring:url value="/logout"/>">Выход</a></li> 
 			</ul>
 			</div>
@@ -92,8 +92,8 @@
 					</label>
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
-								<c:if test="${group.id == car.group.id && car.numberTerminal != 72}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+								<c:if test="${group.id == car.group.id && car.id != 72}">
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>
@@ -113,8 +113,8 @@
 					</label>
 						<ul class="options">
 							<c:forEach var="car" items="${listVehicle}">
-								<c:if test="${group.id == car.group.id && group.id == 1}">
-									<li><a href="#" onclick="setTerminalNumber(${car.numberTerminal})"> 
+								<c:if test="${group.id == car.group.id && (group.id == 1 || group.id == 4 || group.id == 6)}">
+									<li><a href="#" onclick="setTerminalNumber(${car.id})"> 
 									<i aria-hidden="true" class="icon-search"></i> ${car.name } ( ${car.regNumber } )
 									</a></li>
 								</c:if>
@@ -158,13 +158,13 @@
 				<table id="reportTable">
 					<thead>
 						<td>№</td>
-						<td>Остаток до заправки, л</td>
+						<td>Остаток до, л</td>
 						<td>Остаток после, л</td>
-						<td>Всего заправленно, л</td>
-						<td>Дата начала заправки</td>
-						<td>Дата окончания заправки</td>
-						<td>Израсходованно по датчику, л</td>
-						<td>Израсходованно по счетчику, л</td>
+						<td>Заправка/Слив, л</td>
+						<td>Дата начала</td>
+						<td>Дата окончания</td>
+						<td>Израсходованно по ДУТ, л</td>
+						<td>Израсходованно по CAN, л</td>
 					</thead>
 					<tbody>
 					</tbody>

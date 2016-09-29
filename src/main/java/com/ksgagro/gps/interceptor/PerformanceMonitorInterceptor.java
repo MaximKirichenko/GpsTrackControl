@@ -15,7 +15,7 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ksgagro.gps.domain.repository.UserActionRepository;
+import com.ksgagro.gps.repository.UserActionRepository;
 
 public class PerformanceMonitorInterceptor implements HandlerInterceptor {
 
