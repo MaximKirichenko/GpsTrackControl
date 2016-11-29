@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ksgagro.gps.domain">
+	<class name="UserAction" table="USER_ACTION">
+		<id name="id" column="ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="user" column="KSG_USER" unique="false" 
+		class="User" not-null="true" lazy="false"/>
+		<property name="action" column="ACTION" />
+		<property name="date" column="ACTION_DATE" />
+	</class>
+</hibernate-mapping>

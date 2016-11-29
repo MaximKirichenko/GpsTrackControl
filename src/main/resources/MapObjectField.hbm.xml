@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ksgagro.gps.domain">
+	<class name="MapObjectField" table="MAP_OBJECT_FIELD">
+		<id name="id" column="ID">
+			<generator class="increment" />
+		</id>
+		<property name="fieldNumber" column="FIELD_NUMBER"/>
+		<property name="fieldEnterprice" column="FIELD_ENTERPRISE" />
+		<property name="fieldArea" column="FIELD_AREA" />
+		<property name="latLngArray">
+			<column name="COORDINATES"/>
+			<type name="com.ksgagro.gps.domain.JsonType">
+				<param name="type">LIST</param>
+				<param name="element">com.ksgagro.gps.domain.Coordinates</param>
+			</type>
+		</property>
+		
+		
+	</class>
+</hibernate-mapping>
