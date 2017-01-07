@@ -78,8 +78,8 @@
 		<!-- Oracle Connector Java dependency (JDBC driver for oracle -->
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0</version>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.1</version>
 		</dependency>
 		<!-- Apache Commons DBCP dependency (for database connection pooling): -->
 		<dependency>

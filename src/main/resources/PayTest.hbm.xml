@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ksgagro.gps.domain">
+
+	<class name="TestPay" table="TEST_PAY">
+		<id name="id" column="TEST_PAY_ID">
+			<generator class="increment" />
+		</id>
+		<property name="name" column="OWNER_NAME"/>
+		<property name="identificationNumber" column="IDENTIFICATION_NUMBER"/>
+		<property name="conclusionContractDate" column="CONCLUTION_CONTRACT_DATE"/>
+		<property name="contractTerm" column="CONTRACT_TERM"/>
+		<property name="kadastrNumber" column="KADASTR_NUMBER"/>
+		<property name="renter" column="FIELD_RENTER"/>
+		<property name="area" column="AREA"/>
+		<property name="coordinateses">
+			<column name="COORDINATES"/>
+			<type name="com.ksgagro.gps.domain.JsonType">
+				<param name="type">LIST</param>
+				<param name="element">com.ksgagro.gps.domain.Coordinates</param>
+			</type>
+		</property>
+		
+		
+	</class>
+</hibernate-mapping>
+

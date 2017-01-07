@@ -1,19 +1,19 @@
 package com.ksgagro.gps.service.impl;
 
-import java.util.List;
-
+import com.google.gson.Gson;
+import com.ksgagro.gps.domain.AgroFields;
+import com.ksgagro.gps.dto.FirmsArea;
+import com.ksgagro.gps.dto.NotNullContractDTO;
+import com.ksgagro.gps.repository.AgroFieldsRepository;
+import com.ksgagro.gps.service.AgroFieldsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.ksgagro.gps.dto.FirmsArea;
-import com.ksgagro.gps.dto.NotNullContractDTO;
-import com.ksgagro.gps.domain.AgroFields;
-import com.ksgagro.gps.repository.AgroFieldsRepository;
-import com.ksgagro.gps.service.AgroFieldsService;
+import java.util.List;
 
 @Service
 public class AgroFieldsServiceImpl implements AgroFieldsService{
+
 	@Autowired
 	AgroFieldsRepository agroFieldsRepository;
 	

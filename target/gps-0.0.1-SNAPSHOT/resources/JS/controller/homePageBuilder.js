@@ -6,6 +6,7 @@ $("document").ready(function() {
 	setTrackerActivitiIndicators();
 	LoadMap(); //function from mapService.js
 	submitButtonInit();
+	setAnamyField();
 	setMapObjectField();
 	setFields();
 	setupMapToolsMeneger();
@@ -266,9 +267,21 @@ function setMapObjectField(){
 		url : 'getMapObjectField',
 		contentType : 'application/json',
 		mimeType : 'application/json',
-		success: function (data) { 	
+		success: function (data) {
 			getMapObjectField(data);
         }
+	});
+}
+
+function setAnamyField(){
+	$.ajax({
+		type : "POST",
+		url : 'getMapNeibor',
+		contentType : 'application/json',
+		mimeType : 'application/json',
+		success: function (data) {
+            getMapAnamyField(data);
+		}
 	});
 }
 

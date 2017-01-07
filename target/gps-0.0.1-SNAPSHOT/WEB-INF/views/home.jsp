@@ -17,13 +17,14 @@
      </script> 
 	<script src="<c:url value="/resource/JS/jquery-1.11.3.js"/>"></script>
 	<script src="<c:url value="/resource/JS/jquery-ui.js"/>"></script>
+	<script src="<c:url value="/resource/JS/jquery.min.js"/>"></script>
 	<script src="<c:url value="/resource/JS/OpenLayers.js"/>"></script>
 	<script src="<c:url value="/resource/JS/ExtendedRenderers.js"/>"></script>
 	<script src="<c:url value="/resource/JS/service/mapService.js"/>"></script>
 	<script src="<c:url value="/resource/JS/service/dateMaintainingService.js"/>"></script>
 	<script src="<c:url value="/resource/JS/service/vehicleClickMaintainingService.js"/>"></script>
 	<script src="<c:url value="/resource/JS/controller/homePageController.js"/>"></script>
-	
+
 
 	
 	

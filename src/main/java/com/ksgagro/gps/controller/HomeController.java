@@ -1,14 +1,15 @@
 package com.ksgagro.gps.controller;
 
+import com.ksgagro.gps.controller.JSON.MapObjectJSON;
+import com.ksgagro.gps.controller.JSON.Mapper;
+import com.ksgagro.gps.domain.*;
 import com.ksgagro.gps.dto.MulitiTrackRequestDTO;
 import com.ksgagro.gps.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.dto.ReportTrackDto;
 import com.ksgagro.gps.dto.TrackRequestDTO;
-import com.ksgagro.gps.domain.*;
 import com.ksgagro.gps.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,38 +27,17 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@Scope("session")
 public class HomeController {
 	
-	@Autowired
-	private VehicleGroupService vehicleGroupService;
-	
-	@Autowired
-	private VehicleService vehicleService;
-	
-	@Autowired
-	private VehicleDetailsTableService vehicleDetailsTableService;
-	
-	@Autowired
-	private TerminalDateService terminalDateService;
-	
-	@Autowired
-	private GasTankCalibrationDataService calibrationDataService;
-	
-	@Autowired
-	private AgroFieldsService agroFieldsService;
-	
-	@Autowired
-	private LocationService locationService;
-	
-	@Autowired
-	private MapObjectFieldService objectFieldService;
-	
-	@Autowired
-	private MulitiTrackRequestDTO multiTrackRequestDTO;
-	
-	@Autowired 
-	private ChartService chartService;
+	@Autowired private VehicleGroupService vehicleGroupService;
+	@Autowired private VehicleService vehicleService;
+	@Autowired private VehicleDetailsTableService vehicleDetailsTableService;
+	@Autowired private TerminalDateService terminalDateService;
+	@Autowired private GasTankCalibrationDataService calibrationDataService;
+	@Autowired private AgroFieldsService agroFieldsService;
+	@Autowired private LocationService locationService;
+	@Autowired private MapObjectFieldService objectFieldService;
+	@Autowired private Mapper mapper;
 	
 	Logger logger = Logger.getLogger(HomeController.class);
 	
@@ -68,24 +48,7 @@ public class HomeController {
 		
 		return model;
 	}
-	
-//	@RequestMapping("/")
-//	public ModelAndView monitoring(){
-//		ModelAndView model = new ModelAndView("home");
-//
-//		List<Location> listLocation = locationRepository.getList();	
-//		List<VehicleGroup> listGroup = vehicleGroupService.getList();
-//		List<Vehicle> listVehicle = vehicleService.getList();
-//		List<Vehicle> vehicleInEnterprise = vehicleService.getListFromLocation(1);
-//
-//		model.addObject("listLocation", listLocation);
-//		model.addObject("listGroup", listGroup);
-//		model.addObject("listVehicle", listVehicle);
-//		model.addObject("vehicleInEnterprise", vehicleInEnterprise);
-//		model.addObject("fields", agroFieldsService.getJsonFields());
-//		
-//		return model;
-//	}
+
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
 	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TrackRequestDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
@@ -107,18 +70,13 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
 	public @ResponseBody List<MultiTrackResponseDto> buildTracks(@RequestBody MulitiTrackRequestDTO trackRequest){
+		MulitiTrackRequestDTO multiTrackRequestDTO = new MulitiTrackRequestDTO();
 		multiTrackRequestDTO.setDataFrom(trackRequest.getDataFrom());
 		multiTrackRequestDTO.setDataTo(trackRequest.getDataTo());
 		multiTrackRequestDTO.setTerminalNumbers(trackRequest.getTerminalNumbers());
 		System.out.println("track request\n" + trackRequest.getTerminalNumbers() + " " + new Date(trackRequest.getDataFrom()) + " " + new Date(trackRequest.getDataTo()));
 		List<MultiTrackResponseDto> date = terminalDateService.getTerminalDateAboutVehiclesFromPeriod(multiTrackRequestDTO.getDataFrom(), multiTrackRequestDTO.getDataTo(), multiTrackRequestDTO.getTerminalNumbers());
 		return date;
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/buildChart")
-	public @ResponseBody List<MultiTrackResponseDto> buildChart(@RequestBody Integer vehicleId){
-		chartService.buildMultiTrackResponseDto(vehicleId, multiTrackRequestDTO.getDataFrom(), multiTrackRequestDTO.getDataTo());
-		return null;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/carInfo")
@@ -131,7 +89,7 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
 	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
-		logger.info("Номер терминала: " + vehicleId);
+		logger.info("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + vehicleId);
 		VehicleDetailsTable table = vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
 		return table;
 	}
@@ -209,7 +167,7 @@ public class HomeController {
 		return field;
 	}
 	@RequestMapping("/getMapObjectField")
-	public @ResponseBody List<MapObjectField> getMapObjectField(){
+	public @ResponseBody List<MapObjectJSON> getMapObjectField(){
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 		@SuppressWarnings("unchecked")
 		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
@@ -220,8 +178,13 @@ public class HomeController {
 			  return null;
 		     }
 		  }
-		return objectFieldService.getAll();
+		return mapper.toJSONList(objectFieldService.getAll());
 	}
+	@RequestMapping("/getMapNeibor")
+	public @ResponseBody List<MapObjectJSON> getNeibor(){
+		return mapper.toJSONTestPayList(objectFieldService.neibor());
+	}
+
 	@RequestMapping("/getFieldInfo")
 	public @ResponseBody MapObjectField getMapObjectField(@RequestBody int poliId){
 		System.out.println(poliId);
