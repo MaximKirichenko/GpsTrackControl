@@ -1,5 +1,6 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/VehicleRepositoryImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/GasTankCalibrationDataService.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/MapObjectFieldType.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/MapObjectFieldRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/TestController.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/TerminalDate.java
@@ -38,6 +39,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/dto/ReportGroupDTO.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/CarSignalService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/ContractServiceImpl.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/dto/TerminalDateDTO.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/VehicleGroupRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/MapController.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/Coordinates.java
@@ -66,6 +68,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/AgroFieldsRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/VehicleGroupImpl.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateMapper.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/AgroPayContractRepositoryImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/MapObjectFieldService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.java
@@ -85,6 +88,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/CarDeteilController.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/CarSignalRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/AdminController.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/VehicleDetailsTableServiceImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/LocationRepositoryImpl.java
@@ -105,3 +109,4 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/impl/UserActionRepositoryImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/Location.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/LocationService.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateJSON.java

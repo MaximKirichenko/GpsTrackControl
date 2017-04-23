@@ -1,5 +1,6 @@
 package com.ksgagro.gps.controller;
 
+import com.ksgagro.gps.controller.JSON.MapObjectFieldTypeJson;
 import com.ksgagro.gps.controller.JSON.MapObjectJSON;
 import com.ksgagro.gps.controller.JSON.Mapper;
 import com.ksgagro.gps.domain.*;
@@ -44,8 +45,6 @@ public class HomeController {
 	@RequestMapping("/home")
 	public ModelAndView helloPage(){
 		ModelAndView model = new ModelAndView("home");
-		//calibrationDataService.getFuelLevel(57, 1, 300);
-		
 		return model;
 	}
 
@@ -156,16 +155,26 @@ public class HomeController {
 		  }
 		return agroFieldsService.getAll();
 	}
+
+	@RequestMapping("/field/types")
+	public @ResponseBody
+	List<MapObjectFieldTypeJson> getFieldType(){
+		return mapper.toTypesJSONs(objectFieldService.getTypes());
+	}
 	
 	@RequestMapping("/getEnterprises")
 	public @ResponseBody List<Location> getEnterprises(){
 		return locationService.getList();
 	}
+
+
 	@RequestMapping(method = RequestMethod.POST, value="/addMapObjectField")
 	public @ResponseBody MapObjectField addMapObjectField(@RequestBody MapObjectField field){
 		objectFieldService.addField(field);
 		return field;
 	}
+
+
 	@RequestMapping("/getMapObjectField")
 	public @ResponseBody List<MapObjectJSON> getMapObjectField(){
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
@@ -182,12 +191,18 @@ public class HomeController {
 	}
 	@RequestMapping("/getMapNeibor")
 	public @ResponseBody List<MapObjectJSON> getNeibor(){
-		return mapper.toJSONTestPayList(objectFieldService.neibor());
+		return mapper.toJSONTestPayList(objectFieldService.neibors());
 	}
 
 	@RequestMapping("/getFieldInfo")
 	public @ResponseBody MapObjectField getMapObjectField(@RequestBody int poliId){
 		System.out.println(poliId);
 		return objectFieldService.get(poliId);
+	}
+
+	@RequestMapping("/getAnamyInfo")
+	public @ResponseBody TestPay getAnamyInfo(@RequestBody() long id){
+		System.out.println(id);
+		return objectFieldService.getNeibor(id);
 	}
 }

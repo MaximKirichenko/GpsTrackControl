@@ -1,6 +1,7 @@
 package com.ksgagro.gps.controller.JSON;
 
 import com.ksgagro.gps.domain.MapObjectField;
+import com.ksgagro.gps.domain.MapObjectFieldType;
 import com.ksgagro.gps.domain.TestPay;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,20 @@ public class Mapper {
         for (TestPay field : src) {
             ret.add(toJSON(field));
         }
+        return ret;
+    }
+
+    public List<MapObjectFieldTypeJson> toTypesJSONs(List<MapObjectFieldType> types) {
+        List<MapObjectFieldTypeJson> ret = new ArrayList<>();
+        for(MapObjectFieldType type: types)
+            ret.add(toType(type));
+        return ret;
+    }
+
+    public MapObjectFieldTypeJson toType(MapObjectFieldType entity){
+        MapObjectFieldTypeJson ret = new MapObjectFieldTypeJson();
+        ret.setId(entity.getId());
+        ret.setName(entity.getName());
         return ret;
     }
 }

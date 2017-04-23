@@ -1,6 +1,7 @@
 package com.ksgagro.gps.repository.impl;
 
 import com.ksgagro.gps.domain.MapObjectField;
+import com.ksgagro.gps.domain.MapObjectFieldType;
 import com.ksgagro.gps.domain.TestPay;
 import com.ksgagro.gps.repository.MapObjectFieldRepository;
 import org.hibernate.Criteria;
@@ -46,12 +47,29 @@ public class MapObjectFieldRepositoryImpl implements MapObjectFieldRepository{
 
 	@Override
 	@Transactional
-	public List<TestPay> getNeibor() {
+	public List<TestPay> getNeibors() {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(TestPay.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		@SuppressWarnings("unchecked")
 		List<TestPay> list = (List<TestPay>)criteria.list();
 		return list;
 	}
+
+	@Override
+	@Transactional
+    public TestPay getNeibor(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (TestPay) session.createCriteria(TestPay.class).add(Restrictions.eq("id", id)).uniqueResult();
+    }
+
+    @Override
+	@Transactional
+    public List<MapObjectFieldType> getTypes() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(MapObjectFieldType.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		@SuppressWarnings("unchecked")
+		List<MapObjectFieldType> ret = (List<MapObjectFieldType>)criteria.list();
+		return ret;
+    }
 
 }

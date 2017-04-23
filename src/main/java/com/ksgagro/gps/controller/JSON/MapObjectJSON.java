@@ -1,7 +1,9 @@
 package com.ksgagro.gps.controller.JSON;
 
 import com.ksgagro.gps.domain.Coordinates;
+import com.ksgagro.gps.domain.MapObjectFieldType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,4 +46,6 @@ public class MapObjectJSON {
     public void setFieldNumber(String fieldNumber) {
         this.fieldNumber = fieldNumber;
     }
+
+
 }

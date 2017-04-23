@@ -3,6 +3,7 @@ package com.ksgagro.gps.repository.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.ksgagro.gps.domain.MapObjectFieldType;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;

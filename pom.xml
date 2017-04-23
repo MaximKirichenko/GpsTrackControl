@@ -20,6 +20,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>ISO-8859-1</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -81,6 +82,8 @@
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0.1</version>
 		</dependency>
+
+
 		<!-- Apache Commons DBCP dependency (for database connection pooling): -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>

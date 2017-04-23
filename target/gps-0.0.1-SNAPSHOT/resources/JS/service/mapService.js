@@ -16,6 +16,7 @@ var periodDto = {
     terminalNumber: 0
 };
 var lastPointContent;
+var types;
 
 //Load on start page
 //$("document").ready(function(){
@@ -30,6 +31,7 @@ var lastPointContent;
 
 
 function initLayer() {
+    types=getAllTypes();
     // style the sketch fancy
     var sketchSymbolizers = {
         "Point": {
@@ -129,7 +131,7 @@ function initLayer() {
 //		    }
 //	};
 // Track layer	 
-    var layerListeners = {
+    var fieldLayerListener = {
         featureclick: function (evt) {
             console.log(evt);
             $.ajax({
@@ -150,9 +152,35 @@ function initLayer() {
             return false;
         }
     };
+    var anamyLayerListener = {
+        featureclick: function (evt) {
+            console.log(evt);
+            $.ajax({
+                type: "POST",
+                url: 'getAnamyInfo',
+                data: JSON.stringify(evt.feature.attributes.PoliID),
+                dataType: 'json',
+                contentType: 'application/json',
+                mimeType: 'application/json',
+
+                success: function (data) {
+                    console.log(data);
+                    $("#view-window-content").append("Имя: " + data.name + " " + "ИНН " + data.identificationNumber + "</br>");
+                    $("#view-window-content").append("Арендатор: " + data.renter + "</br>");
+                    $("#view-window-content").append("Дата заключения договора: " + new Date(data.conclusionContractDate).toLocaleDateString() + "</br>");
+                    $("#view-window-content").append("Срок договора: " + data.contractTerm + "</br>");
+                    $("#view-window-content").append("Кадастровый номер: " + data.kadastrNumber + "</br>");
+                    $("#view-window-content").append("Площадь: " + data.area + " Га.</br>");
+                    $("#view-window").center();
+                    $("#view-window").show();
+                }
+            });
+            return false;
+        }
+    };
     trackLayer = new OpenLayers.Layer.Vector("Трэк", {
         renderers: ['SVGExtended', 'VMLExtended', 'CanvasExtended'],
-        eventListeners: layerListeners,
+        eventListeners: fieldLayerListener,
         styleMap: new OpenLayers.StyleMap({
             'default': OpenLayers.Util.extend({
                 orientation: true
@@ -165,7 +193,7 @@ function initLayer() {
     });
     anamyLayer = new OpenLayers.Layer.Vector("Вражины", {
         renderers: ['SVGExtended', 'VMLExtended', 'CanvasExtended'],
-        eventListeners: layerListeners,
+        eventListeners: anamyLayerListener,
         styleMap: new OpenLayers.StyleMap({
             'default': OpenLayers.Util.extend({
                 orientation: true
@@ -374,17 +402,21 @@ function showAddFieldForm(area) {
     $("#add-map-object-form").show();
 }
 var enterprises;
+
+
 function createAddFieldsForm(area) {
     $.ajax({
-        type: "POST",
-        url: 'getEnterprises',
+        type:"POST",
+        url:'getEnterprises',
         contentType: 'application/json',
         mimeType: 'application/json',
         success: function (enterpriseList) {
             enterprises = enterpriseList;
             $("#add-map-object-content").append("<label class='object-label'>Тип объекта</label>");
-            $("#add-map-object-content").append("<select name='select-object-name' id='select-object-name'>" +
-                "<option>Поле</option></select>");
+            $("#add-map-object-content").append("<select name='select-object-name' id='select-object-name'></select>");
+            for (var i = 0; i < types.length; i++) {
+                $("select[name='select-object-name']").append("<option>" + types[i].name + "</option>");
+            }
             $("#add-map-object-content").append("<label class='object-label'>№</label>");
             $("#add-map-object-content").append("<input type='text' class='object-field' name='fieldNumber'/>");
             $("#add-map-object-content").append("<label class='object-label'>Принадлежность</label>");
@@ -400,14 +432,26 @@ function createAddFieldsForm(area) {
             $("#add-map-object-form").center();
         }
     });
-
 }
+
+function getAllTypes(){
+    $.get("field/types", function(data, textStatus)
+    {
+        console.log(data);
+        console.log(textStatus);
+        types = data;
+    });
+}
+
 
 function sendMapObjectField() {
     var enterpriseString = $("select[name='fieldEnterprice'] option:selected").text();
+    var typeString = $("select[name='select-object-name'] option:selected").text();
     var enterpriseId = getEnterpriseIfFromString(enterpriseString);
+    var typeStringId = getTypeIfFromString(typeString);
     var field = {
         fieldNumber: $("input[name='fieldNumber']").val(),
+        type: typeStringId,
         fieldEnterprice: enterpriseId,
         fieldArea: $("input[name='fieldArea']").val(),
         latLngArray: latLngArray
@@ -426,9 +470,16 @@ function sendMapObjectField() {
     });
     console.log(field);
 }
+
 function getEnterpriseIfFromString(enterpriseString) {
     for (var i = 0; i < enterprises.length; i++) {
         if (enterpriseString == enterprises[i].enterprise) return enterprises[i].id;
+    }
+}
+
+function getTypeIfFromString(typeString) {
+    for (var i = 0; i < types.length; i++) {
+        if (typeString == types[i].name) return types[i].id;
     }
 }
 function attachLastPointMessage(point) {
@@ -780,7 +831,6 @@ function addUserObject(field, layer) {
         strokeColor: "#413206"
     };
     if (layer == "field") trackLayer.addFeatures(polygonFeatures2);
-    console.log(anamyLayer);
     if (layer == "anamy") anamyLayer.addFeatures(polygonFeatures2);
 }
 function getFields(fields){

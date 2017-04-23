@@ -1,10 +1,15 @@
 package com.ksgagro.gps.repository;
 
+import com.ksgagro.gps.domain.Terminal;
+import com.ksgagro.gps.dto.TerminalDateDTO;
+
 import java.util.List;
 
-import com.ksgagro.gps.domain.Terminal;
-
 public interface TerminalRepository {
-	Terminal getTerminalByVehicleId(int id);
-	List<Terminal> getTerminals(List<Integer> terminalNumbers);
+
+    Terminal getTerminalByVehicleId(int id);
+
+    List<Terminal> getTerminals(List<Integer> terminalNumbers);
+
+    List<TerminalDateDTO> getTerminals();
 }

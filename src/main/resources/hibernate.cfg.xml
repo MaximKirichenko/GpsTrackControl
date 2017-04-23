@@ -22,6 +22,8 @@
         <mapping resource="AgroPayContract.hbm.xml" />
         <mapping resource="MapObjectField.hbm.xml" />
         <mapping resource="PayTest.hbm.xml" />
+        <mapping resource="MapObjectFieldType.hbm.xml" />
+        <mapping resource="TerminalDateDTO.hbm.xml" />
 
     </session-factory>
 </hibernate-configuration>

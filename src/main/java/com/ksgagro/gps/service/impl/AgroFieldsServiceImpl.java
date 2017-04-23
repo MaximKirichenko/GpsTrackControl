@@ -2,6 +2,7 @@ package com.ksgagro.gps.service.impl;
 
 import com.google.gson.Gson;
 import com.ksgagro.gps.domain.AgroFields;
+import com.ksgagro.gps.domain.MapObjectFieldType;
 import com.ksgagro.gps.dto.FirmsArea;
 import com.ksgagro.gps.dto.NotNullContractDTO;
 import com.ksgagro.gps.repository.AgroFieldsRepository;

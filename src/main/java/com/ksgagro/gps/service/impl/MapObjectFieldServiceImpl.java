@@ -1,6 +1,7 @@
 package com.ksgagro.gps.service.impl;
 
 import com.ksgagro.gps.domain.MapObjectField;
+import com.ksgagro.gps.domain.MapObjectFieldType;
 import com.ksgagro.gps.domain.TestPay;
 import com.ksgagro.gps.repository.MapObjectFieldRepository;
 import com.ksgagro.gps.service.MapObjectFieldService;
@@ -33,8 +34,18 @@ public class MapObjectFieldServiceImpl implements MapObjectFieldService{
 	}
 
 	@Override
-	public List<TestPay> neibor() {
-		return mapObjectFieldRepository.getNeibor();
+	public List<TestPay> neibors() {
+		return mapObjectFieldRepository.getNeibors();
 	}
+
+    @Override
+    public TestPay getNeibor(long id) {
+        return mapObjectFieldRepository.getNeibor(id);
+    }
+
+    @Override
+    public List<MapObjectFieldType> getTypes() {
+        return mapObjectFieldRepository.getTypes();
+    }
 
 }

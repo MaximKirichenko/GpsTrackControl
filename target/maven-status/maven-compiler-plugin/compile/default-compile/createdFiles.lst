@@ -16,6 +16,7 @@ com/ksgagro/gps/controller/ReportController.class
 com/ksgagro/gps/domain/GasTankPosition.class
 com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.class
 com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.class
+com/ksgagro/gps/domain/MapObjectFieldType.class
 com/ksgagro/gps/repository/CarSignalRepository.class
 com/ksgagro/gps/service/impl/VehicleDetailsTableServiceImpl.class
 com/ksgagro/gps/domain/Emp.class
@@ -57,6 +58,7 @@ com/ksgagro/gps/domain/VehicleMenuItem.class
 com/ksgagro/gps/repository/VehicleRepository.class
 com/ksgagro/gps/repository/impl/CarSignalRepositoryImpl.class
 com/ksgagro/gps/tracks/menu/utils/DateUtils$1.class
+com/ksgagro/gps/controller/JSON/TerminalDateMapper.class
 com/ksgagro/gps/service/impl/VehicleGroupImpl.class
 com/ksgagro/gps/tracks/menu/dto/VehicleStatus.class
 com/ksgagro/gps/domain/AgroPayContract.class
@@ -77,6 +79,7 @@ com/ksgagro/gps/repository/AgroPayConractRepository.class
 com/ksgagro/gps/dto/TrackRequestDTO.class
 com/ksgagro/gps/repository/impl/ContractRepositoryImpl.class
 com/ksgagro/gps/domain/Coordinates.class
+com/ksgagro/gps/dto/TerminalDateDTO.class
 com/ksgagro/gps/repository/impl/TerminalDateRepositoryImpl.class
 com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.class
 com/ksgagro/gps/repository/ContractRepository.class
@@ -94,6 +97,7 @@ com/ksgagro/gps/repository/impl/VehicleGroupRepositoryImpl.class
 com/ksgagro/gps/domain/AgroFields.class
 com/ksgagro/gps/domain/Pay.class
 com/ksgagro/gps/service/impl/TerminalDateServiceImpl.class
+com/ksgagro/gps/controller/JSON/TerminalDateJSON.class
 com/ksgagro/gps/repository/impl/VehicleRepositoryImpl.class
 com/ksgagro/gps/domain/AgroPayContractGroupDTO.class
 com/ksgagro/gps/repository/impl/GasTankCalibrationDataRepositoryImpl.class
@@ -102,6 +106,7 @@ com/ksgagro/gps/service/VehicleGroupService.class
 com/ksgagro/gps/service/VehicleDetailsTableService.class
 com/ksgagro/gps/domain/GasTank.class
 com/ksgagro/gps/controller/JSON/Mapper.class
+com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.class
 com/ksgagro/gps/service/GasTankCalibrationDataService.class
 com/ksgagro/gps/service/impl/TerminalServiceImpl.class
 com/ksgagro/gps/dto/FuelChartDTO.class
