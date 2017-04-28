@@ -16,7 +16,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -41,11 +40,13 @@ public class HomeController {
 	@Autowired private Mapper mapper;
 	
 	Logger logger = Logger.getLogger(HomeController.class);
-	
-	@RequestMapping("/home")
-	public ModelAndView helloPage(){
-		ModelAndView model = new ModelAndView("home");
-		return model;
+
+
+	@RequestMapping("/")
+	public String getHomeNew(Model model){
+		model.addAttribute("vehicleMenuItems", vehicleService.getVehicleMenuItems());
+		model.addAttribute("vehicleGroups", vehicleGroupService.getList());
+		return "home";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
@@ -134,12 +135,6 @@ public class HomeController {
 		model.addAttribute("speed", speed);
 		System.out.println(car);
 		return "carDetails";
-	}
-	@RequestMapping("/")
-	public String getHomeNew(Model model){
-		model.addAttribute("vehicleMenuItems", vehicleService.getVehicleMenuItems());
-		model.addAttribute("vehicleGroups", vehicleGroupService.getList());
-		return "home_new";
 	}
 	
 	@RequestMapping("/getFields")

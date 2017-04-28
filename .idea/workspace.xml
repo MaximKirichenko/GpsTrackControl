@@ -2,61 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f42ca29-bfac-4872-8b11-847264fb768d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateJSON.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateMapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/MapObjectFieldType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/dto/TerminalDateDTO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/MapObjectFieldType.hbm.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/TerminalDateDTO.hbm.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/terminalList.jsp" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_oracle_ojdbc7_12_1_0_1.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/controller/AdminController.class" afterPath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/controller/AdminController.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home2.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/views/home2.jsp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/views/home_new.jsp" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home_new.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/controller/HomeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/domain/MapObjectField.class" afterPath="$PROJECT_DIR$/target/classes/com/ksgagro/gps/domain/MapObjectField.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT.war" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/controller/AdminController.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/controller/AdminController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/controller/HomeController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/domain/MapObjectField.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/domain/MapObjectField.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/MapObjectFieldRepository.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/MapObjectFieldRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/TerminalRepository.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/TerminalRepository.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/TerminalRepositoryImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/repository/impl/TerminalRepositoryImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/MapObjectFieldService.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/MapObjectFieldService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/TerminalService.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/TerminalService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/TerminalServiceImpl.class" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/service/impl/TerminalServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gps.iml" afterPath="$PROJECT_DIR$/gps.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/AdminController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/Mapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/Mapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/MapObjectField.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/MapObjectField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/AgroFieldsRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/AgroFieldsRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/MapObjectFieldRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/MapObjectFieldRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/TerminalRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/TerminalRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/AgroFieldsRepositoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/MapObjectFieldRepositoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/TerminalRepositoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/TerminalRepositoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/AgroFieldsService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/AgroFieldsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/MapObjectFieldService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/MapObjectFieldService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/TerminalService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/TerminalService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/TerminalServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/TerminalServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/MapObjectField.hbm.xml" afterPath="$PROJECT_DIR$/src/main/resources/MapObjectField.hbm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/JS/service/mapService.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/JS/service/mapService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/MapObjectField.hbm.xml" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/MapObjectField.hbm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/hibernate.cfg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/resources/JS/service/mapService.js" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/resources/JS/service/mapService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/views/home.jsp" afterPath="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/views/home.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
@@ -100,11 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DispatcherServlet-context.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" column="61" lean-forward="false" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
+            <state relative-caret-position="480">
+              <caret line="90" column="36" lean-forward="false" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -141,10 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/service/impl/TerminalDateServiceImpl.java" />
-        <option value="$PROJECT_DIR$/out/production/gps/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/resources/css/style.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/tracks/menu/dto/TrackDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/tracks/menu/BO/VehicleStatus.java" />
@@ -154,7 +107,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/TestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/tracks/menu/dto/VehicleStatus.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/tracks/menu/dto/VehicleDTO.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/TestPay.java" />
         <option value="$PROJECT_DIR$/src/main/resources/PayTest.hbm.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/JS/controller/homePageBuilder.js" />
@@ -172,7 +124,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/resources/JS/service/mapService.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/Mapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/MapObjectField.java" />
         <option value="$PROJECT_DIR$/src/main/resources/MapObjectField.hbm.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateJSON.java" />
@@ -185,13 +136,19 @@
         <option value="$PROJECT_DIR$/src/main/resources/TerminalDateDTO.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/TerminalDateDTO.hbm.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/dto/TerminalDateDTO.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e6e11b2a-b2ce-4b93-8195-fd015408c6ec/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/impl/TerminalRepositoryImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/terminalList.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/ChartServiceImpl.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home_new.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/locatedimage/controllers/LocatedImageController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/located_image.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       </list>
     </option>
   </component>
@@ -226,6 +183,20 @@
           <option name="myItemId" value="gps" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Dependencies" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="gps" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
       </PATH>
       <PATH>
         <PATH_ELEMENT>
@@ -244,10 +215,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="39" />
-    <option name="y" value="-4" />
-    <option name="width" value="1881" />
-    <option name="height" value="1084" />
+    <option name="x" value="-1" />
+    <option name="y" value="-11" />
+    <option name="width" value="1922" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -268,8 +239,8 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -422,6 +393,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -451,23 +486,23 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.ksgagro.gps.tracks.menu" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\resources" />
       <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\java\com\ksgagro\gps" />
+      <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\webapp\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.ksgagro.gps.tracks.menu" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.ksgagro.gps.dto" />
       <recent name="com.ksgagro.gps.controller.JSON" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\resources" />
       <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\java\com\ksgagro\gps" />
-      <recent name="C:\Users\kma\Documents\workspace-sts-3.7.2.RELEASE\gps\src\main\webapp\resources" />
     </key>
   </component>
   <component name="RestClientSettings">
@@ -830,6 +865,13 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
     <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
       <config-file value="" />
       <node-interpreter value="project" />
@@ -1046,61 +1088,54 @@
       <workItem from="1489054971535" duration="896000" />
       <workItem from="1489136028546" duration="2857000" />
       <workItem from="1489141192515" duration="979000" />
-      <workItem from="1492973200002" duration="2048000" />
+      <workItem from="1492973200002" duration="4174000" />
+      <workItem from="1492978517490" duration="1546000" />
+      <workItem from="1492980446464" duration="2023000" />
+      <workItem from="1493293806876" duration="943000" />
+      <workItem from="1493295022080" duration="2031000" />
+      <workItem from="1493297068901" duration="2409000" />
+      <workItem from="1493380131728" duration="1000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109660000" />
+    <option name="totallyTimeSpent" value="120739000" />
   </component>
-  <component name="TodoView" selected-index="0">
+  <component name="TodoView">
     <todo-panel id="selected-file">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
     <todo-panel id="all">
       <are-packages-shown value="true" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
       <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="default-changelist">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="false" />
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="39" y="-4" width="1881" height="1084" extended-state="6" />
+    <frame x="-1" y="-11" width="1922" height="1092" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41774893" sideWeight="0.304371" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15585831" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15581644" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3308977" sideWeight="0.695629" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27870563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2678762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22997275" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45615867" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3308977" sideWeight="0.695629" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2807933" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2506812" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45615867" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1111,11 +1146,13 @@
       <window_info id="ASM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42588726" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41830066" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46555322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46555322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1147,129 +1184,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/JS/ControllerHome.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="174" column="16" lean-forward="true" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/JS/controller/homePageBuilder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home_new.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="28" column="35" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/470c2bd8/e6e11b2a-b2ce-4b93-8195-fd015408c6ec/KIRICHENKO.AG_PAY_CONTRACT">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-          <column-attributes>
-            <column name="ROWID" enabled="false" />
-          </column-attributes>
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/470c2bd8/e6e11b2a-b2ce-4b93-8195-fd015408c6ec/KIRICHENKO.MAP_OBJECT_FIELD">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/domain/MapObjectFieldType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="31" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/MapObjectFieldType.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="35" lean-forward="false" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
-          <folding>
-            <marker date="1486908363601" expanded="true" signature="245:454" ph="..." />
-            <marker date="1486908363601" expanded="true" signature="311:433" ph="..." />
-            <marker date="1486908363601" expanded="true" signature="340:383" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/AgroFieldsRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="21" column="51" lean-forward="false" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/AgroFieldsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/MapObjectFieldService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="20" column="35" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/MapObjectFieldServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="47" column="46" lean-forward="true" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/repository/MapObjectFieldRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/JS/service/mapService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="448" column="83" lean-forward="true" selection-start-line="448" selection-start-column="83" selection-end-line="448" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1295,13 +1209,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-          <folding>
-            <marker date="1486912688044" expanded="true" signature="245:971" ph="..." />
-            <marker date="1486912688044" expanded="true" signature="304:950" ph="..." />
-            <marker date="1486912688044" expanded="true" signature="339:396" ph="..." />
-            <marker date="1486912688044" expanded="true" signature="621:889" ph="..." />
-            <marker date="1486912688044" expanded="true" signature="720:869" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1366,13 +1273,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="46" column="61" lean-forward="true" selection-start-line="46" selection-start-column="61" selection-end-line="46" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/JSON/TerminalDateMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
@@ -1384,13 +1284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
-          <folding>
-            <marker date="1483710064263" expanded="true" signature="245:1053" ph="..." />
-            <marker date="1483710064263" expanded="true" signature="287:1032" ph="..." />
-            <marker date="1483710064263" expanded="true" signature="325:368" ph="..." />
-            <marker date="1483710064263" expanded="true" signature="805:1016" ph="..." />
-            <marker date="1483710064263" expanded="true" signature="886:1002" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1398,11 +1291,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="6" />
-          <folding>
-            <marker date="1466691768000" expanded="true" signature="245:731" ph="..." />
-            <marker date="1466691768000" expanded="true" signature="287:710" ph="..." />
-            <marker date="1466691768000" expanded="true" signature="316:356" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1410,11 +1298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <marker date="1450861516000" expanded="true" signature="245:1282" ph="..." />
-            <marker date="1450861516000" expanded="true" signature="294:1261" ph="..." />
-            <marker date="1450861516000" expanded="true" signature="323:374" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1450,10 +1333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding>
-            <marker date="1487939512930" expanded="true" signature="242:407" ph="..." />
-            <marker date="1487939512930" expanded="true" signature="294:386" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1500,13 +1379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-186">
-          <caret line="174" column="35" lean-forward="false" selection-start-line="174" selection-start-column="35" selection-end-line="174" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/470c2bd8/e6e11b2a-b2ce-4b93-8195-fd015408c6ec/KIRICHENKO.GAS_TANK_CALIBRATTION_DATA">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1519,24 +1391,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/ChartController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/service/impl/ChartServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="514">
           <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <marker date="1489138900604" expanded="false" signature="46:590" ph="..." />
-            <marker date="1489138900604" expanded="true" signature="862:3750" ph="{...}" />
-            <marker date="1489138900604" expanded="true" signature="1792:2203" ph="//..." />
-            <marker date="1489138900604" expanded="true" signature="2755:2907" ph="//..." />
-            <marker date="1489138900604" expanded="true" signature="3861:4004" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1555,43 +1413,219 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="79" column="4" lean-forward="false" selection-start-line="79" selection-start-column="4" selection-end-line="83" selection-end-column="21" />
+        <state relative-caret-position="180">
+          <caret line="69" column="16" lean-forward="false" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.0.3.RELEASE/spring-context-4.0.3.RELEASE.jar!/org/springframework/stereotype/Controller.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/ChartController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding>
-            <marker date="1492974211119" expanded="true" signature="104:3750" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="379:610" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="619:1165" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="631:1155" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="643:914" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="791:901" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="926:1142" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1075:1129" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1181:3739" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1196:1350" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1365:1518" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1533:1644" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1659:1812" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1827:1947" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="1989:2185" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="2248:2377" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="2460:2575" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="2669:2796" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="2811:2938" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="2954:3061" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="3076:3230" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="3245:3396" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="3434:3569" ph="..." />
-            <marker date="1492974211119" expanded="true" signature="3584:3722" ph="..." />
+            <marker date="1474892526000" expanded="false" signature="44:1342" ph="..." />
+            <marker date="1474892526000" expanded="true" signature="1888:2618" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="2223:2397" ph="//..." />
+            <marker date="1474892526000" expanded="true" signature="2787:3447" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="2789:3292" ph="//..." />
+            <marker date="1474892526000" expanded="true" signature="3586:5734" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/ReportController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="47" selection-end-column="5" />
+          <folding>
+            <marker date="1474892526000" expanded="false" signature="44:1001" ph="..." />
+            <marker date="1474892526000" expanded="true" signature="1365:1439" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="1613:2355" ph="{...}" />
+            <marker date="1474892526000" expanded="false" signature="1724:1740" ph="&lt;~&gt;" />
+            <marker date="1474892526000" expanded="true" signature="2432:2575" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="2655:2800" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="2880:3208" ph="{...}" />
+            <marker date="1474892526000" expanded="true" signature="3294:3384" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="26" column="4" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="33" />
+          <folding>
+            <marker date="1487937463362" expanded="true" signature="44:660" ph="..." />
+            <marker date="1487937463362" expanded="true" signature="940:1206" ph="{...}" />
+            <marker date="1487937463362" expanded="true" signature="1208:1638" ph="//..." />
+            <marker date="1487937463362" expanded="true" signature="1710:1912" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Subtitle.srt" />
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/maven-archiver/pom.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="49" column="5" lean-forward="false" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+          <folding>
+            <marker date="1492979303324" expanded="false" signature="44:1047" ph="..." />
+            <marker date="1492979303324" expanded="false" signature="107:1047" ph="..." />
+            <marker date="1492979303324" expanded="true" signature="1743:1914" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="2089:2810" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="2993:3665" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="3805:3951" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="4116:4283" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="4442:4527" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="4664:6327" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="6411:6821" ph="{...}" />
+            <marker date="1492979303324" expanded="false" signature="6415:6445" ph="/unchecked/" />
+            <marker date="1492979303324" expanded="false" signature="6922:6926" ph=" { " />
+            <marker date="1492979303324" expanded="false" signature="6984:6987" ph=" }" />
+            <marker date="1492979303324" expanded="false" signature="7079:7083" ph=" { " />
+            <marker date="1492979303324" expanded="false" signature="7116:7119" ph=" }" />
+            <marker date="1492979303324" expanded="true" signature="7285:7343" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="7446:7971" ph="{...}" />
+            <marker date="1492979303324" expanded="false" signature="7545:7575" ph="/unchecked/" />
+            <marker date="1492979303324" expanded="false" signature="8059:8063" ph=" { " />
+            <marker date="1492979303324" expanded="false" signature="8125:8128" ph=" }" />
+            <marker date="1492979303324" expanded="true" signature="8243:8318" ph="{...}" />
+            <marker date="1492979303324" expanded="true" signature="8420:8493" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/classes/com/ksgagro/gps/controller/HomeController.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/gps-0.0.1-SNAPSHOT/WEB-INF/views/home.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/home.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="94" column="30" lean-forward="false" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/classes/com/ksgagro/gps/controller/HomeController.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160">
+          <caret line="54" column="14" lean-forward="true" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ksgagro/gps/controller/locatedimage/controllers/LocatedImageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="50" />
+          <folding>
+            <marker date="1493297157478" expanded="true" signature="69:405" ph="..." />
+            <marker date="1493297157478" expanded="true" signature="407:458" ph="/**...*/" />
+            <marker date="1493297157478" expanded="true" signature="596:689" ph="{...}" />
+            <marker date="1493297157478" expanded="true" signature="803:866" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/located_image.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="66" column="7" lean-forward="false" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="61" lean-forward="false" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
+        <state relative-caret-position="560">
+          <caret line="34" column="11" lean-forward="false" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding>
+            <marker date="1493297805656" expanded="true" signature="97:3851" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="1385:1694" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="1777:1881" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="1927:2058" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="2169:2305" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="2353:2741" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="2567:2627" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="2802:2927" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="3025:3301" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="3330:3531" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="3590:3730" ph="..." />
+            <marker date="1493297805656" expanded="true" signature="3832:3841" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+          <folding>
+            <marker date="1493297892913" expanded="true" signature="64:1324" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="251:572" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="398:560" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="465:544" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="593:693" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="743:894" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="808:876" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="908:1018" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="927:1005" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="1030:1187" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="1102:1176" ph="..." />
+            <marker date="1493297892913" expanded="true" signature="1207:1313" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="90" column="36" lean-forward="false" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
           <folding />
         </state>
       </provider>

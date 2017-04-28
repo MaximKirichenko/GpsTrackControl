@@ -107,6 +107,7 @@ com/ksgagro/gps/service/VehicleDetailsTableService.class
 com/ksgagro/gps/domain/GasTank.class
 com/ksgagro/gps/controller/JSON/Mapper.class
 com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.class
+com/ksgagro/gps/controller/locatedimage/controllers/LocatedImageController.class
 com/ksgagro/gps/service/GasTankCalibrationDataService.class
 com/ksgagro/gps/service/impl/TerminalServiceImpl.class
 com/ksgagro/gps/dto/FuelChartDTO.class

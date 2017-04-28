@@ -36,6 +36,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/RefuelingService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/MenuItem.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/CarSignalServiceImpl.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/locatedimage/controllers/LocatedImageController.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/dto/ReportGroupDTO.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/CarSignalService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/ContractServiceImpl.java
