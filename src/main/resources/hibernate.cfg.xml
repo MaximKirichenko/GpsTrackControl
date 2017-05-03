@@ -24,6 +24,7 @@
         <mapping resource="PayTest.hbm.xml" />
         <mapping resource="MapObjectFieldType.hbm.xml" />
         <mapping resource="TerminalDateDTO.hbm.xml" />
+        <mapping resource="LocatedImageEntity.hbm.xml" />
 
     </session-factory>
 </hibernate-configuration>
