@@ -23,6 +23,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/ContractService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/logic/image/persistence/impl/LocatedImageManagerImplTest.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/AgroFields.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/utils/RandomUtils.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/AgroPayRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/RefuelingServiceImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/tracks/menu/utils/DateUtils.java
@@ -33,6 +34,7 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/dto/MulitiTrackRequestDTO.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/User.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/dto/TrackRequestDTO.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/locatedimage/json/LocatedImagePointJSON.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/GasTankCalibrationData.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/RefuelingService.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/domain/MenuItem.java
@@ -71,6 +73,8 @@
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/AgroFieldsServiceImpl.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/AgroPayConractRepository.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/repository/AgroFieldsRepository.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/locatedimage/json/LocatedImageJsonMapper.java
+/home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/locatedimage/json/LocatedImageJson.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/logic/image/persistence/model/LocatedImageEntity.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/controller/JSON/MapObjectJSON.java
 /home/kma/work/GPS/gps/src/main/java/com/ksgagro/gps/service/impl/VehicleGroupImpl.java

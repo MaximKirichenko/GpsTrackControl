@@ -222,3 +222,38 @@ select{
 	float: left;
 	width: 75px;
 }
+
+#image_container{
+	border-radius: 10px 10px 10px 10px;
+	width: 350px;
+	border: 1px solid #808080;
+	background: url(images/bg.png) repeat;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 5px 10px 5px 5px;
+	z-index: 10;
+}
+
+#image_container-content{
+	float: left;
+}
+
+#image_container-content .object-label{
+	display: block;
+	width: 100px;
+	clear: both;
+}
+#image_container-content .object-field{
+	float: left;
+}
+#image_container-button-box{
+	margin: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 150px;
+	clear: both;
+}
+#image_container-button-box .button{
+	float: left;
+	width: 75px;
+}

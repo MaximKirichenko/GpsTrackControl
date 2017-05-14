@@ -22,9 +22,12 @@ com/ksgagro/gps/domain/MapObjectFieldType.class
 com/ksgagro/gps/repository/CarSignalRepository.class
 com/ksgagro/gps/logic/image/service/impl/LocatedImageServiceImpl.class
 com/ksgagro/gps/service/impl/VehicleDetailsTableServiceImpl.class
+com/ksgagro/gps/logic/image/service/mapper/LocatedImageBOMapper$3.class
 com/ksgagro/gps/domain/Emp.class
+com/ksgagro/gps/logic/image/service/mapper/LocatedImageBOMapper$3$1.class
 com/ksgagro/gps/domain/TerminalDate.class
 com/ksgagro/gps/domain/Terminal.class
+com/ksgagro/gps/controller/locatedimage/json/LocatedImagePointJSON.class
 com/ksgagro/gps/repository/TerminalDateRepository.class
 com/ksgagro/gps/service/RoleFilter.class
 com/ksgagro/gps/logic/common/model/OwnedBO.class
@@ -39,6 +42,7 @@ com/ksgagro/gps/service/VehicleService.class
 com/ksgagro/gps/logic/image/service/mapper/LocatedImageBOMapper$2.class
 com/ksgagro/gps/service/LocationService.class
 com/ksgagro/gps/controller/JSON/MapObjectJSON.class
+com/ksgagro/gps/controller/locatedimage/json/LocatedImageJsonMapper$1.class
 com/ksgagro/gps/repository/VehicleGroupRepository.class
 com/ksgagro/gps/dto/NotNullContractDTO.class
 com/ksgagro/gps/logic/image/service/model/LocatedImageBO.class
@@ -81,11 +85,14 @@ com/ksgagro/gps/controller/HomeController.class
 com/ksgagro/gps/service/CalibrationTableService.class
 com/ksgagro/gps/service/TerminalDateService.class
 com/ksgagro/gps/logic/image/service/mapper/LocatedImageBOMapper.class
+com/ksgagro/gps/controller/locatedimage/json/LocatedImageJsonMapper.class
 com/ksgagro/gps/domain/VehicleGroup.class
 com/ksgagro/gps/dto/ReportTrackDto.class
 com/ksgagro/gps/repository/PayRepository.class
+com/ksgagro/gps/controller/locatedimage/json/LocatedImageJson.class
 com/ksgagro/gps/domain/MapObjectField.class
 com/ksgagro/gps/domain/Location.class
+com/ksgagro/gps/controller/locatedimage/json/LocatedImageJsonMapper$2.class
 com/ksgagro/gps/tracks/menu/dto/VehicleDTO.class
 com/ksgagro/gps/service/ChartService.class
 com/ksgagro/gps/repository/AgroPayConractRepository.class
@@ -120,6 +127,7 @@ com/ksgagro/gps/service/VehicleDetailsTableService.class
 com/ksgagro/gps/logic/image/persistence/mapper/LocatedImageEntityMapper.class
 com/ksgagro/gps/domain/GasTank.class
 com/ksgagro/gps/logic/image/service/LocatedImageService.class
+com/ksgagro/gps/utils/RandomUtils.class
 com/ksgagro/gps/controller/JSON/Mapper.class
 com/ksgagro/gps/controller/JSON/MapObjectFieldTypeJson.class
 com/ksgagro/gps/controller/locatedimage/controllers/LocatedImageController.class
