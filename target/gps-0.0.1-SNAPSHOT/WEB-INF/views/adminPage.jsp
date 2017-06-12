@@ -32,6 +32,7 @@
 			</ul>
 			</div>
 		</div>
+		<div id="linked-button-frame"></div>
 	</div>
 
 </body>
