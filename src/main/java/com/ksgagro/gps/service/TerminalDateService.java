@@ -3,13 +3,14 @@ package com.ksgagro.gps.service;
 import java.util.Date;
 import java.util.List;
 
+import com.ksgagro.gps.dto.MultiTrackQuery;
 import com.ksgagro.gps.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.TerminalDate;
 
 public interface TerminalDateService {
 	public List<TerminalDate> getTerminalDateAboutVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber);
-	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(long millisFrom, long millisTo, List<Integer> terminalNumbers);
+	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(MultiTrackQuery query);
 	
 	public List<TerminalDate> getVehicleFromPeriod(
 			String dateFrom, String timeFrom, String dateTo, String timeTo, int terminalNumber);

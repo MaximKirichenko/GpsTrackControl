@@ -3,7 +3,7 @@ package com.ksgagro.gps.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class MulitiTrackRequestDTO implements Serializable{
+public class MultiTrackQuery implements Serializable{
 	
 	private static final long serialVersionUID = 74398488174553047L;
 	
@@ -48,7 +48,7 @@ public class MulitiTrackRequestDTO implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MulitiTrackRequestDTO other = (MulitiTrackRequestDTO) obj;
+		MultiTrackQuery other = (MultiTrackQuery) obj;
 		if (dataFrom != other.dataFrom)
 			return false;
 		if (dataTo != other.dataTo)

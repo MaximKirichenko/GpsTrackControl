@@ -1,7 +1,8 @@
 package com.ksgagro.gps.service.impl;
 
-import com.ksgagro.gps.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.domain.*;
+import com.ksgagro.gps.dto.MultiTrackQuery;
+import com.ksgagro.gps.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.repository.TerminalDateRepository;
 import com.ksgagro.gps.repository.TerminalRepository;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
@@ -18,29 +19,20 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class TerminalDateServiceImpl implements TerminalDateService {
 
-	@Autowired
-	TerminalDateRepository terminalDateRepository;
-	
-	@Autowired
-	GasTankCalibrationDataService gasCalibration;
+	@Autowired private VehicleService vehicleService;
+	@Autowired private TerminalService terminalService;
+	@Autowired private TerminalRepository terminalRepository;
+	@Autowired private GasTankCalibrationDataService gasCalibration;
+	@Autowired private TerminalDateRepository terminalDateRepository;
 
-	@Autowired
-	TerminalRepository terminalRepository;
-	
-	@Autowired
-	TerminalService terminalService;
-	
-	@Autowired
-	VehicleService vehicleService;
-	
-	@Autowired
-	private GasTankCalibrationDataService gasTankService;
-	
 	Logger logger = Logger.getLogger(TerminalDateServiceImpl.class);
 	
 	public List<TerminalDate> getTerminalDateAboutVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
@@ -574,12 +566,10 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 
 
 	@Override
-	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(long millisFrom, long millisTo,
-			List<Integer> terminalNumbers) {
+	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(MultiTrackQuery query) {
 		
-		List<TerminalDate> data = terminalDateRepository.getTerminalDateAboutVehiclesFromPeriod(millisFrom, millisTo, terminalNumbers);
+		List<TerminalDate> data = terminalDateRepository.getTerminalDateAboutVehiclesFromPeriod(query.getDataFrom(), query.getDataTo(), query.getTerminalNumbers());
 		
-		Map<Integer, Map<Integer, GasTankCalibrationData>> calibrationTables = gasTankService.getCalibrationTables(terminalNumbers, millisFrom);
 		List<MultiTrackResponseDto> multiTreckList = new ArrayList<>();
 		
 		for(TerminalDate terminalDataItem: data){
@@ -587,7 +577,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			boolean terminalExistInMultitrackList = addDataToMultiTrack(multiTreckList, terminalDataItem);
 			
 			if(!terminalExistInMultitrackList){
-				MultiTrackResponseDto multiTrackResponseDto = buildMultiTrackResponse(terminalNumbers, terminalDataItem);
+				MultiTrackResponseDto multiTrackResponseDto = buildMultiTrackResponse(query.getTerminalNumbers(), terminalDataItem);
 				multiTreckList.add(multiTrackResponseDto);
 			}
 		}

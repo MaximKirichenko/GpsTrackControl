@@ -4,7 +4,7 @@ import com.ksgagro.gps.controller.JSON.MapObjectFieldTypeJson;
 import com.ksgagro.gps.controller.JSON.MapObjectJSON;
 import com.ksgagro.gps.controller.JSON.Mapper;
 import com.ksgagro.gps.domain.*;
-import com.ksgagro.gps.dto.MulitiTrackRequestDTO;
+import com.ksgagro.gps.dto.MultiTrackQuery;
 import com.ksgagro.gps.dto.MultiTrackResponseDto;
 import com.ksgagro.gps.dto.ReportTrackDto;
 import com.ksgagro.gps.dto.TrackRequestDTO;
@@ -69,13 +69,12 @@ public class HomeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
-	public @ResponseBody List<MultiTrackResponseDto> buildTracks(@RequestBody MulitiTrackRequestDTO trackRequest){
-		MulitiTrackRequestDTO multiTrackRequestDTO = new MulitiTrackRequestDTO();
-		multiTrackRequestDTO.setDataFrom(trackRequest.getDataFrom());
-		multiTrackRequestDTO.setDataTo(trackRequest.getDataTo());
-		multiTrackRequestDTO.setTerminalNumbers(trackRequest.getTerminalNumbers());
-		System.out.println("track request\n" + trackRequest.getTerminalNumbers() + " " + new Date(trackRequest.getDataFrom()) + " " + new Date(trackRequest.getDataTo()));
-		List<MultiTrackResponseDto> date = terminalDateService.getTerminalDateAboutVehiclesFromPeriod(multiTrackRequestDTO.getDataFrom(), multiTrackRequestDTO.getDataTo(), multiTrackRequestDTO.getTerminalNumbers());
+	public @ResponseBody List<MultiTrackResponseDto> buildTracks(@RequestBody MultiTrackQuery trackQuery){
+		MultiTrackQuery multiTrackRequestDTO = new MultiTrackQuery();
+		multiTrackRequestDTO.setDataFrom(trackQuery.getDataFrom());
+		multiTrackRequestDTO.setDataTo(trackQuery.getDataTo());
+		multiTrackRequestDTO.setTerminalNumbers(trackQuery.getTerminalNumbers());
+		List<MultiTrackResponseDto> date = terminalDateService.getTerminalDateAboutVehiclesFromPeriod(trackQuery);
 		return date;
 	}
 	
