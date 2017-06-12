@@ -32,15 +32,8 @@
 			</ul>
 			</div>
 		</div>
+		<div id="linked-button-frame"></div>
 	</div>
-		<div id="menuBlock">
-			<div id="leftVerticalMenu">
-				<ul>
-					<c:forEach var="item" items="${menuItems }">
-						<li><a href="${item.action }">${item.name }</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
+
 </body>
 </html>
