@@ -1,7 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f42ca29-bfac-4872-8b11-847264fb768d" name="Default" comment="" />
+    <list default="true" id="6f42ca29-bfac-4872-8b11-847264fb768d" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/00changelog.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/cache/branch2-served" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/cache/rbc-names-v1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/cache/rbc-revs-v1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/cache/tags2-visible" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/cur-message.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/dirstate" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/hgrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/last-message.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/requires" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/00changelog.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/00manifest.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/_chart_controller.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/_home_controller.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/_login_controller.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/_map_controller.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/_report_controller.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/controller/dto/_terminal_date_d_t_o.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_agro_fields.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_agro_fields.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_agro_pay.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_coordinates.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_fuel_level_graph.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank_calibration_data.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank_calibration_data.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank_position.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_gas_tank_position.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_json_type.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_location.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_location.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_polygon.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_terminal.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_terminal.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_terminal_date.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_terminal_date.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_vehicle.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_vehicle.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_vehicle_group.hbm.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/_vehicle_group.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_agro_fields_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_agro_pay_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_gas_tank_calibration_data_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_location_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_terminal_date_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_terminal_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_vehicle_group_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/_vehicle_repository.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_agro_fields_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_gas_tank_calibration_data_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_location_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_terminal_date_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_terminal_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_vehicle_group_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/repository/impl/_vehicle_repository_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/_agro_fields_service.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/_chart_service.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/_gas_tank_calibration_data_service.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/_terminal_date_service.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/impl/_agro_fields_service_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/impl/_gas_tank_calibration_data_service_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/domain/service/impl/_terminal_date_service_impl.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/interceptor/_auditing_interceptor.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/com/ksgagro/gps/interceptor/_performance_monitor_interceptor.java.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/java/hibernate.cfg.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/resources/log4j.properties.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/resources/messages.properties.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/resources/messages__en.properties.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/spring/webcontext/_dispatcher_servlet-context.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/spring/webcontext/_security-context.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/add_fields_property.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/car_details.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/empty_track.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/fuel_line_chart.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/home.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/login.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/map_view.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/monitoring.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/track.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/views/track_view.jsp.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/_w_e_b-_i_n_f/web.xml.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/_chart.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/_controller.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/_extended_renderers.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/_open_layers.js.d" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/_open_layers.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/button_controller.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/controllers.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/datafield.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/blank.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/cloud-popup-relative.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/drag-rectangle-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/drag-rectangle-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/east-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/finish_icon.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/layer-switcher-maximize.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/layer-switcher-minimize.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/marker-blue.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/marker-gold.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/marker-green.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/marker.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/measuring-stick-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/measuring-stick-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/nitral_icon.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/north-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/panning-hand-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/panning-hand-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/slider.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/south-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/start_icon.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/thumbnail.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/west-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/zoom-minus-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/zoom-plus-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/zoom-world-mini.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/img/zoombar.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/jq.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/jquery-1.11.3.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/jquery-1.8.3.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/jquery-ui.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/map.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/map_redactor.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/map_view.js.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/google.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/google.tidy.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/ie6-style.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/ie6-style.tidy.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/add__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/add__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/blank.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/close.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/drag-rectangle-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/drag-rectangle-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__line__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__line__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__polygon__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/draw__polygon__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/editing__tool__bar.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/move__feature__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/move__feature__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/navigation__history.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/overview__replacement.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/pan-panel-_n_o_a_l_p_h_a.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/pan-panel.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/pan__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/pan__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/panning-hand-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/panning-hand-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/remove__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/remove__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/ruler.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/save__features__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/save__features__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/view__next__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/view__next__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/view__previous__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/view__previous__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/zoom-panel-_n_o_a_l_p_h_a.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/img/zoom-panel.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/style.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/style.mobile.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/style.mobile.tidy.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/_j_s/theme/default/style.tidy.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/_open_layers.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/car-info-table.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/details-form.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/horizontal_menu.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/bg.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/calendar.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/login-sprite.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__diagonals-thick__18__b81900__40x40.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__diagonals-thick__20__666666__40x40.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__flat__10__000000__40x100.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__glass__100__f6f6f6__1x400.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__glass__100__fdf5ce__1x400.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__glass__65__ffffff__1x400.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__gloss-wave__35__f6a828__500x100.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__highlight-soft__100__eeeeee__1x100.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-bg__highlight-soft__75__ffe45c__1x100.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-icons__222222__256x240.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-icons__228ef1__256x240.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-icons__ef8c08__256x240.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-icons__ffd27a__256x240.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/images/ui-icons__ffffff__256x240.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/add__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/add__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/blank.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/close.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/drag-rectangle-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/drag-rectangle-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__line__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__line__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__polygon__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/draw__polygon__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/editing__tool__bar.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/move__feature__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/move__feature__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/navigation__history.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/overview__replacement.gif.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/pan-panel-_n_o_a_l_p_h_a.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/pan-panel.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/pan__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/pan__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/panning-hand-off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/panning-hand-on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/remove__point__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/remove__point__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/ruler.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/save__features__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/save__features__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/view__next__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/view__next__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/view__previous__off.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/view__previous__on.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/zoom-panel-_n_o_a_l_p_h_a.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/img/zoom-panel.png.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/jquery-ui.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/ol.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/style.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/track.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/data/src/main/webapp/resources/css/track_view.css.i" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/fncache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/phaseroots" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/undo" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/undo.backupfiles" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/store/undo.phaseroots" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/thgstatus" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/undo.bookmarks" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/undo.branch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/undo.desc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/hg/undo.dirstate" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/artifacts/gps_war.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/artifacts/gps_war_exploded.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__com_google_code_gson_gson_1_7_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__com_oracle_ojdbc6_11_2_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__commons_logging_commons_logging_1_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__javax_servlet_javax_servlet_api_3_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__javax_servlet_jstl_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__log4j_log4j_1_2_12.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_apache_commons_commons_dbcp2_2_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_4_0_4_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_hibernate_hibernate_core_4_3_5_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_javassist_javassist_3_18_1_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_jboss_jandex_1_1_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_jboss_logging_jboss_logging_3_1_3_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_jboss_logging_jboss_logging_annotations_1_2_0_Beta1.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_jboss_spec_javax_transaction_jboss_transaction_api_1_2_spec_1_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_security_spring_security_config_3_1_4_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_security_spring_security_core_3_1_4_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_security_spring_security_web_3_1_4_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_aop_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_beans_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_context_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_core_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_expression_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_jdbc_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_orm_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_tx_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_web_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__org_springframework_spring_webmvc_4_0_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/jsdtscope" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.jdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.m2e.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.common.component" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.common.project.facet.core.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.jsdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.jsdt.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.jsdt.ui.superType.container" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.jsdt.ui.superType.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/settings/org.eclipse.wst.validation.prefs" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="target/" />
     <ignored path="settings/" />
     <ignored path="idea/" />
@@ -263,20 +556,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1187,7 +1466,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197372000" />
+    <option name="totallyTimeSpent" value="197641000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1221,9 +1500,9 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3716143" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33044422" sideWeight="0.695629" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33044422" sideWeight="0.695629" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46478873" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46478873" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2782516" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
