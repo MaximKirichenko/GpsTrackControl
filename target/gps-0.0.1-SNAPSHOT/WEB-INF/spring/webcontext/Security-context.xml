@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_AGRO_USER_VEHICLE, ROLE_RENT" />
+		<security:intercept-url pattern="/chart" access="ROLE_ADMIN, ROLE_AGRO_USER, ROLE_RENT" />
+		<security:intercept-url pattern="/report" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/adminPage" access="ROLE_ADMIN" />
+		
+		<security:form-login login-page="/login" 
+               default-target-url="/"   
+               authentication-failure-url="/loginfailed"/>
+        <security:logout logout-success-url="/logout" />
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="KMA" password="BNhyTTr6" authorities="ROLE_ADMIN" />
+				<security:user name="HAV" password="Htlbcrf" authorities="ROLE_ADMIN" />
+				<security:user name="Angur" password="Ytcrf;e" authorities="ROLE_ADMIN" />
+				<security:user name="OOV" password="Jktqybr2611" authorities="ROLE_ADMIN" />
+				<security:user name="YSV" password="Ekfctdbx2611" authorities="ROLE_ADMIN" />
+				<security:user name="MSV" password="spider" authorities="ROLE_ADMIN" />
+				<security:user name="KSP" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="KKV" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="KNS" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="LVP" password="rcufuhj" authorities="ROLE_ADMIN" />
+				<security:user name="KES" password="rcufuhj" authorities="ROLE_ADMIN" />
+				
+				<security:user name="VEV" password="889977" authorities="ROLE_ADMIN" />
+				<security:user name="Lada" password="7777" authorities="ROLE_ADMIN" />
+				<security:user name="PrNa" password="666666" authorities="ROLE_ADMIN" />
+				<security:user name="NMO" password="5432" authorities="ROLE_ADMIN" />
+				
+				<security:user name="CIV" password="654428" authorities="ROLE_AGRO_USER" />
+				<security:user name="LAM" password="620113" authorities="ROLE_AGRO_USER" />
+				<security:user name="VSA" password="431374" authorities="ROLE_AGRO_USER" />
+				<security:user name="MGS" password="582878" authorities="ROLE_AGRO_USER" />
+				<security:user name="SAM" password="223339" authorities="ROLE_AGRO_USER" />
+				<security:user name="IAA" password="795791" authorities="ROLE_AGRO_USER" />
+				<security:user name="LOI" password="596166" authorities="ROLE_AGRO_USER" />
+				<security:user name="BEM" password="627827" authorities="ROLE_AGRO_USER" />
+				<security:user name="MEV" password="550303" authorities="ROLE_AGRO_USER" />
+				<security:user name="MDA" password="352544" authorities="ROLE_AGRO_USER" />
+				<security:user name="MSD" password="937355" authorities="ROLE_AGRO_USER" />
+				<security:user name="RVP" password="365068" authorities="ROLE_AGRO_USER" />
+				<security:user name="TSI" password="597750" authorities="ROLE_AGRO_USER" />
+				<security:user name="LVV" password="847886" authorities="ROLE_AGRO_USER" />
+				<security:user name="PAG" password="403313" authorities="ROLE_AGRO_USER" />
+				<security:user name="BAI" password="998225" authorities="ROLE_AGRO_USER" />
+				<security:user name="GVV" password="356420" authorities="ROLE_AGRO_USER" />
+				<security:user name="ZAA" password="520441" authorities="ROLE_AGRO_USER" />
+				<security:user name="KAA" password="582765" authorities="ROLE_AGRO_USER" />
+				<security:user name="HMA" password="824386" authorities="ROLE_AGRO_USER" />
+				<security:user name="PAI" password="384065" authorities="ROLE_AGRO_USER" />
+				<security:user name="RVV" password="888791" authorities="ROLE_AGRO_USER" />
+				<security:user name="KAE" password="775364" authorities="ROLE_AGRO_USER" />
+				<security:user name="YAN" password="111183" authorities="ROLE_AGRO_USER" />
+				<security:user name="AIL" password="Djkuf" authorities="ROLE_AGRO_USER" />
+				<security:user name="agroscope" password="TDsBuT" authorities="ROLE_RENT" />
+				
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
