@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ksgagro.gps.dto.FuelChartDTO;
-import com.ksgagro.gps.dto.MultiTrackResponseDto;
+import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.domain.GasTankCalibrationData;
 import com.ksgagro.gps.domain.Refueling;
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.service.ChartService;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.service.TerminalDateService;
@@ -35,10 +35,10 @@ public class ChartServiceImpl implements ChartService{
 		List<Integer> speeds = new ArrayList<Integer>();
 		List<Integer> voltage = new ArrayList<Integer>();
 		
-		List<List<TerminalDate>> stops = terminalDataService.getStops(from, to, vehicleId);
+		List<List<TrackEntity>> stops = terminalDataService.stopList(from, to, vehicleId);
 		List<Refueling> refuelings = terminalDataService.getRefulingDate(stops, vehicleId);
 		
-		List<TerminalDate> terminalDataList = terminalDataService.getTerminalDateAboutVehicleFromPeriod(from, to, vehicleId);
+		List<TrackEntity> terminalDataList = terminalDataService.tracks(from, to, vehicleId);
 		List<Double> leftTankDatas = new ArrayList<Double>();
 		List<Double> rightTankDatas = new ArrayList<Double>();
 //		System.out.println("Left: ");
@@ -53,7 +53,7 @@ public class ChartServiceImpl implements ChartService{
 		double previousRightTankLevel = 0;
 		double canConsumption = 0;
 		int count=0;
-		for(TerminalDate data: terminalDataList){
+		for(TrackEntity data: terminalDataList){
 			//System.out.println(data);
 			
 			double leftTankLevel = gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData);
@@ -90,8 +90,8 @@ public class ChartServiceImpl implements ChartService{
 
 
 	@Override
-	public MultiTrackResponseDto buildMultiTrackResponseDto(int numberTerminal, long from, long to) {
-		List<TerminalDate> terminalDate = terminalDataService.getTerminalDateAboutVehicleFromPeriod(from, to, numberTerminal);
+	public TrackBO buildMultiTrackResponseDto(int numberTerminal, long from, long to) {
+		List<TrackEntity> terminalDate = terminalDataService.tracks(from, to, numberTerminal);
 		
 		return null;
 	}

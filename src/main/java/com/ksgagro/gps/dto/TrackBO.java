@@ -4,19 +4,19 @@ import java.util.List;
 
 import com.ksgagro.gps.domain.FuelLineChartPoint;
 import com.ksgagro.gps.domain.Terminal;
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.domain.TrackInfo;
 import com.ksgagro.gps.domain.Vehicle;
 
-public class MultiTrackResponseDto {
+public class TrackBO {
 	
 	private Terminal terminal;
 	private Vehicle vehicle;
-	private List<TerminalDate> data;
+	private List<TrackEntity> trackEntities;
 	private TrackInfo trackInfo;
-	
 	private List<FuelLineChartPoint> leftFuelLine;
 	private List<FuelLineChartPoint> rightFuelLine;
+	private List<List<TrackEntity>> stopList;
 	
 	
 	public Terminal getTerminal() {
@@ -31,24 +31,21 @@ public class MultiTrackResponseDto {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	public List<TerminalDate> getData() {
-		return data;
+	public List<TrackEntity> getTrackEntities() {
+		return trackEntities;
 	}
-	public void setData(List<TerminalDate> data) {
-		this.data = data;
+	public void setTrackEntities(List<TrackEntity> trackEntities) {
+		this.trackEntities = trackEntities;
 	}
-	public void addData(TerminalDate data){
-		this.data.add(data);
+	public void addData(TrackEntity data){
+		this.trackEntities.add(data);
 	}
-	
 	public TrackInfo getTrackInfo() {
 		return trackInfo;
 	}
 	public void setTrackInfo(TrackInfo trackInfo) {
 		this.trackInfo = trackInfo;
 	}
-	
-	
 	public List<FuelLineChartPoint> getLeftFuelLine() {
 		return leftFuelLine;
 	}
@@ -61,7 +58,6 @@ public class MultiTrackResponseDto {
 		point.setY(fuelLevel);
 		this.leftFuelLine.add(point);
 	}
-	
 	public List<FuelLineChartPoint> getRightFuelLine() {
 		return rightFuelLine;
 	}
@@ -74,11 +70,20 @@ public class MultiTrackResponseDto {
 		point.setY(fuelLevel);
 		this.rightFuelLine.add(point);
 	}
+
+	public List<List<TrackEntity>> getStopList() {
+		return stopList;
+	}
+
+	public void setStopList(List<List<TrackEntity>> stopList) {
+		this.stopList = stopList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((trackEntities == null) ? 0 : trackEntities.hashCode());
 		result = prime * result + ((terminal == null) ? 0 : terminal.hashCode());
 		result = prime * result + ((trackInfo == null) ? 0 : trackInfo.hashCode());
 		result = prime * result + ((vehicle == null) ? 0 : vehicle.hashCode());
@@ -92,11 +97,11 @@ public class MultiTrackResponseDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MultiTrackResponseDto other = (MultiTrackResponseDto) obj;
-		if (data == null) {
-			if (other.data != null)
+		TrackBO other = (TrackBO) obj;
+		if (trackEntities == null) {
+			if (other.trackEntities != null)
 				return false;
-		} else if (!data.equals(other.data))
+		} else if (!trackEntities.equals(other.trackEntities))
 			return false;
 		if (terminal == null) {
 			if (other.terminal != null)
@@ -117,7 +122,7 @@ public class MultiTrackResponseDto {
 	}
 	@Override
 	public String toString() {
-		return "MultiTrackResponseDto [terminal=" + terminal + ", vehicle=" + vehicle + ", data=" + data
+		return "MultiTrackResponseDto [terminal=" + terminal + ", vehicle=" + vehicle + ", data=" + trackEntities
 				+ ", trackInfo=" + trackInfo + "]";
 	}
 	

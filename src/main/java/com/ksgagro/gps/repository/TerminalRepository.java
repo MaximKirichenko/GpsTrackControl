@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TerminalRepository {
 
-    Terminal getTerminalByVehicleId(int id);
+    Terminal get(int id);
 
     List<Terminal> getTerminals(List<Integer> terminalNumbers);
 

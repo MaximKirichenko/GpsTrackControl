@@ -3,12 +3,12 @@ package com.ksgagro.gps.domain;
 public class VehicleMenuItem {
 	
 	private Vehicle vehicle;
-	private TerminalDate lastSignal;
+	private TrackEntity lastSignal;
 	
 	public VehicleMenuItem() {
 		super();
 	}
-	public VehicleMenuItem(Vehicle vehicle, TerminalDate lastSignal) {
+	public VehicleMenuItem(Vehicle vehicle, TrackEntity lastSignal) {
 		super();
 		this.vehicle = vehicle;
 		this.lastSignal = lastSignal;
@@ -19,10 +19,10 @@ public class VehicleMenuItem {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	public TerminalDate getLastSignal() {
+	public TrackEntity getLastSignal() {
 		return lastSignal;
 	}
-	public void setLastSignal(TerminalDate lastSignal) {
+	public void setLastSignal(TrackEntity lastSignal) {
 		this.lastSignal = lastSignal;
 	}
 	@Override

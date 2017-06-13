@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ksgagro.gps.dto.ReportGroupDTO;
 import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.AgroPayContract;
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.service.AgroFieldsService;
 import com.ksgagro.gps.service.CarSignalService;
@@ -53,7 +53,7 @@ public class ReportController {
 		List<ReportGroupDTO> report = new ArrayList<ReportGroupDTO>();
 		for(Vehicle vehicle: vehicleList){
 			ReportGroupDTO item = new ReportGroupDTO();
-			List<TerminalDate> terminalDates = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getId());
+			List<TrackEntity> terminalDates = terminalDateService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getId());
 			terminalDates = terminalDateService.filterData(terminalDates);
 			double consumption = terminalDateService.getCanConsumption(terminalDates);
 			double mileage = terminalDateService.getPathLength(terminalDates);

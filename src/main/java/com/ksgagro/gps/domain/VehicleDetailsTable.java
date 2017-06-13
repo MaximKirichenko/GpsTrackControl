@@ -3,7 +3,7 @@ package com.ksgagro.gps.domain;
 public class VehicleDetailsTable {
 	Terminal terminal;
 	Vehicle vehicle;
-	TerminalDate terminalDate;
+	TrackEntity terminalDate;
 	double fuelLevelLeft;
 	double fuelLevelRight;
 	
@@ -20,10 +20,10 @@ public class VehicleDetailsTable {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	public TerminalDate getTerminalDate() {
+	public TrackEntity getTerminalDate() {
 		return terminalDate;
 	}
-	public void setTerminalDate(TerminalDate terminalDate) {
+	public void setTerminalDate(TrackEntity terminalDate) {
 		this.terminalDate = terminalDate;
 	}
 	public double getFuelLevelLeft() {

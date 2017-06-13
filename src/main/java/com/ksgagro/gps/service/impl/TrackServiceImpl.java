@@ -2,7 +2,7 @@ package com.ksgagro.gps.service.impl;
 
 import com.ksgagro.gps.domain.*;
 import com.ksgagro.gps.dto.MultiTrackQuery;
-import com.ksgagro.gps.dto.MultiTrackResponseDto;
+import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.repository.TerminalDateRepository;
 import com.ksgagro.gps.repository.TerminalRepository;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
@@ -25,40 +25,31 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TerminalDateServiceImpl implements TerminalDateService {
+public class TrackServiceImpl implements TerminalDateService {
 
 	@Autowired private VehicleService vehicleService;
 	@Autowired private TerminalService terminalService;
 	@Autowired private TerminalRepository terminalRepository;
 	@Autowired private GasTankCalibrationDataService gasCalibration;
-	@Autowired private TerminalDateRepository terminalDateRepository;
+	@Autowired private TerminalDateRepository trackRepository;
 
-	Logger logger = Logger.getLogger(TerminalDateServiceImpl.class);
+	Logger logger = Logger.getLogger(TrackServiceImpl.class);
 	
-	public List<TerminalDate> getTerminalDateAboutVehicleFromPeriod(long millisFrom, long millisTo, int terminalNumber){
-		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
+	@Override
+	public List<TrackEntity> tracks(long millisFrom, long millisTo, int terminalNumber){
+		Terminal terminal = terminalRepository.get(terminalNumber);
 
-		List<TerminalDate> inputList = terminalDateRepository.getListFromPeriod(millisFrom, millisTo,
+		List<TrackEntity> inputList = trackRepository.list(millisFrom, millisTo,
 				terminal.getImei());
 		
 		////inputList = calibrateTank(inputList, terminalNumber);
 		return inputList;
 	}
 	
-	public List<TerminalDate> calibrateTank(List<TerminalDate> list, int terminalNumber ){
-		for(TerminalDate point: list){
-			int leftGasLevel = (int)gasCalibration.getFuelLevel(terminalNumber, 1, point.getLeftGasTank());
-			int rightGasLevel = (int)gasCalibration.getFuelLevel(terminalNumber, 2, point.getRightGasTank());
-			point.setLeftGasTank(leftGasLevel);
-			point.setRightGasTank(rightGasLevel);
-		}
-		return list;
-		
-	}
-	
-	public List<TerminalDate> filterData(List<TerminalDate> inputList){
+	@Override
+	public List<TrackEntity> filterData(List<TrackEntity> inputList){
 		boolean lastCoordinateIsZero = false;
-		List<TerminalDate> result = new ArrayList<TerminalDate>();
+		List<TrackEntity> result = new ArrayList<TrackEntity>();
 		for (int i = 0; i < inputList.size(); i++) {
 			
 			if(inputList.get(i).getLatitude()==0||inputList.get(i).getLongitude()==0){
@@ -91,54 +82,54 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		return result;
 	}
 
-	public List<TerminalDate> getVehicleFromPeriod(String dateFrom, String timeFrom, String dateTo, String timeTo,
-			int terminalNumber) {
+	@Override
+	public List<TrackEntity> tracks(String dateFrom, String timeFrom, String dateTo, String timeTo,
+									int terminalNumber) {
 
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		long epochTimeFrom = epochTime(dateFrom, timeFrom);
+		long epochTimeTo = epochTime(dateTo, timeTo);
+		Terminal terminal = terminalRepository.get(terminalNumber);
 
-		LocalDateTime timeFromLDT = LocalDateTime.from(format.parse(dateFrom + " " + timeFrom));
-		LocalDateTime timeToLTD = LocalDateTime.from(format.parse(dateTo + " " + timeTo));
+		List<TrackEntity> tracks = trackRepository.list(epochTimeFrom, epochTimeTo, terminal.getImei());
+		List<TrackEntity> ret = new ArrayList<TrackEntity>();
 
-		ZonedDateTime fromZdt = timeFromLDT.atZone(ZoneId.systemDefault());
-		long millisFrom = fromZdt.toInstant().toEpochMilli();
-
-		ZonedDateTime toZdt = timeToLTD.atZone(ZoneId.systemDefault());
-		long millisTo = toZdt.toInstant().toEpochMilli();
-
-		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
-
-		List<TerminalDate> inputList = terminalDateRepository.getListFromPeriod(millisFrom, millisTo, terminal.getImei());
-		List<TerminalDate> result = new ArrayList<TerminalDate>();
-
-		for (int i = 0; i < inputList.size(); i++) {
+		for (int i = 0; i < tracks.size(); i++) {
 
 			if (i == 0) {
-				result.add(inputList.get(i));
+				ret.add(tracks.get(i));
 			} else {
-				int lastElement = result.size() - 1;
-				if (result.get(lastElement).getLatitude() != inputList.get(i).getLatitude()
-						&& result.get(lastElement).getLongitude() != inputList.get(i).getLongitude()) {
+				int lastElement = ret.size() - 1;
+				if (ret.get(lastElement).getLatitude() != tracks.get(i).getLatitude()
+						&& ret.get(lastElement).getLongitude() != tracks.get(i).getLongitude()) {
 					// if (result.size() > 0) {
-					double difLat = Math.abs(result.get(lastElement).getLatitude() - inputList.get(i).getLatitude());
-					double difLong = Math.abs(result.get(lastElement).getLongitude() - inputList.get(i).getLongitude());
+					double difLat = Math.abs(ret.get(lastElement).getLatitude() - tracks.get(i).getLatitude());
+					double difLong = Math.abs(ret.get(lastElement).getLongitude() - tracks.get(i).getLongitude());
 
 					if ((difLat < 0.01) && (difLong < 0.01)) {
-						result.add(inputList.get(i));
+						ret.add(tracks.get(i));
 					}
 					// }
 				}
 			}
 		}
 
-		return result;
+		return ret;
+	}
+
+	private Long epochTime(String date, String time){
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		LocalDateTime localDateTime = LocalDateTime.from(format.parse(date + " " + time));
+		ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+		return zonedDateTime.toInstant().toEpochMilli();
+
 	}
 	
-	public double getPathLength(List<TerminalDate> terminalDate) {
+	public double getPathLength(List<TrackEntity> terminalDate) {
 		double distance = 0.0;
-		TerminalDate first = null;
-		TerminalDate second = null;
+		TrackEntity first = null;
+		TrackEntity second = null;
 		
-		for (TerminalDate aList : terminalDate) {
+		for (TrackEntity aList : terminalDate) {
             if (first == null) {
                 first = aList;
             } else {
@@ -150,25 +141,20 @@ public class TerminalDateServiceImpl implements TerminalDateService {
         return round(distance/1000);
 	}
 	
-	public Date getLastSignalDate(int terminalNumber) {
-		Terminal terminal = terminalRepository.getTerminalByVehicleId(terminalNumber);
-		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
-		
-		return new Date(point.getMessageDate());
-	}
-	
-	public TerminalDate getLastSignal(int vehicleId){
-		Terminal terminal = terminalRepository.getTerminalByVehicleId(vehicleId);
-		//logger.info(terminal);
-		TerminalDate point = terminalDateRepository.getLastSignal(terminal.getImei());
+	@Override
+	public TrackEntity last(int vehicleId){
+		Terminal terminal = terminalRepository.get(vehicleId);
+		TrackEntity point = trackRepository.getLastSignal(terminal.getImei());
 		return point;
 	}
 	
-	public List<TerminalDate> getLastSignals(){
-		return terminalDateRepository.getLastSignals();
+	@Override
+	public List<TrackEntity> last(){
+		return trackRepository.getLastSignals();
 	}
 	
-	public double getCanConsumption(List<TerminalDate> terminalDates){
+	@Override
+	public double getCanConsumption(List<TrackEntity> terminalDates){
 		double firstSignalCanConsumption = 0;
 		double lastSignalCanConsumption = 0;
 		
@@ -201,7 +187,6 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		secondLat = secondLat*Math.PI/180;
 		secondLong = secondLong*Math.PI/180;
 		
-		//������� �������� � ������ ����� � ������� ������
         double cl1 = Math.cos(firstLat);
         double cl2 = Math.cos(secondLat);
         double sl1 = Math.sin(firstLat);
@@ -212,7 +197,6 @@ public class TerminalDateServiceImpl implements TerminalDateService {
         double cdelta = Math.cos(delta);
         double sdelta = Math.sin(delta);
 		
-        //���������� ����� �������� �����
         double y = Math.sqrt(Math.pow(cl2 * sdelta, 2) + Math.pow(cl1 * sl2 - sl1 * cl2 * cdelta, 2));
         double x = sl1 * sl2 + cl1 * cl2 * cdelta;
         double ad = Math.atan2(y, x);
@@ -224,8 +208,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	      return new BigDecimal(d).setScale(2, RoundingMode.UP).doubleValue();
 	   }
 
-	public Date getStartMovementTime(List<TerminalDate> terminalDate) {
-		for(TerminalDate item: terminalDate){
+	public Date getStartMovementTime(List<TrackEntity> terminalDate) {
+		for(TrackEntity item: terminalDate){
 			double longitude = 0;
 			double latitude = 0;
 			if(item.getSpeed()>0){
@@ -240,44 +224,46 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		return null;
 	}
 
-	public Date getFinishMovementTime(List<TerminalDate> terminalDate) {
+	public Date getFinishMovementTime(List<TrackEntity> terminalDate) {
 		Collections.reverse(terminalDate);
 		return getStartMovementTime(terminalDate);
 	}
 	
-	public List<List<TerminalDate>> getStops(long millisFrom, long millisTo, int terminalNumber){
-		List<TerminalDate> allDateFromTerminal = getTerminalDateAboutVehicleFromPeriod(millisFrom, millisTo, terminalNumber);
-//		for(TerminalDate data: allDateFromTerminal){
-//			System.out.println(data);
-//		}
-		boolean stop = false;
-		List<List<TerminalDate>> stops = new ArrayList<>();
-		List<TerminalDate> stopList = new ArrayList<>();
-		for(TerminalDate currentDate: allDateFromTerminal){
-			if(currentDate.getSpeed()==0){
-				stop = true;
-				stopList.add(currentDate);
-			}else if(stop == true && currentDate.getSpeed() > 0){
+	public List<List<TrackEntity>> stopList(long from, long to, int terminalNumber){
+		List<TrackEntity> tracks = tracks(from, to, terminalNumber);
+
+		boolean isStop = false;
+
+		List<List<TrackEntity>> stops = new ArrayList<>();
+		List<TrackEntity> stopList = new ArrayList<>();
+		for(TrackEntity track: tracks){
+			if(track.getSpeed()==0){
+				isStop = true;
+				stopList.add(track);
+			}else if(isStop && track.getSpeed() > 0){
 				stops.add(stopList);
 				stopList = new ArrayList<>();
-				stop = false;
+				isStop = false;
 			}
 		}
-		
-		//Leaving only element with size > 1
-		List<List<TerminalDate>> result = new ArrayList<>();
-		for(List<TerminalDate> currentData: stops){
+
+		return filterStop(stops);
+	}
+
+	private List<List<TrackEntity>> filterStop(List<List<TrackEntity>> stops){
+		List<List<TrackEntity>> result = new ArrayList<>();
+		for(List<TrackEntity> currentData: stops){
 			if(currentData.size()>1) result.add(currentData);
 		}
 		return result;
 	}
 	
-	public List<Refueling> getRefulingDate(List<List<TerminalDate>> stops, int terminalNumber){
+	public List<Refueling> getRefulingDate(List<List<TrackEntity>> stops, int terminalNumber){
 
 		List<Refueling> refulings = new ArrayList<>();
 		
 		
-		for(List<TerminalDate> stopDateList: stops){
+		for(List<TrackEntity> stopDateList: stops){
 			DataAboutRefuling refData = getRefulingFromStopList(stopDateList);
 			Refueling refuling = new Refueling();
 			
@@ -357,9 +343,9 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		
 		return refulings;
 	}
-	private DataAboutRefuling getRefulingFromStopList(List<TerminalDate> stopList){
+	private DataAboutRefuling getRefulingFromStopList(List<TrackEntity> stopList){
 
-		for(TerminalDate terminalDate: stopList){
+		for(TrackEntity terminalDate: stopList){
 			System.out.println(terminalDate);
 		}
 
@@ -378,7 +364,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		System.out.println("Current refuling: " + curentRefuling);
 		return curentRefuling;
 	}
-	private DataAboutRefuling analizeAndAddLeftTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previousDataInArray, TerminalDate curentDataInArray, boolean isLastData){
+	private DataAboutRefuling analizeAndAddLeftTankDataIfRefulingActive(DataAboutRefuling refuling, TrackEntity previousDataInArray, TrackEntity curentDataInArray, boolean isLastData){
 		
 		int previousFuelLevel = previousDataInArray.getLeftGasTank();
 		int curentFuelLevel = curentDataInArray.getLeftGasTank();
@@ -401,7 +387,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		}
 		return refuling;
 	}
-	private DataAboutRefuling analizeAndAddRightTankDataIfRefulingActive(DataAboutRefuling refuling, TerminalDate previous, TerminalDate curent, boolean isLastData){
+	private DataAboutRefuling analizeAndAddRightTankDataIfRefulingActive(DataAboutRefuling refuling, TrackEntity previous, TrackEntity curent, boolean isLastData){
 		
 		int previousFuelLevel = previous.getRightGasTank();
 		int curentFuelLevel = curent.getRightGasTank();
@@ -435,8 +421,8 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	
 	private class DataAboutRefuling{
 		
-		List<TerminalDate> leftTanks;
-		List<TerminalDate> rightTanks;
+		List<TrackEntity> leftTanks;
+		List<TrackEntity> rightTanks;
 		
 		Boolean isLeftRefuling;
 		Boolean isRightRefuling;
@@ -458,7 +444,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			isRightRefuling = false;
 		}
 		
-		public void setStartFuelLevelLeftTank(TerminalDate terminalDate){
+		public void setStartFuelLevelLeftTank(TrackEntity terminalDate){
 			if(startFuelLevelLeftTank == 0) {
 				startFuelLevelLeftTank = terminalDate.getLeftGasTank();
 				refulingLeftStartDate = terminalDate.getMessageDate();
@@ -471,7 +457,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		public int getStartFuelLevelLeftTank(){
 			return this.startFuelLevelLeftTank;
 		}
-		public void setStartFuelLevelRightTank(TerminalDate terminalDate){
+		public void setStartFuelLevelRightTank(TrackEntity terminalDate){
 			if(startFuelLevelRightTank == 0) {
 				startFuelLevelRightTank = terminalDate.getRightGasTank();
 				refulingRightStartDate = terminalDate.getMessageDate();
@@ -489,7 +475,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		
 		public int getLeftMaxFuelLevel(){
 			int maxValue = Integer.MIN_VALUE;
-			for(TerminalDate curent: leftTanks){
+			for(TrackEntity curent: leftTanks){
 				if(curent.getLeftGasTank()>maxValue){
 					maxValue = curent.getLeftGasTank();
 					refulingLeftFinishDate = curent.getMessageDate();
@@ -501,7 +487,7 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 		
 		public int getRightMaxFuelLevel(){
 			int maxValue = Integer.MIN_VALUE;
-			for(TerminalDate curent: rightTanks){
+			for(TrackEntity curent: rightTanks){
 				if(curent.getRightGasTank()>maxValue){
 					maxValue = curent.getRightGasTank();
 					refulingRightFinishDate = curent.getMessageDate();
@@ -529,10 +515,10 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 			return refulingRightStartDate;
 		}
 
-		public void addLeftTanksData(TerminalDate data){
+		public void addLeftTanksData(TrackEntity data){
 			leftTanks.add(data);
 		}
-		public void addRightTanksData(TerminalDate data){
+		public void addRightTanksData(TrackEntity data){
 			rightTanks.add(data);
 		}
 		public void finishedLeftRefuling(){
@@ -566,67 +552,64 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 
 
 	@Override
-	public List<MultiTrackResponseDto> getTerminalDateAboutVehiclesFromPeriod(MultiTrackQuery query) {
+	public List<TrackBO> tracks(MultiTrackQuery query) {
 		
-		List<TerminalDate> data = terminalDateRepository.getTerminalDateAboutVehiclesFromPeriod(query.getDataFrom(), query.getDataTo(), query.getTerminalNumbers());
+		List<TrackEntity> trackEntities = trackRepository.tracks(query.getDataFrom(), query.getDataTo(), query.getTerminalNumbers());
+		List<TrackBO> ret = new ArrayList<>();
 		
-		List<MultiTrackResponseDto> multiTreckList = new ArrayList<>();
-		
-		for(TerminalDate terminalDataItem: data){
-			
-			boolean terminalExistInMultitrackList = addDataToMultiTrack(multiTreckList, terminalDataItem);
-			
+		for(TrackEntity trackEntity : trackEntities){
+			boolean terminalExistInMultitrackList = addDataToMultiTrack(ret, trackEntity);
 			if(!terminalExistInMultitrackList){
-				MultiTrackResponseDto multiTrackResponseDto = buildMultiTrackResponse(query.getTerminalNumbers(), terminalDataItem);
-				multiTreckList.add(multiTrackResponseDto);
+				TrackBO trackBO = buildMultiTrackResponse(query.getTerminalNumbers(), trackEntity);
+				ret.add(trackBO);
 			}
 		}
-		for(MultiTrackResponseDto item: multiTreckList){
-			//List<TerminalDate> temp = filterData(item.getData());
-			//item.setData(temp);
+
+		for(TrackBO item: ret){
 			TrackInfo trackInfo = new TrackInfo();
-			trackInfo.setTotalLength(getPathLength(item.getData()));
+			trackInfo.setTotalLength(getPathLength(item.getTrackEntities()));
 			item.setTrackInfo(trackInfo);
 		}
+
 		
-		return multiTreckList;
+		return ret;
 	}
-	private MultiTrackResponseDto buildMultiTrackResponse(List<Integer> terminalNumbers, TerminalDate terminalDataItem){
+
+	private TrackBO buildMultiTrackResponse(List<Integer> terminalNumbers, TrackEntity terminalDataItem){
 		
 		List<Terminal> terminals = terminalService.getTerminals(terminalNumbers);
 		List<Vehicle> vehicles = vehicleService.getVehicles(terminalNumbers);
-		
 		List<FuelLineChartPoint> leftTankFuelLine = new ArrayList<>();
 		List<FuelLineChartPoint> rightTankFuelLine = new ArrayList<>();
 		
-		MultiTrackResponseDto multiTrackResponseDto = new MultiTrackResponseDto();
+		TrackBO trackBO = new TrackBO();
 		int curentVehicleID = -1;
 		for(Terminal terminal: terminals){
 			if(terminal.getImei().equals(terminalDataItem.getImei())){
-				multiTrackResponseDto.setTerminal(terminal);
+				trackBO.setTerminal(terminal);
 				curentVehicleID = terminal.getVehicle();
 			}
 		}
 		for(Vehicle vehicle: vehicles){
 			if(vehicle.getId()==curentVehicleID){
-				multiTrackResponseDto.setVehicle(vehicle);
+				trackBO.setVehicle(vehicle);
 			}
 		}
-		List<TerminalDate> terminalDates = new ArrayList<>();
+		List<TrackEntity> terminalDates = new ArrayList<>();
 		terminalDates.add(terminalDataItem);
 		
-		multiTrackResponseDto.setLeftFuelLine(leftTankFuelLine);
-		multiTrackResponseDto.addLeftTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getLeftGasTank());
+		trackBO.setLeftFuelLine(leftTankFuelLine);
+		trackBO.addLeftTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getLeftGasTank());
 		
-		multiTrackResponseDto.setRightFuelLine(rightTankFuelLine);
-		multiTrackResponseDto.addRightTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getRightGasTank());
+		trackBO.setRightFuelLine(rightTankFuelLine);
+		trackBO.addRightTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getRightGasTank());
 		
-		multiTrackResponseDto.setData(terminalDates);
+		trackBO.setTrackEntities(terminalDates);
 		
-		return multiTrackResponseDto;
+		return trackBO;
 	}
-	private boolean addDataToMultiTrack(List<MultiTrackResponseDto> multiTreckList, TerminalDate terminalDataItem){
-		for(MultiTrackResponseDto multiTrackItem: multiTreckList){
+	private boolean addDataToMultiTrack(List<TrackBO> multiTreckList, TrackEntity terminalDataItem){
+		for(TrackBO multiTrackItem: multiTreckList){
 			if(multiTrackItem.getTerminal().getImei().equals(terminalDataItem.getImei())){
 				multiTrackItem.addData(terminalDataItem);
 				multiTrackItem.addLeftTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getLeftGasTank());
@@ -638,9 +621,9 @@ public class TerminalDateServiceImpl implements TerminalDateService {
 	}
 
 	@Override
-	public TerminalDate getLastSignal(String imei) {
+	public TrackEntity last(String imei) {
 		
-		return terminalDateRepository.getLastSignal(imei);
+		return trackRepository.getLastSignal(imei);
 	}
 
 

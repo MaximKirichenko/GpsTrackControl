@@ -1,22 +1,18 @@
 package com.ksgagro.gps.repository.impl;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import com.ksgagro.gps.controller.JSON.TerminalDateJSON;
+import com.ksgagro.gps.domain.Terminal;
 import com.ksgagro.gps.dto.TerminalDateDTO;
+import com.ksgagro.gps.repository.TerminalRepository;
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ksgagro.gps.domain.Terminal;
-import com.ksgagro.gps.repository.TerminalRepository;
+import java.util.List;
 
 @Repository
 public class TerminalRepositoryImpl implements TerminalRepository{
@@ -25,14 +21,13 @@ public class TerminalRepositoryImpl implements TerminalRepository{
 	SessionFactory sessionFactory;
 	
 	@Transactional
-	public Terminal getTerminalByVehicleId(int id) {
+	public Terminal get(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Terminal.class)
 				.add(Restrictions.eq("vehicle", id))
-				.add(Restrictions.eq("uninstal_date",new Long(0)));
-		
-		Terminal terminal = (Terminal)criteria.uniqueResult();
-		return terminal;
+				.add(Restrictions.eq("uninstal_date", 0L));
+
+		return (Terminal)criteria.uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

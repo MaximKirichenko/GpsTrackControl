@@ -3,9 +3,10 @@ package com.ksgagro.gps.controller;
 import com.ksgagro.gps.controller.JSON.MapObjectFieldTypeJson;
 import com.ksgagro.gps.controller.JSON.MapObjectJSON;
 import com.ksgagro.gps.controller.JSON.Mapper;
+import com.ksgagro.gps.controller.track.json.TrackJson;
 import com.ksgagro.gps.domain.*;
 import com.ksgagro.gps.dto.MultiTrackQuery;
-import com.ksgagro.gps.dto.MultiTrackResponseDto;
+import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.dto.ReportTrackDto;
 import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.service.*;
@@ -52,12 +53,12 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
 	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TrackRequestDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
-		List<TerminalDate> list = terminalDateService.getTerminalDateAboutVehicleFromPeriod(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
+		List<TrackEntity> list = terminalDateService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 
 		list = terminalDateService.filterData(list);
 
 		Collections.reverse(list);
-		for(TerminalDate item: list){
+		for(TrackEntity item: list){
 			System.out.println(item);
 		}
 		report.setTerminalDateList(list);
@@ -69,12 +70,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
-	public @ResponseBody List<MultiTrackResponseDto> buildTracks(@RequestBody MultiTrackQuery trackQuery){
-		MultiTrackQuery multiTrackRequestDTO = new MultiTrackQuery();
-		multiTrackRequestDTO.setDataFrom(trackQuery.getDataFrom());
-		multiTrackRequestDTO.setDataTo(trackQuery.getDataTo());
-		multiTrackRequestDTO.setTerminalNumbers(trackQuery.getTerminalNumbers());
-		List<MultiTrackResponseDto> date = terminalDateService.getTerminalDateAboutVehiclesFromPeriod(trackQuery);
+	public @ResponseBody List<TrackJson> buildTracks(@RequestBody MultiTrackQuery trackQuery){
+		List<TrackBO> date = terminalDateService.tracks(trackQuery);
 		return date;
 	}
 	
@@ -88,21 +85,21 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
 	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
-		logger.info("����� ���������: " + vehicleId);
 		VehicleDetailsTable table = vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
 		return table;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getLastTerminalData")
-	public @ResponseBody TerminalDate getLastTerminalData(@RequestBody String imei){
-		TerminalDate data = terminalDateService.getLastSignal(imei);
+	public @ResponseBody
+	TrackEntity getLastTerminalData(@RequestBody String imei){
+		TrackEntity data = terminalDateService.last(imei);
 		
 		return data;
 	}
 	
 	@RequestMapping("/carDetails")
 	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TerminalDate terminalDate = terminalDateService.getLastSignal(terminalNumber);
+		TrackEntity terminalDate = terminalDateService.last(terminalNumber);
 		Vehicle car = vehicleService.getVehicleById(terminalNumber);
 		String status;
 		Date date = new Date(terminalDate.getMessageDate());

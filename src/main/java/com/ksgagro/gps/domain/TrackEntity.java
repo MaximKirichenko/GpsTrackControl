@@ -2,7 +2,7 @@ package com.ksgagro.gps.domain;
 
 import java.io.Serializable;
 
-public class TerminalDate implements Serializable, Cloneable {
+public class TrackEntity implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -9142955441904363073L;
 
@@ -25,20 +25,13 @@ public class TerminalDate implements Serializable, Cloneable {
 	private int engineSpeed;
 	private int psv;
 	private int vBat;
-	
-	
-	
-	
 
-	
-
-	public TerminalDate() {
+	public TrackEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	public TerminalDate(TerminalDate terminalDate) {
+	public TrackEntity(TrackEntity terminalDate) {
 		super();
 		this.id = terminalDate.id;
 		this.imei = terminalDate.imei;
@@ -221,7 +214,7 @@ public class TerminalDate implements Serializable, Cloneable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TerminalDate other = (TerminalDate) obj;
+		TrackEntity other = (TrackEntity) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -229,14 +222,25 @@ public class TerminalDate implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return "TerminalDate [id=" + id + ", imei=" + imei + ", numberMessage=" + numberMessage + ", messageDate="
-				+ messageDate + ", height=" + height + ", isCorrect=" + isCorrect + ", numberSatellite="
-				+ numberSatellite + ", azimuth=" + azimuth + ", speed=" + speed + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", leftGasTank=" + leftGasTank + ", rightGasTank=" + rightGasTank
-				+ ", CANFuelConsumption=" + CANFuelConsumption + ", CANFLS=" + CANFLS + ", engineSpeed=" + engineSpeed
-				+ ", psv=" + psv + ", vBat=" + vBat + "]";
+		return "Track{" +
+				"id=" + id +
+				", imei='" + imei + '\'' +
+				", numberMessage=" + numberMessage +
+				", messageDate=" + messageDate +
+				", height=" + height +
+				", isCorrect=" + isCorrect +
+				", numberSatellite=" + numberSatellite +
+				", azimuth=" + azimuth +
+				", speed=" + speed +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				", leftGasTank=" + leftGasTank +
+				", rightGasTank=" + rightGasTank +
+				", CANFuelConsumption=" + CANFuelConsumption +
+				", CANFLS=" + CANFLS +
+				", engineSpeed=" + engineSpeed +
+				", psv=" + psv +
+				", vBat=" + vBat +
+				'}';
 	}
-
-	
-
 }

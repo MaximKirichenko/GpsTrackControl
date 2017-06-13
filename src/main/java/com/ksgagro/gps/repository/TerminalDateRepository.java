@@ -2,12 +2,12 @@ package com.ksgagro.gps.repository;
 
 import java.util.List;
 
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 
 public interface TerminalDateRepository {
-	List<TerminalDate> getListFromPeriod(long from, long to, String imei);
-	List<TerminalDate> getTerminalDateAboutVehiclesFromPeriod(long millisFrom, long millisTo,
-			List<Integer> terminalNumbers);
-	TerminalDate getLastSignal(String imei);
-	List<TerminalDate> getLastSignals();
+	List<TrackEntity> list(long from, long to, String imei);
+	List<TrackEntity> tracks(long millisFrom, long millisTo,
+                             List<Integer> terminalNumbers);
+	TrackEntity getLastSignal(String imei);
+	List<TrackEntity> getLastSignals();
 }

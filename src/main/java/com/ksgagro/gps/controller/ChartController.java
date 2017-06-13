@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ksgagro.gps.dto.FuelChartDTO;
 import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.domain.Location;
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.VehicleGroup;
 import com.ksgagro.gps.repository.LocationRepository;
@@ -85,7 +85,7 @@ public class ChartController {
 	}
 	@RequestMapping(value = "/chart/fuel")
 	public String buildFuelChartPage(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TerminalDate terminalDate = terminalDateService.getLastSignal(terminalNumber);
+		TrackEntity terminalDate = terminalDateService.last(terminalNumber);
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
 		List<Vehicle> listVehicle = vehicleRepository.getList();

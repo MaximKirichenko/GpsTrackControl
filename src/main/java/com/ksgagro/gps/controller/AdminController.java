@@ -2,8 +2,6 @@ package com.ksgagro.gps.controller;
 
 import com.ksgagro.gps.controller.JSON.TerminalDateJSON;
 import com.ksgagro.gps.controller.JSON.TerminalDateMapper;
-import com.ksgagro.gps.domain.TerminalDate;
-import com.ksgagro.gps.dto.TerminalDateDTO;
 import com.ksgagro.gps.service.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ksgagro.gps.domain.MenuItem;
 import com.ksgagro.gps.service.AgroFieldsService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

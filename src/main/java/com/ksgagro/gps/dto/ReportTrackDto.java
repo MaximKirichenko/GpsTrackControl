@@ -3,21 +3,21 @@ package com.ksgagro.gps.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 
 public class ReportTrackDto {
-	private List<TerminalDate> terminalDateList;
+	private List<TrackEntity> terminalDateList;
 	private double pathLength;
 	private double canConsumption;
 	private Date startMovement;
 	private Date finishMovement;
 	
 
-	public List<TerminalDate> getTerminalDateList() {
+	public List<TrackEntity> getTerminalDateList() {
 		return terminalDateList;
 	}
 
-	public void setTerminalDateList(List<TerminalDate> terminalDateList) {
+	public void setTerminalDateList(List<TrackEntity> terminalDateList) {
 		this.terminalDateList = terminalDateList;
 	}
 

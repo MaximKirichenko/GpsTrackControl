@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ksgagro.gps.domain.GasTankCalibrationData;
 import com.ksgagro.gps.domain.Refueling;
-import com.ksgagro.gps.domain.TerminalDate;
+import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
 import com.ksgagro.gps.service.RefuelingService;
 
@@ -25,15 +25,15 @@ public class RefuelingServiceImpl implements RefuelingService {
 
 	private Refueling refueling = null;
 
-	public List<Refueling> getRefuelings(List<TerminalDate> datasFromTerminal,
+	public List<Refueling> getRefuelings(List<TrackEntity> datasFromTerminal,
 			List<GasTankCalibrationData> calibrationDatas) {
 		long timeIntervalBetweenMessages = 0;
 		boolean refuling = false;
 		boolean inserting = false;
-		ArrayList<TerminalDate> refulingItem = null;
-		ArrayList<ArrayList<TerminalDate>> refulings = new ArrayList<ArrayList<TerminalDate>>();
+		ArrayList<TrackEntity> refulingItem = null;
+		ArrayList<ArrayList<TrackEntity>> refulings = new ArrayList<ArrayList<TrackEntity>>();
 
-		Deque<TerminalDate> dateDeque = new ArrayDeque<TerminalDate>(10);
+		Deque<TrackEntity> dateDeque = new ArrayDeque<TrackEntity>(10);
 
 		for (int i = 0; i < datasFromTerminal.size(); i++) {
 
@@ -62,7 +62,7 @@ public class RefuelingServiceImpl implements RefuelingService {
 			} 
 			if (refuling) {
 				if (!inserting) {
-					refulingItem = new ArrayList<TerminalDate>();
+					refulingItem = new ArrayList<TrackEntity>();
 					refulings.add(refulingItem);
 					refulingItem.add(dateDeque.getLast());
 					inserting = true;
@@ -74,7 +74,7 @@ public class RefuelingServiceImpl implements RefuelingService {
 
 		return buildRefuelingsList(refulings, datasFromTerminal, calibrationDatas);
 	}
-	private boolean isBigFuelDifferent(Deque<TerminalDate> fuelDeque, List<GasTankCalibrationData> calibrationDatas){
+	private boolean isBigFuelDifferent(Deque<TrackEntity> fuelDeque, List<GasTankCalibrationData> calibrationDatas){
 		double rightTankNext = gasTankService.getFuelLevel(fuelDeque.getLast().getRightGasTank(), calibrationDatas);
 		double rightTankPrevious = gasTankService.getFuelLevel(fuelDeque.getFirst().getRightGasTank(), calibrationDatas);
 		double rightFuelDifferent = rightTankPrevious - rightTankNext;
@@ -84,17 +84,17 @@ public class RefuelingServiceImpl implements RefuelingService {
 		
 		return rightFuelDifferent>BIG_FUEL_DIFFERENS||leftFuelDifferent>BIG_FUEL_DIFFERENS;
 	}
-	private List<Refueling> buildRefuelingsList(ArrayList<ArrayList<TerminalDate>> refulings,
-			List<TerminalDate> datasFromTerminal, List<GasTankCalibrationData> calibrationDatas) 
+	private List<Refueling> buildRefuelingsList(ArrayList<ArrayList<TrackEntity>> refulings,
+												List<TrackEntity> datasFromTerminal, List<GasTankCalibrationData> calibrationDatas)
 	{
 		refulings = combineRefulings(refulings);
 		List<Refueling> list = new ArrayList<Refueling>();
-		for (ArrayList<TerminalDate> ref : refulings) {
+		for (ArrayList<TrackEntity> ref : refulings) {
 			refueling = new Refueling();
 
 			long finishedDate = ref.get(ref.size() - 1).getMessageDate() + 300000;
-			TerminalDate last = null;
-			for (TerminalDate item : datasFromTerminal) {
+			TrackEntity last = null;
+			for (TrackEntity item : datasFromTerminal) {
 				if (item.getMessageDate() >= finishedDate) {
 					last = item;
 					break;
@@ -116,7 +116,7 @@ public class RefuelingServiceImpl implements RefuelingService {
 	}
 
 	// Combine refuelings if time between one less then 1 hour
-	private ArrayList<ArrayList<TerminalDate>> combineRefulings(ArrayList<ArrayList<TerminalDate>> refulings) {
+	private ArrayList<ArrayList<TrackEntity>> combineRefulings(ArrayList<ArrayList<TrackEntity>> refulings) {
 		long startedTime = 0;
 		long finishedTime = 0;
 		for (int i = 0; i < refulings.size(); i++) {
