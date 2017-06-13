@@ -69,12 +69,6 @@ public class HomeController {
 		return report;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
-	public @ResponseBody List<TrackJson> buildTracks(@RequestBody MultiTrackQuery trackQuery){
-		List<TrackBO> date = terminalDateService.tracks(trackQuery);
-		return date;
-	}
-	
 	@RequestMapping(method = RequestMethod.POST, value="/carInfo")
 	public @ResponseBody Vehicle getCarInfo(@RequestBody int terminalNumber){
 		logger.info("Selected vehicle id: " + terminalNumber);
