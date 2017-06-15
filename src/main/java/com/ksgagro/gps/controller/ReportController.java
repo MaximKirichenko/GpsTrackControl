@@ -20,7 +20,7 @@ import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.service.AgroFieldsService;
 import com.ksgagro.gps.service.CarSignalService;
 import com.ksgagro.gps.service.ContractService;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import com.ksgagro.gps.service.VehicleService;
 
 @Controller
@@ -38,7 +38,7 @@ public class ReportController {
 	VehicleService vehicleService;
 	
 	@Autowired
-	TerminalDateService terminalDateService;
+    TrackService trackService;
 	
 	@RequestMapping(value = "/report")
 	public ModelAndView buildChartPage(){
@@ -53,10 +53,10 @@ public class ReportController {
 		List<ReportGroupDTO> report = new ArrayList<ReportGroupDTO>();
 		for(Vehicle vehicle: vehicleList){
 			ReportGroupDTO item = new ReportGroupDTO();
-			List<TrackEntity> terminalDates = terminalDateService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getId());
-			terminalDates = terminalDateService.filterData(terminalDates);
-			double consumption = terminalDateService.getCanConsumption(terminalDates);
-			double mileage = terminalDateService.getPathLength(terminalDates);
+			List<TrackEntity> terminalDates = trackService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), vehicle.getId());
+			terminalDates = trackService.filterData(terminalDates);
+			double consumption = trackService.getCanConsumption(terminalDates);
+			double mileage = trackService.getPathLength(terminalDates);
 			item.setVehicle(vehicle);
 			item.setConsumption(consumption);
 			item.setMileage(mileage);

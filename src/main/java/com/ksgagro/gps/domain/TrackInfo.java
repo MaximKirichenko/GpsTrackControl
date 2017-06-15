@@ -6,9 +6,14 @@ public class TrackInfo {
 	
 	private double totalLength;
 	private List<DaysTrack> daysTracks;
-	
-	
-	public double getTotalLength() {
+
+	public TrackInfo(double totalLength) {
+		this.totalLength = totalLength;
+		this.daysTracks = null;
+	}
+
+
+    public double getTotalLength() {
 		return totalLength;
 	}
 	public void setTotalLength(double totalLength) {

@@ -13,4 +13,10 @@ public interface TerminalService {
     List<Terminal> getTerminals(List<Integer> terminalNumbers);
 
     List<TerminalDateDTO> getTerminals();
+
+    Terminal getTerminalByImei(String imei);
+
+    List<Terminal> getTerminalsByVehicles(List<Integer> vehicleIds);
+
+    Terminal getTerminalByVehicle(int vehicleId);
 }

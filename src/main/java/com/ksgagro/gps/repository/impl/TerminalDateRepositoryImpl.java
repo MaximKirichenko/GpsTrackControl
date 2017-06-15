@@ -71,7 +71,7 @@ public class TerminalDateRepositoryImpl implements TerminalDateRepository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
-	public List<TrackEntity> tracks(long millisFrom, long millisTo, List<Integer> terminalNumbers) {
+	public List<TrackEntity> tracksByTerminalNumbers(long millisFrom, long millisTo, List<Integer> terminalNumbers) {
 
 		DetachedCriteria getImeisByVehicleIdCrt = DetachedCriteria.forClass(Terminal.class).
 		add(Restrictions.in("vehicle", terminalNumbers)).
@@ -83,6 +83,23 @@ public class TerminalDateRepositoryImpl implements TerminalDateRepository {
 				add(Property.forName("imei").in(getImeisByVehicleIdCrt)).addOrder(Order.asc("messageDate")).list();
 
 		return dates;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public List<TrackEntity> tracksByImeis(long millisFrom, long millisTo, List<String> imeis) {
+
+		if (imeis.size()==1)
+			return (List<TrackEntity>) sessionFactory.getCurrentSession().
+					createCriteria(TrackEntity.class).
+					add(Restrictions.between("messageDate", millisFrom, millisTo)).
+					add(Restrictions.eq("imei", imeis.get(0))).addOrder(Order.asc("messageDate")).list();
+
+		return (List<TrackEntity>) sessionFactory.getCurrentSession().
+				createCriteria(TrackEntity.class).
+				add(Restrictions.between("messageDate", millisFrom, millisTo)).
+				add(Restrictions.in("imei", imeis)).addOrder(Order.asc("messageDate")).list();
 	}
 
 		

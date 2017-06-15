@@ -8,7 +8,7 @@ import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.TrackEntity;
 
-public interface TerminalDateService {
+public interface TrackService {
 
 	List<TrackEntity> tracks(long millisFrom, long millisTo, int terminalNumber);
 

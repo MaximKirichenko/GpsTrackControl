@@ -6,7 +6,7 @@ import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.repository.TerminalDateRepository;
 import com.ksgagro.gps.repository.TerminalRepository;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import com.ksgagro.gps.service.TerminalService;
 import com.ksgagro.gps.service.VehicleService;
 import org.apache.log4j.Logger;
@@ -19,13 +19,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class TrackServiceImpl implements TerminalDateService {
+public class TrackServiceImpl implements TrackService {
 
 	@Autowired private VehicleService vehicleService;
 	@Autowired private TerminalService terminalService;
@@ -228,15 +225,13 @@ public class TrackServiceImpl implements TerminalDateService {
 		Collections.reverse(terminalDate);
 		return getStartMovementTime(terminalDate);
 	}
-	
-	public List<List<TrackEntity>> stopList(long from, long to, int terminalNumber){
-		List<TrackEntity> tracks = tracks(from, to, terminalNumber);
 
+	private List<List<TrackEntity>> stopList(List<TrackEntity> trackEntities) {
 		boolean isStop = false;
 
 		List<List<TrackEntity>> stops = new ArrayList<>();
 		List<TrackEntity> stopList = new ArrayList<>();
-		for(TrackEntity track: tracks){
+		for(TrackEntity track: trackEntities){
 			if(track.getSpeed()==0){
 				isStop = true;
 				stopList.add(track);
@@ -248,6 +243,10 @@ public class TrackServiceImpl implements TerminalDateService {
 		}
 
 		return filterStop(stops);
+	}
+	
+	public List<List<TrackEntity>> stopList(long from, long to, int terminalNumber){
+		return stopList(tracks(from, to, terminalNumber));
 	}
 
 	private List<List<TrackEntity>> filterStop(List<List<TrackEntity>> stops){
@@ -550,79 +549,54 @@ public class TrackServiceImpl implements TerminalDateService {
 		
 	}
 
-
 	@Override
 	public List<TrackBO> tracks(MultiTrackQuery query) {
-		
-		List<TrackEntity> trackEntities = trackRepository.tracks(query.getDataFrom(), query.getDataTo(), query.getTerminalNumbers());
-		List<TrackBO> ret = new ArrayList<>();
-		
-		for(TrackEntity trackEntity : trackEntities){
-			boolean terminalExistInMultitrackList = addDataToMultiTrack(ret, trackEntity);
-			if(!terminalExistInMultitrackList){
-				TrackBO trackBO = buildMultiTrackResponse(query.getTerminalNumbers(), trackEntity);
-				ret.add(trackBO);
-			}
+		Map<String, TrackBO> map = new HashMap<>();
+		for(TrackEntity trackEntity : trackRepository.tracksByImeis(
+				query.getDataFrom(),
+				query.getDataTo(),
+				imeis(terminalService.getTerminalsByVehicles(query.getVehicleIds())))
+				){
+			if(map.get(trackEntity.getImei())!=null)
+				toBO(map.get(trackEntity.getImei()), trackEntity);
+			else
+				map.put(trackEntity.getImei(), toBO(null, trackEntity));
 		}
-
-		for(TrackBO item: ret){
-			TrackInfo trackInfo = new TrackInfo();
-			trackInfo.setTotalLength(getPathLength(item.getTrackEntities()));
-			item.setTrackInfo(trackInfo);
+		List<TrackBO> ret = new ArrayList<>(map.values());
+		for (TrackBO bo : ret) {
+			bo.setStopList(stopList(bo.getTrackEntities()));
 		}
-
-		
 		return ret;
 	}
 
-	private TrackBO buildMultiTrackResponse(List<Integer> terminalNumbers, TrackEntity terminalDataItem){
-		
-		List<Terminal> terminals = terminalService.getTerminals(terminalNumbers);
-		List<Vehicle> vehicles = vehicleService.getVehicles(terminalNumbers);
-		List<FuelLineChartPoint> leftTankFuelLine = new ArrayList<>();
-		List<FuelLineChartPoint> rightTankFuelLine = new ArrayList<>();
-		
-		TrackBO trackBO = new TrackBO();
-		int curentVehicleID = -1;
-		for(Terminal terminal: terminals){
-			if(terminal.getImei().equals(terminalDataItem.getImei())){
-				trackBO.setTerminal(terminal);
-				curentVehicleID = terminal.getVehicle();
-			}
+	private TrackBO toBO(TrackBO trackBO, TrackEntity trackEntity) {
+		if(trackBO==null){
+			trackBO = new TrackBO();
+			Terminal terminal = terminalService.getTerminalByImei(trackEntity.getImei());
+			trackBO.setVehicle(vehicleService.getVehicleByTerminalNumber(terminal.getId()));
+			trackBO.setTerminal(terminal);
+			trackBO.addTrackEntity(trackEntity);
+			trackBO.addLeftTankFuelPoint(trackEntity.getMessageDate(), trackEntity.getLeftGasTank());
+			trackBO.addRightTankFuelPoint(trackEntity.getMessageDate(), trackEntity.getRightGasTank());
+			return trackBO;
 		}
-		for(Vehicle vehicle: vehicles){
-			if(vehicle.getId()==curentVehicleID){
-				trackBO.setVehicle(vehicle);
-			}
-		}
-		List<TrackEntity> terminalDates = new ArrayList<>();
-		terminalDates.add(terminalDataItem);
-		
-		trackBO.setLeftFuelLine(leftTankFuelLine);
-		trackBO.addLeftTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getLeftGasTank());
-		
-		trackBO.setRightFuelLine(rightTankFuelLine);
-		trackBO.addRightTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getRightGasTank());
-		
-		trackBO.setTrackEntities(terminalDates);
-		
+		trackBO.addTrackEntity(trackEntity);
+		trackBO.addLeftTankFuelPoint(trackEntity.getMessageDate(), trackEntity.getLeftGasTank());
+		trackBO.addRightTankFuelPoint(trackEntity.getMessageDate(), trackEntity.getRightGasTank());
+		trackBO.setTrackInfo(new TrackInfo(getPathLength(trackBO.getTrackEntities())));
+
 		return trackBO;
 	}
-	private boolean addDataToMultiTrack(List<TrackBO> multiTreckList, TrackEntity terminalDataItem){
-		for(TrackBO multiTrackItem: multiTreckList){
-			if(multiTrackItem.getTerminal().getImei().equals(terminalDataItem.getImei())){
-				multiTrackItem.addData(terminalDataItem);
-				multiTrackItem.addLeftTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getLeftGasTank());
-				multiTrackItem.addRightTankFuelPoint(terminalDataItem.getMessageDate(), terminalDataItem.getRightGasTank());
-				return true;
-			}
-		}
-		return false;
+
+	private List<String> imeis(List<Terminal> terminals){
+		List<String> ret = new ArrayList<>();
+		for(Terminal terminal: terminals)
+			ret.add(terminal.getImei());
+		return ret;
 	}
 
 	@Override
 	public TrackEntity last(String imei) {
-		
 		return trackRepository.getLastSignal(imei);
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.domain.VehicleDetailsTable;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import com.ksgagro.gps.service.TerminalService;
 import com.ksgagro.gps.service.VehicleDetailsTableService;
 import com.ksgagro.gps.service.VehicleService;
@@ -14,7 +14,7 @@ import com.ksgagro.gps.service.VehicleService;
 @Service
 public class VehicleDetailsTableServiceImpl implements VehicleDetailsTableService{
 	@Autowired
-	TerminalDateService terminalDateService;
+    TrackService trackService;
 	
 	@Autowired
 	private VehicleService vehicleService;
@@ -33,8 +33,8 @@ public class VehicleDetailsTableServiceImpl implements VehicleDetailsTableServic
 	}
 	
 	private void initVehicleDetailsTable(VehicleDetailsTable table, int vehicleId){
-		TrackEntity terminalDate = terminalDateService.last(vehicleId);
-		table.setTerminalDate(terminalDateService.last(vehicleId));
+		TrackEntity terminalDate = trackService.last(vehicleId);
+		table.setTerminalDate(trackService.last(vehicleId));
 		table.setVehicle(vehicleService.getVehicleById(vehicleId));
 		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getLeftGasTank()));
 		table.setFuelLevelRight(calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getRightGasTank()));

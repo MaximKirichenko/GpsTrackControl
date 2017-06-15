@@ -4,7 +4,7 @@ import com.ksgagro.gps.controller.track.json.TrackJson;
 import com.ksgagro.gps.controller.track.json.TrackJsonMapper;
 import com.ksgagro.gps.dto.MultiTrackQuery;
 import com.ksgagro.gps.dto.TrackBO;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +20,13 @@ import java.util.List;
 @Controller
 public class TrackController {
 
-    @Autowired private TerminalDateService terminalDateService;
+    @Autowired private TrackService trackService;
     @Autowired private TrackJsonMapper mapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "/buildTracks")
     public @ResponseBody
     List<TrackJson> buildTracks(@RequestBody MultiTrackQuery trackQuery){
-        List<TrackBO> date = terminalDateService.tracks(trackQuery);
+        List<TrackBO> date = trackService.tracks(trackQuery);
         return mapper.toJsons(date);
     }
 }

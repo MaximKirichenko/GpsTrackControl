@@ -6,7 +6,7 @@ import com.ksgagro.gps.domain.Vehicle;
 import com.ksgagro.gps.domain.VehicleMenuItem;
 import com.ksgagro.gps.repository.VehicleRepository;
 import com.ksgagro.gps.service.RoleFilter;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import com.ksgagro.gps.service.TerminalService;
 import com.ksgagro.gps.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class VehicleServiceImpl implements VehicleService{
 	VehicleRepository vehicleRepository;
 	
 	@Autowired
-	TerminalDateService terminalDateService;
+	TrackService trackService;
 	
 	@Autowired
 	TerminalService terminalService;
@@ -58,7 +58,12 @@ public class VehicleServiceImpl implements VehicleService{
 		return vehicleRepository.getVehicleById(vehicleId);
 	}
 
-	@Override
+    @Override
+    public Vehicle getVehicleByTerminalNumber(int terminalNumber) {
+		return vehicleRepository.getVehicleById(terminalService.getTerminal(terminalNumber).getVehicle());
+    }
+
+    @Override
 	public List<Vehicle> getListFromLocation(int locationId) {
 		return vehicleRepository.getListFromLocation(locationId);
 	}
@@ -68,7 +73,7 @@ public class VehicleServiceImpl implements VehicleService{
 		
 		
 		List<Vehicle> listVehicle = getFilteredList();
-		List<TrackEntity> listOfLastSignals = terminalDateService.last();
+		List<TrackEntity> listOfLastSignals = trackService.last();
 		List<VehicleMenuItem> vehicleMenuItems = new ArrayList<>();
 		
 		for(Vehicle vehicle: listVehicle){
@@ -84,7 +89,7 @@ public class VehicleServiceImpl implements VehicleService{
 	}
 	
 	private TrackEntity getItemByVehicleFromLastSignalDate(Vehicle vehicle, List<TrackEntity> terminalDates){
-		Terminal terminal = terminalService.getTerminal(vehicle.getId());
+		Terminal terminal = terminalService.getTerminalByVehicle(vehicle.getId());
 		if(terminal==null){
 			throw new NullPointerException("No terminal on vehicle with ID: " + vehicle.getId());
 		}
@@ -101,6 +106,18 @@ public class VehicleServiceImpl implements VehicleService{
 	public List<Vehicle> getVehicles(List<Integer> terminalNumbers) {
 		
 		return vehicleRepository.getVehicles(terminalNumbers);
+	}
+
+	@Override
+	public List<Vehicle> getVehiclesByTerminalNumbers(List<Terminal> terminals) {
+		return vehicleRepository.getVehicles(terminalNumbers(terminals));
+	}
+
+	private List<Integer> terminalNumbers(List<Terminal> terminals) {
+		List<Integer> ret = new ArrayList<>();
+		for(Terminal terminal: terminals)
+			ret.add(terminal.getId());
+		return ret;
 	}
 
 }

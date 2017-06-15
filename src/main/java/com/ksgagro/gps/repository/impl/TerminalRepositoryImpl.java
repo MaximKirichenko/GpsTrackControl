@@ -24,18 +24,41 @@ public class TerminalRepositoryImpl implements TerminalRepository{
 	public Terminal get(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Terminal.class)
-				.add(Restrictions.eq("vehicle", id))
+				.add(Restrictions.eq("id", id))
 				.add(Restrictions.eq("uninstal_date", 0L));
 
 		return (Terminal)criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
+    @Override
+	@Transactional
+    public Terminal get(String imei) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Terminal.class)
+				.add(Restrictions.eq("imei", imei))
+				.add(Restrictions.eq("uninstal_date", 0L));
+
+		return (Terminal)criteria.uniqueResult();
+    }
+
+    @SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Terminal> getTerminals(List<Integer> terminalNumbers) {
-		return sessionFactory.getCurrentSession().createCriteria(Terminal.class).add(Restrictions.in("vehicle", terminalNumbers)).list();
+		return sessionFactory.getCurrentSession().createCriteria(Terminal.class).add(Restrictions.in("id", terminalNumbers)).list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+    public List<Terminal> byVehicles(List<Integer> vehicleIds) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Terminal.class)
+				.add(Restrictions.in("vehicle", vehicleIds))
+				.add(Restrictions.eq("uninstal_date", 0L));
+
+		return criteria.list();
+    }
 
     @Override
 	@javax.transaction.Transactional
@@ -44,5 +67,17 @@ public class TerminalRepositoryImpl implements TerminalRepository{
 		String hql = "SELECT imei, MIN(MESSAGE_DATE) AS MESSAGE_DATE FROM DEVICE_DATE GROUP BY IMEI";
 		SQLQuery query = session.createSQLQuery(hql).addEntity(TerminalDateDTO.class);
 		return (List<TerminalDateDTO>) query.list();
+    }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+    public Terminal byVehicle(int vehicleId) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Terminal.class)
+				.add(Restrictions.eq("vehicle", vehicleId))
+				.add(Restrictions.eq("uninstal_date", 0L));
+
+		return (Terminal)criteria.uniqueResult();
     }
 }

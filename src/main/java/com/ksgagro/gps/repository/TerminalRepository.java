@@ -9,7 +9,13 @@ public interface TerminalRepository {
 
     Terminal get(int id);
 
+    Terminal get(String imei);
+
     List<Terminal> getTerminals(List<Integer> terminalNumbers);
 
+    List<Terminal> byVehicles(List<Integer> vehicleIds);
+
     List<TerminalDateDTO> getTerminals();
+
+    Terminal byVehicle(int vehicleId);
 }

@@ -13,8 +13,7 @@ import com.ksgagro.gps.service.TerminalService;
 @Service
 public class TerminalServiceImpl implements TerminalService{
 
-	@Autowired
-	TerminalRepository terminalRepository;
+	@Autowired TerminalRepository terminalRepository;
 	
 	@Override
 	public Terminal getTerminal(int id) {
@@ -29,6 +28,21 @@ public class TerminalServiceImpl implements TerminalService{
     @Override
     public List<TerminalDateDTO> getTerminals() {
         return terminalRepository.getTerminals();
+    }
+
+	@Override
+	public Terminal getTerminalByImei(String imei) {
+		return terminalRepository.get(imei);
+	}
+
+    @Override
+    public List<Terminal> getTerminalsByVehicles(List<Integer> vehicleIds) {
+		return terminalRepository.byVehicles(vehicleIds);
+    }
+
+    @Override
+    public Terminal getTerminalByVehicle(int vehicleId) {
+        return terminalRepository.byVehicle(vehicleId);
     }
 
 }

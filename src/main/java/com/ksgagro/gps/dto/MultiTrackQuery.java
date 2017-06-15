@@ -7,17 +7,17 @@ public class MultiTrackQuery implements Serializable{
 	
 	private static final long serialVersionUID = 74398488174553047L;
 	
-	private List<Integer> terminalNumbers;
+	private List<Integer> vehicleIds;
 	private long dataFrom;
 	private long dataTo;
 	
 	
 	
-	public List<Integer> getTerminalNumbers() {
-		return terminalNumbers;
+	public List<Integer> getVehicleIds() {
+		return vehicleIds;
 	}
-	public void setTerminalNumbers(List<Integer> terminalNumbers) {
-		this.terminalNumbers = terminalNumbers;
+	public void setVehicleIds(List<Integer> vehicleIds) {
+		this.vehicleIds = vehicleIds;
 	}
 	public long getDataFrom() {
 		return dataFrom;
@@ -37,7 +37,7 @@ public class MultiTrackQuery implements Serializable{
 		int result = 1;
 		result = prime * result + (int) (dataFrom ^ (dataFrom >>> 32));
 		result = prime * result + (int) (dataTo ^ (dataTo >>> 32));
-		result = prime * result + ((terminalNumbers == null) ? 0 : terminalNumbers.hashCode());
+		result = prime * result + ((vehicleIds == null) ? 0 : vehicleIds.hashCode());
 		return result;
 	}
 	@Override
@@ -53,16 +53,16 @@ public class MultiTrackQuery implements Serializable{
 			return false;
 		if (dataTo != other.dataTo)
 			return false;
-		if (terminalNumbers == null) {
-			if (other.terminalNumbers != null)
+		if (vehicleIds == null) {
+			if (other.vehicleIds != null)
 				return false;
-		} else if (!terminalNumbers.equals(other.terminalNumbers))
+		} else if (!vehicleIds.equals(other.vehicleIds))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "MulitiTrackRequestDTO [terminalNumbers=" + terminalNumbers + ", dataFrom=" + dataFrom + ", dataTo="
+		return "MulitiTrackRequestDTO [terminalNumbers=" + vehicleIds + ", dataFrom=" + dataFrom + ", dataTo="
 				+ dataTo + "]";
 	}
 	

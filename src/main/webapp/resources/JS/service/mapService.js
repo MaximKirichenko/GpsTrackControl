@@ -654,71 +654,35 @@ function addTracks(trackInfo) {
 
     }
 
-
-//	vectorStartPoint.removeAllFeatures();
-//	vectorStartPoint.destroyFeatures();
-//	vectorStartPoint.addFeatures([]);
-
     stopMarkersLayer.clearMarkers();
     clearPopUp();
 
-//	if(linearRing2!=null){
-//	    	console.log("Clean point");
-//	    	for(var i=0; i<labels.length; i++){
-//	        	vectorStartPoint.removeFeatures(labels[i]);
-//	        }
-//	    	
-//	    }
-
     for (var j = 0; j < trackInfo.length; j++) {
+        console.log(trackInfo[j]);
         var labelContent = new Array();
         var trackPoints = new Array();
         var oldData;
-        for (var i = 0; i < trackInfo[j].data.length; i++) {
-            var point = createPoint(trackInfo[j].data[i].longitude, trackInfo[j].data[i].latitude);
+        for (var i = 0; i < trackInfo[j].trackEntities.length; i++) {
+            var point = createPoint(trackInfo[j].trackEntities[i].longitude, trackInfo[j].trackEntities[i].latitude);
             trackPoints.push(point);
             if (i == 0) {
-                var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate) / 1000;
-                travelTime = travelTime.toString().toHHMMSS();
                 var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber +
-                    "</br>Время старта: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString();
+                    "</br>Время старта: " + new Date(trackInfo[j].trackEntities[i].messageDate).toLocaleString();
                 stopMarkersLayer.addMarker(createStartMarker(point, "Start", popupContent));
-            } else if (i == trackInfo[j].data.length - 1) {
-                var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate) / 1000;
+            } else if (i == trackInfo[j].trackEntities.length - 1) {
+                var travelTime = (trackInfo[j].trackEntities[i].messageDate - trackInfo[j].trackEntities[0].messageDate) / 1000;
                 travelTime = travelTime.toString().toHHMMSS();
                 var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber +
                     "</br>Длина пути: " + trackInfo[j].trackInfo.totalLength + " км." +
                     "</br>Время в пути: " + travelTime +
-                    "</br>Время финиша: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString();
+                    "</br>Время финиша: " + new Date(trackInfo[j].trackEntities[i].messageDate).toLocaleString();
 
                 stopMarkersLayer.addMarker(createFinishMarker(point, "Stop", popupContent));
                 map.setCenter(new OpenLayers.LonLat(point.x, point.y));
-            } else if (i > 0) {
-                var stopTime = trackInfo[j].data[i].messageDate - oldData.messageDate;
-                if (stopTime > MIN_STOP_TIME && stopTime < 360000) {
-                    var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate) / 1000;
-                    travelTime = travelTime.toString().toHHMMSS();
-                    var stopDuration = (stopTime / 1000).toString().toHHMMSS();
-                    var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber +
-                        "</br>Время в пути: " + travelTime +
-                        "</br>Время остановки: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString() +
-                        "</br>продолжительность остановки: " + stopDuration;
-                    stopMarkersLayer.addMarker(createStopMarker(point, stopTime, popupContent));
-                } else if (stopTime >= 360000) {
-                    console.log("Stop");
-                    var travelTime = (trackInfo[j].data[i].messageDate - trackInfo[j].data[0].messageDate) / 1000;
-                    travelTime = travelTime.toString().toHHMMSS();
-                    var stopDuration = (stopTime / 1000).toString().toHHMMSS();
-                    var popupContent = trackInfo[j].vehicle.name + " " + trackInfo[j].vehicle.regNumber +
-                        "Время парковки: " + new Date(trackInfo[j].data[i].messageDate).toLocaleString() +
-                        "</br>продолжительность стоянки: " + stopDuration;
-                    stopMarkersLayer.addMarker(createStopMarker(point, stopTime, popupContent));
-                }
             }
-            oldData = trackInfo[j].data[i];
 
         }
-
+        addStops(trackInfo[j].stops);
         for (var i = 0; i < labels.length; i++) {
             vectorStartPoint.addFeatures(labels[i]);
         }
@@ -727,8 +691,23 @@ function addTracks(trackInfo) {
         linearRing2 = new OpenLayers.Feature.Vector(track);
         trackLayer.addFeatures(linearRing2);
     }
+    function addStops(stops) {
+        console.log(stops);
+        for(var i = 0; i<stops.length; i++){
+            console.log(stops[i]);
+            var stopDuration = stops[i].duration.toString().toHHMMSS();
+            var popupContent = stops[i].vehicle.name + " " + stops[i].vehicle.regNumber +
+                "Время парковки: " + new Date(stops[i].date).toLocaleString() +
+                "</br>продолжительность стоянки: " + stopDuration;
+            point = createPoint(stops[i].longitude, stops[i].latitude)
+            stopMarkersLayer.addMarker(createStopMarker(point, stops[i].date, popupContent));
+        }
+    }
 
 }
+
+
+
 function clearPopUp() {
     if (map.popups.length != 0) {
         while (map.popups.length != 0) {

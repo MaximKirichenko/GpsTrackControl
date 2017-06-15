@@ -13,7 +13,7 @@ import com.ksgagro.gps.domain.Refueling;
 import com.ksgagro.gps.domain.TrackEntity;
 import com.ksgagro.gps.service.ChartService;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 
 @Service
 public class ChartServiceImpl implements ChartService{
@@ -21,7 +21,7 @@ public class ChartServiceImpl implements ChartService{
 	@Autowired
 	private GasTankCalibrationDataService gasTankService;
 	@Autowired
-	private TerminalDateService terminalDataService;
+	private TrackService terminalDataService;
 
 	
 	public FuelChartDTO getFuelChartData(int vehicleId, long from, long to) {

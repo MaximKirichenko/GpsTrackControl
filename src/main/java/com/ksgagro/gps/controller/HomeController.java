@@ -3,10 +3,7 @@ package com.ksgagro.gps.controller;
 import com.ksgagro.gps.controller.JSON.MapObjectFieldTypeJson;
 import com.ksgagro.gps.controller.JSON.MapObjectJSON;
 import com.ksgagro.gps.controller.JSON.Mapper;
-import com.ksgagro.gps.controller.track.json.TrackJson;
 import com.ksgagro.gps.domain.*;
-import com.ksgagro.gps.dto.MultiTrackQuery;
-import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.dto.ReportTrackDto;
 import com.ksgagro.gps.dto.TrackRequestDTO;
 import com.ksgagro.gps.service.*;
@@ -33,7 +30,7 @@ public class HomeController {
 	@Autowired private VehicleGroupService vehicleGroupService;
 	@Autowired private VehicleService vehicleService;
 	@Autowired private VehicleDetailsTableService vehicleDetailsTableService;
-	@Autowired private TerminalDateService terminalDateService;
+	@Autowired private TrackService trackService;
 	@Autowired private GasTankCalibrationDataService calibrationDataService;
 	@Autowired private AgroFieldsService agroFieldsService;
 	@Autowired private LocationService locationService;
@@ -53,19 +50,19 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.POST, value = "/buildTrack")
 	public @ResponseBody ReportTrackDto buildTrack(@RequestBody TrackRequestDTO periodDtoJson, Model model){
 		ReportTrackDto report = new ReportTrackDto();
-		List<TrackEntity> list = terminalDateService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
+		List<TrackEntity> list = trackService.tracks(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
 
-		list = terminalDateService.filterData(list);
+		list = trackService.filterData(list);
 
 		Collections.reverse(list);
 		for(TrackEntity item: list){
 			System.out.println(item);
 		}
 		report.setTerminalDateList(list);
-		report.setPathLength(terminalDateService.getPathLength(list));
-		report.setCanConsumption(terminalDateService.getCanConsumption(list)*(-1));
-		report.setStartMovement(terminalDateService.getStartMovementTime(list));
-		report.setFinishMovement(terminalDateService.getFinishMovementTime(list));
+		report.setPathLength(trackService.getPathLength(list));
+		report.setCanConsumption(trackService.getCanConsumption(list)*(-1));
+		report.setStartMovement(trackService.getStartMovementTime(list));
+		report.setFinishMovement(trackService.getFinishMovementTime(list));
 		return report;
 	}
 	
@@ -86,14 +83,14 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.POST, value="/getLastTerminalData")
 	public @ResponseBody
 	TrackEntity getLastTerminalData(@RequestBody String imei){
-		TrackEntity data = terminalDateService.last(imei);
+		TrackEntity data = trackService.last(imei);
 		
 		return data;
 	}
 	
 	@RequestMapping("/carDetails")
 	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TrackEntity terminalDate = terminalDateService.last(terminalNumber);
+		TrackEntity terminalDate = trackService.last(terminalNumber);
 		Vehicle car = vehicleService.getVehicleById(terminalNumber);
 		String status;
 		Date date = new Date(terminalDate.getMessageDate());

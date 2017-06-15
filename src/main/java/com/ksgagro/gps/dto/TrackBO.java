@@ -1,5 +1,6 @@
 package com.ksgagro.gps.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ksgagro.gps.domain.FuelLineChartPoint;
@@ -12,11 +13,11 @@ public class TrackBO {
 	
 	private Terminal terminal;
 	private Vehicle vehicle;
-	private List<TrackEntity> trackEntities;
 	private TrackInfo trackInfo;
-	private List<FuelLineChartPoint> leftFuelLine;
-	private List<FuelLineChartPoint> rightFuelLine;
-	private List<List<TrackEntity>> stopList;
+	private List<TrackEntity> trackEntities = new ArrayList<>();
+	private List<FuelLineChartPoint> leftFuelLine = new ArrayList<>();
+	private List<FuelLineChartPoint> rightFuelLine = new ArrayList<>();
+	private List<List<TrackEntity>> stopList = new ArrayList<>();
 	
 	
 	public Terminal getTerminal() {
@@ -37,7 +38,7 @@ public class TrackBO {
 	public void setTrackEntities(List<TrackEntity> trackEntities) {
 		this.trackEntities = trackEntities;
 	}
-	public void addData(TrackEntity data){
+	public void addTrackEntity(TrackEntity data){
 		this.trackEntities.add(data);
 	}
 	public TrackInfo getTrackInfo() {

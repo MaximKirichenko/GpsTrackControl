@@ -29,7 +29,7 @@ import com.ksgagro.gps.repository.VehicleGroupRepository;
 import com.ksgagro.gps.repository.VehicleRepository;
 import com.ksgagro.gps.service.ChartService;
 import com.ksgagro.gps.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.service.TerminalDateService;
+import com.ksgagro.gps.service.TrackService;
 import com.ksgagro.gps.service.VehicleService;
 
 
@@ -46,7 +46,7 @@ public class ChartController {
 	@Autowired
 	private ChartService chartService;
 	@Autowired
-	private TerminalDateService terminalDateService;
+	private TrackService trackService;
 	@Autowired
 	private GasTankCalibrationDataService calibrationDataService;
 	@Autowired
@@ -85,7 +85,7 @@ public class ChartController {
 	}
 	@RequestMapping(value = "/chart/fuel")
 	public String buildFuelChartPage(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TrackEntity terminalDate = terminalDateService.last(terminalNumber);
+		TrackEntity terminalDate = trackService.last(terminalNumber);
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
 		List<Vehicle> listVehicle = vehicleRepository.getList();

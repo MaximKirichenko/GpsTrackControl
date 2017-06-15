@@ -48,7 +48,7 @@ function sendTracksRequest(selectedVehicleList, period){
 	var tracksRequestData = {
 			dataFrom: period.dataFrom,
 			dataTo: period.dataTo,
-			terminalNumbers: selectedVehicleList
+        	vehicleIds: selectedVehicleList
 	}
 	$.ajax({
 		type : "POST",
