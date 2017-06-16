@@ -14,18 +14,12 @@ import com.ksgagro.gps.service.VehicleService;
 
 @Service
 public class VehicleDetailsTableServiceImpl implements VehicleDetailsTableService{
-	@Autowired
-    TrackService trackService;
-	
-	@Autowired
-	private VehicleService vehicleService;
-	
-	@Autowired
-	private GasTankCalibrationDataService calibrationDataService;
-	
-	@Autowired
-	private TerminalService terminalService;
-	
+
+	@Autowired TrackService trackService;
+	@Autowired private VehicleService vehicleService;
+	@Autowired private TerminalService terminalService;
+	@Autowired private GasTankCalibrationDataService calibrationDataService;
+
 	@Override
 	public VehicleDetailsTable createVehicleDetailsTableById(int vehicleId) {
 		VehicleDetailsTable table = new VehicleDetailsTable();
