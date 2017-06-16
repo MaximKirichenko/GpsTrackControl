@@ -1,5 +1,6 @@
 package com.ksgagro.gps.service.impl;
 
+import com.ksgagro.gps.domain.Terminal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +29,14 @@ public class VehicleDetailsTableServiceImpl implements VehicleDetailsTableServic
 	@Override
 	public VehicleDetailsTable createVehicleDetailsTableById(int vehicleId) {
 		VehicleDetailsTable table = new VehicleDetailsTable();
-		initVehicleDetailsTable(table, vehicleId);
-		return table;
-	}
-	
-	private void initVehicleDetailsTable(VehicleDetailsTable table, int vehicleId){
-		TrackEntity terminalDate = trackService.last(vehicleId);
-		table.setTerminalDate(trackService.last(vehicleId));
+		Terminal terminal = terminalService.getTerminalByVehicle(vehicleId);
+		TrackEntity terminalDate = trackService.last(terminal.getImei());
+		table.setTerminalDate(terminalDate);
 		table.setVehicle(vehicleService.getVehicleById(vehicleId));
 		table.setFuelLevelLeft(calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getLeftGasTank()));
 		table.setFuelLevelRight(calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getRightGasTank()));
-		table.setTerminal(terminalService.getTerminal(vehicleId));
+		table.setTerminal(terminal);
+		return table;
 	}
 
 }

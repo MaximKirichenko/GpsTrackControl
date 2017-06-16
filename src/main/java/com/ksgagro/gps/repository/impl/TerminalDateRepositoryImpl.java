@@ -24,35 +24,26 @@ import com.ksgagro.gps.repository.TerminalDateRepository;
 public class TerminalDateRepositoryImpl implements TerminalDateRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	@Transactional
-	public List<TrackEntity> list(long from, long to, String imei) {
-		Session session = sessionFactory.getCurrentSession();
-		
-		String hql = "FROM TerminalDate terminalDate WHERE terminalDate.imei = :imei AND terminalDate.messageDate > :from AND terminalDate.messageDate < :to ORDER BY terminalDate.messageDate";
-		Query query = session.createQuery(hql);
-		query.setParameter("from", from);
-		query.setParameter("to", to);
-		query.setParameter("imei", imei);
-		
-		@SuppressWarnings("unchecked")
-		List<TrackEntity> result = query.list();
 
-		return result;
+	@SuppressWarnings("unchecked")
+	@Transactional
+	@Override
+	public List<TrackEntity> list(long from, long to, String imei) {
+		return (List<TrackEntity>) sessionFactory.getCurrentSession().
+				createCriteria(TrackEntity.class).
+				add(Restrictions.between("messageDate", from, to)).
+				add(Restrictions.eq("imei", imei)).addOrder(Order.asc("messageDate")).list();
 	}
 	
 	@Transactional
 	public TrackEntity getLastSignal(String imei) {
-		Session session = sessionFactory.getCurrentSession();
-	
-		String hql = "FROM TerminalDate terminalDate WHERE terminalDate.imei = :imei AND terminalDate.messageDate = (SELECT max(terminalDate.messageDate) FROM TerminalDate terminalDate WHERE terminalDate.imei = :imei)";
-		Query query = session.createQuery(hql);
-		query.setParameter("imei", imei);
-
-		@SuppressWarnings("unchecked")
-		List<TrackEntity> result = query.list();
-		
-		return result.get(0);
+		DetachedCriteria lastDate = DetachedCriteria.forClass(TrackEntity.class)
+				.setProjection(Projections.max("messageDate"))
+				.add(Restrictions.eq("imei", imei));
+		return (TrackEntity) sessionFactory.getCurrentSession().createCriteria(TrackEntity.class)
+				.add(Property.forName("messageDate").eq(lastDate))
+				.add(Restrictions.eq("imei", imei))
+				.uniqueResult();
 	}
 	
 	@SuppressWarnings("unchecked")

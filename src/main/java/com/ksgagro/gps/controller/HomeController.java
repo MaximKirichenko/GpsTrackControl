@@ -31,6 +31,7 @@ public class HomeController {
 	@Autowired private VehicleService vehicleService;
 	@Autowired private VehicleDetailsTableService vehicleDetailsTableService;
 	@Autowired private TrackService trackService;
+	@Autowired private TerminalService terminalService;
 	@Autowired private GasTankCalibrationDataService calibrationDataService;
 	@Autowired private AgroFieldsService agroFieldsService;
 	@Autowired private LocationService locationService;
@@ -76,8 +77,7 @@ public class HomeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getVehicleDeteilTable")
 	public @ResponseBody VehicleDetailsTable getLastPoint(@RequestBody int vehicleId){
-		VehicleDetailsTable table = vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
-		return table;
+		return vehicleDetailsTableService.createVehicleDetailsTableById(vehicleId);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/getLastTerminalData")
@@ -89,18 +89,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/carDetails")
-	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TrackEntity terminalDate = trackService.last(terminalNumber);
-		Vehicle car = vehicleService.getVehicleById(terminalNumber);
+	public String getCarByTerminalNumber(@RequestParam("terminalNumber") int vehicleId, Model model){
+		Terminal terminal = terminalService.getTerminalByVehicle(vehicleId);
+		TrackEntity terminalDate = trackService.last(terminal.getImei());
+		Vehicle car = vehicleService.getVehicleById(vehicleId);
 		String status;
 		Date date = new Date(terminalDate.getMessageDate());
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 		
 		status = df.format(date);
 		
-		double leftTanks = calibrationDataService.getFuelLevel(terminalNumber, 1, terminalDate.getRightGasTank());
+		double leftTanks = calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getRightGasTank());
 		
-		double rightTanks = calibrationDataService.getFuelLevel(terminalNumber, 2, terminalDate.getLeftGasTank());
+		double rightTanks = calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getLeftGasTank());
 		
 		double totalFuel = leftTanks + rightTanks;
 		//double fuelFromCan = new BigDecimal(terminalDate.getCANFLS()*0.0017236857).setScale(3, RoundingMode.UP).doubleValue();

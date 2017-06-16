@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.ksgagro.gps.domain.*;
+import com.ksgagro.gps.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -20,38 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ksgagro.gps.dto.FuelChartDTO;
 import com.ksgagro.gps.dto.TrackRequestDTO;
-import com.ksgagro.gps.domain.Location;
-import com.ksgagro.gps.domain.TrackEntity;
-import com.ksgagro.gps.domain.Vehicle;
-import com.ksgagro.gps.domain.VehicleGroup;
 import com.ksgagro.gps.repository.LocationRepository;
 import com.ksgagro.gps.repository.VehicleGroupRepository;
 import com.ksgagro.gps.repository.VehicleRepository;
-import com.ksgagro.gps.service.ChartService;
-import com.ksgagro.gps.service.GasTankCalibrationDataService;
-import com.ksgagro.gps.service.TrackService;
-import com.ksgagro.gps.service.VehicleService;
-
 
 
 @Controller
 public class ChartController {
 	
-	@Autowired
-	private LocationRepository locationRepository;
-	@Autowired
-	private VehicleGroupRepository vehicleGroupRepository;
-	@Autowired
-	private VehicleRepository vehicleRepository;
-	@Autowired
-	private ChartService chartService;
-	@Autowired
-	private TrackService trackService;
-	@Autowired
-	private GasTankCalibrationDataService calibrationDataService;
-	@Autowired
-	private VehicleService vehicleService;
-	
+	@Autowired private ChartService chartService;
+	@Autowired private TrackService trackService;
+	@Autowired private VehicleService vehicleService;
+	@Autowired private TerminalService terminalService;
+	@Autowired private VehicleRepository vehicleRepository;
+	@Autowired private LocationRepository locationRepository;
+	@Autowired private VehicleGroupRepository vehicleGroupRepository;
+	@Autowired private GasTankCalibrationDataService calibrationDataService;
+
 	@RequestMapping(value = "/chart")
 	public ModelAndView buildChartPage(){
 		ModelAndView model = new ModelAndView("fuelLineChart");
@@ -70,12 +57,6 @@ public class ChartController {
 	}
 	@RequestMapping(method = RequestMethod.POST, value = "/chart/fuel/build")
 	public @ResponseBody FuelChartDTO buildFuelChart(@RequestBody TrackRequestDTO periodDtoJson){
-//		List<List<TerminalDate>> stops = terminalDateService.getStops(periodDtoJson.getDataFrom(), periodDtoJson.getDataTo(), periodDtoJson.getTerminalNumber());
-//		terminalDateService.getRefulingDate(stops, periodDtoJson.getTerminalNumber());
-//		System.out.println("Stops size: " + stops.size());
-//		for(List<TerminalDate> stopList: stops){
-//			System.out.println("Stop at: " + new Date(stopList.get(0).getMessageDate()) + " run at " + new Date(stopList.get(stopList.size()-1).getMessageDate()));
-//		}
 		return chartService.getFuelChartData(
 				periodDtoJson.getTerminalNumber(), 
 				periodDtoJson.getDataFrom(), 
@@ -84,8 +65,9 @@ public class ChartController {
 
 	}
 	@RequestMapping(value = "/chart/fuel")
-	public String buildFuelChartPage(@RequestParam("terminalNumber") int terminalNumber, Model model){
-		TrackEntity terminalDate = trackService.last(terminalNumber);
+	public String buildFuelChartPage(@RequestParam("terminalNumber") int vehicleId, Model model){
+		Terminal terminal = terminalService.getTerminalByVehicle(vehicleId);
+		TrackEntity terminalDate = trackService.last(terminal.getImei());
 		List<Location> listLocation = locationRepository.getList();	
 		List<VehicleGroup> listGroup = vehicleGroupRepository.getList();
 		List<Vehicle> listVehicle = vehicleRepository.getList();
@@ -95,7 +77,7 @@ public class ChartController {
 		model.addAttribute("listGroup", listGroup);
 		model.addAttribute("listVehicle", listVehicle);
 		model.addAttribute("vehicleInEnterprise", vehicleInEnterprise);
-		Vehicle car = vehicleRepository.getVehicleById(terminalNumber);
+		Vehicle car = vehicleRepository.getVehicleById(vehicleId);
 		String carName = car.getName() + " " + car.getRegNumber();
 		model.addAttribute("carName", carName);
 //		model.addAttribute("numberTerminal", car.getNumberTerminal());
@@ -106,9 +88,9 @@ public class ChartController {
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 		
 		status = df.format(date);
-		double leftTanks = calibrationDataService.getFuelLevel(terminalNumber, 1, terminalDate.getRightGasTank());
+		double leftTanks = calibrationDataService.getFuelLevel(vehicleId, 1, terminalDate.getRightGasTank());
 		
-		double rightTanks = calibrationDataService.getFuelLevel(terminalNumber, 2, terminalDate.getLeftGasTank());
+		double rightTanks = calibrationDataService.getFuelLevel(vehicleId, 2, terminalDate.getLeftGasTank());
 		
 		double totalFuel = leftTanks + rightTanks;
 		double fuelFromCan = new BigDecimal(terminalDate.getCANFLS()).setScale(3, RoundingMode.UP).doubleValue();

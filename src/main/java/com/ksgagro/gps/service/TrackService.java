@@ -28,11 +28,11 @@ public interface TrackService {
 
 	List<List<TrackEntity>> stopList(long millisFrom, long millisTo, int terminalNumber);
 
+	List<List<TrackEntity>> stopList(List<TrackEntity> tracks);
+
 	List<Refueling> getRefulingDate(List<List<TrackEntity>> stops, int terminalNumber);
 
 	List<TrackEntity> last();
-
-	TrackEntity last(int vehicleId);
 
 	TrackEntity last(String imei);
 }

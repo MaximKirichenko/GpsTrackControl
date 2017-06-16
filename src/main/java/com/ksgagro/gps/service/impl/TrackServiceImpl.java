@@ -35,12 +35,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public List<TrackEntity> tracks(long millisFrom, long millisTo, int terminalNumber){
 		Terminal terminal = terminalRepository.get(terminalNumber);
-
-		List<TrackEntity> inputList = trackRepository.list(millisFrom, millisTo,
-				terminal.getImei());
-		
-		////inputList = calibrateTank(inputList, terminalNumber);
-		return inputList;
+		return trackRepository.list(millisFrom, millisTo, terminal.getImei());
 	}
 	
 	@Override
@@ -139,13 +134,6 @@ public class TrackServiceImpl implements TrackService {
 	}
 	
 	@Override
-	public TrackEntity last(int vehicleId){
-		Terminal terminal = terminalRepository.get(vehicleId);
-		TrackEntity point = trackRepository.getLastSignal(terminal.getImei());
-		return point;
-	}
-	
-	@Override
 	public List<TrackEntity> last(){
 		return trackRepository.getLastSignals();
 	}
@@ -226,7 +214,13 @@ public class TrackServiceImpl implements TrackService {
 		return getStartMovementTime(terminalDate);
 	}
 
-	private List<List<TrackEntity>> stopList(List<TrackEntity> trackEntities) {
+	@Override
+	public List<List<TrackEntity>> stopList(long from, long to, int terminalNumber){
+		return stopList(tracks(from, to, terminalNumber));
+	}
+
+	@Override
+	public List<List<TrackEntity>> stopList(List<TrackEntity> trackEntities) {
 		boolean isStop = false;
 
 		List<List<TrackEntity>> stops = new ArrayList<>();
@@ -243,10 +237,6 @@ public class TrackServiceImpl implements TrackService {
 		}
 
 		return filterStop(stops);
-	}
-	
-	public List<List<TrackEntity>> stopList(long from, long to, int terminalNumber){
-		return stopList(tracks(from, to, terminalNumber));
 	}
 
 	private List<List<TrackEntity>> filterStop(List<List<TrackEntity>> stops){

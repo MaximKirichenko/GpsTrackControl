@@ -3,6 +3,7 @@ package com.ksgagro.gps.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ksgagro.gps.service.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class ChartServiceImpl implements ChartService{
 	private GasTankCalibrationDataService gasTankService;
 	@Autowired
 	private TrackService terminalDataService;
+	@Autowired
+	private TerminalService terminalService;
+	@Autowired
+	private TrackService trackService;
 
 	
 	public FuelChartDTO getFuelChartData(int vehicleId, long from, long to) {
@@ -34,26 +39,18 @@ public class ChartServiceImpl implements ChartService{
 		List<Long> messageDate= new ArrayList<Long>();
 		List<Integer> speeds = new ArrayList<Integer>();
 		List<Integer> voltage = new ArrayList<Integer>();
-		
-		List<List<TrackEntity>> stops = terminalDataService.stopList(from, to, vehicleId);
+		List<TrackEntity> tracks = trackService.tracks(from, to, terminalService.getTerminalByVehicle(vehicleId).getId());
+		List<List<TrackEntity>> stops = terminalDataService.stopList(tracks);
 		List<Refueling> refuelings = terminalDataService.getRefulingDate(stops, vehicleId);
 		
-		List<TrackEntity> terminalDataList = terminalDataService.tracks(from, to, vehicleId);
 		List<Double> leftTankDatas = new ArrayList<Double>();
 		List<Double> rightTankDatas = new ArrayList<Double>();
-//		System.out.println("Left: ");
-//		for(GasTankCalibrationData calibrationData: leftTankCalibrationData){
-//			System.out.println(calibrationData.getFuelLevel() + " " + calibrationData.getData());
-//		}
-//		System.out.println("Right: ");
-//		for(GasTankCalibrationData calibrationData: rightTankCalibrationData){
-//			System.out.println(calibrationData.getFuelLevel() + " " + calibrationData.getData());
-//		}
+
 		double previousLeftTankLevel = 0;
 		double previousRightTankLevel = 0;
 		double canConsumption = 0;
 		int count=0;
-		for(TrackEntity data: terminalDataList){
+		for(TrackEntity data: tracks){
 			//System.out.println(data);
 			
 			double leftTankLevel = gasTankService.getFuelLevel(data.getLeftGasTank(), leftTankCalibrationData);
@@ -81,7 +78,7 @@ public class ChartServiceImpl implements ChartService{
 		fuelChartDTO.setRightTankDatas(rightTankDatas);
 		fuelChartDTO.setEngineSpeedDatas(engineSpeedDatas);
 		fuelChartDTO.setMessageData(messageDate);
-		fuelChartDTO.setFuelConsumptionFromCan(terminalDataService.getCanConsumption(terminalDataList));
+		fuelChartDTO.setFuelConsumptionFromCan(terminalDataService.getCanConsumption(tracks));
 		fuelChartDTO.setSpeeds(speeds);
 		fuelChartDTO.setVoltage(voltage);
 		
