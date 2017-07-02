@@ -2,11 +2,11 @@ package com.ksgagro.gps.logic.image.persistence.impl;
 
 import com.ksgagro.gps.logic.image.persistence.LocatedImageManager;
 import com.ksgagro.gps.logic.image.persistence.model.LocatedImageEntity;
+import com.ksgagro.gps.logic.image.persistence.model.LocatedImageInfoEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,26 +22,42 @@ public class LocatedImageManagerImpl implements LocatedImageManager{
 
     @Override
     @Transactional
-    public void save(LocatedImageEntity entity) {
+    public void save(LocatedImageInfoEntity entity) {
         Session session = sessionFactory.getCurrentSession();
         session.save(entity);
     }
 
     @Override
     @Transactional
-    public List<LocatedImageEntity> list() {
+    public List<LocatedImageInfoEntity> list() {
         Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(LocatedImageEntity.class)
+        Criteria criteria = session.createCriteria(LocatedImageInfoEntity.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        return (List<LocatedImageEntity>)criteria.list();
+        return (List<LocatedImageInfoEntity>)criteria.list();
     }
 
     @Override
     @Transactional
-    public LocatedImageEntity get(String fileKey) {
+    public LocatedImageInfoEntity get(String fileKey) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(LocatedImageInfoEntity.class)
+                .add(Restrictions.eq("name", fileKey));
+        return (LocatedImageInfoEntity)criteria.uniqueResult();
+    }
+
+    @Override
+    @Transactional
+    public Long save(LocatedImageEntity imageEntity) {
+        Session session = sessionFactory.getCurrentSession();
+        return (Long)session.save(imageEntity);
+    }
+
+    @Override
+    @Transactional
+    public LocatedImageEntity getImage(Long imageId) {
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(LocatedImageEntity.class)
-                .add(Restrictions.eq("name", fileKey));
+                .add(Restrictions.eq("locatedImageId", imageId));
         return (LocatedImageEntity)criteria.uniqueResult();
     }
 

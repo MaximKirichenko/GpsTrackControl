@@ -50,11 +50,10 @@
 		</div>
 	</div>
 	<div class="right-col">
-		<form method="POST" action="/located/image/upload" enctype="multipart/form-data">
-			File to upload: <input type="file" name="image">
-			Name: <input type="text" name="name">
-			<input type="submit" value="Upload"> Press here to upload the file!
-		</form>
+		<div>
+			File to upload: <input id="imageUpload" type="file" name="image">
+			<input type="submit" value="Upload" id="uploadButton">
+		</div>
 		<div id="map"></div>
 	</div>
 </div>

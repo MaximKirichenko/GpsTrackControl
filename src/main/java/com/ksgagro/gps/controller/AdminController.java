@@ -29,15 +29,6 @@ public class AdminController {
 		return model;
 	}
 
-//	@RequestMapping("/getAddFieldPage")
-//	ModelAndView buildAddFieldsPage(){
-//		ModelAndView model = new ModelAndView("addFieldsPage");
-//		MenuItem[] menuItems = {new MenuItem("Добавление полей", "/getAddFieldPage"), new MenuItem("Работа с тарировочными таблицами", "/getCalibratioTablePage")};
-//		model.addObject("menuItems", menuItems);
-//		model.addObject("fields", agroFieldsService.getJsonFields());
-//		return model;
-//	}
-
 	@RequestMapping("/terminal/list")
 	public ModelAndView terminalList(){
 		ModelAndView model = new ModelAndView("terminalList");

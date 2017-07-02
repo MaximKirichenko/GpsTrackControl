@@ -35,7 +35,8 @@
 				<security:user name="KNS" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="LVP" password="rcufuhj" authorities="ROLE_ADMIN" />
 				<security:user name="KES" password="rcufuhj" authorities="ROLE_ADMIN" />
-				
+				<security:user name="ZAV" password="zav3648" authorities="ROLE_ADMIN" />
+
 				<security:user name="VEV" password="889977" authorities="ROLE_ADMIN" />
 				<security:user name="Lada" password="7777" authorities="ROLE_ADMIN" />
 				<security:user name="PrNa" password="666666" authorities="ROLE_ADMIN" />

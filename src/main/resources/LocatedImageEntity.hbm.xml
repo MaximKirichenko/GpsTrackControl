@@ -4,17 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.ksgagro.gps.logic.image.persistence.model">
-    <class name="LocatedImageEntity" table="LOCATED_IMAGE">
-        <id name="id" column="LOCATED_IMAGE_ID">
-            <generator class="increment" />
+    <class name="com.ksgagro.gps.logic.image.persistence.model.LocatedImageEntity" table="LOCATED_IMAGE">
+        <id name="locatedImageId" column="LOCATED_IMAGE_ID">
+            <generator class="sequence">
+                <param name="sequence">LOCATED_IMAGE_SEQ</param>
+            </generator>
         </id>
-        <property name="name" column="IMAGE_NAME"/>
-        <property name="data" column="IMAGE_BYTES" />
-        <property name="longitude" column="LONGITUDE" />
-        <property name="latitude" column="LATITUDE" />
-        <property name="ownerId" column="OWNER_ID" />
-        <property name="creatorId" column="CREATOR_ID" />
-        <property name="creationTime" column="CREATION_TIME" />
-        <property name="updatedTime" column="UPDATE_TIME" />
+        <property name="image" column="IMAGE_BYTES"/>
     </class>
 </hibernate-mapping>

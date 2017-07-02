@@ -8,7 +8,34 @@ $("document").ready(function(){
         $("#image_container").hide();
         $("#image_container-content").empty();
     });
+    $("#uploadButton").click(function(e){
+        uploadImage();
+        e.preventDefault();
+    });
 });
+
+function uploadImage(){
+    var image = new FormData();
+    image.append('image', $("#imageUpload")[0].files[0]);
+    $.ajax({
+        type: "POST",
+        url: "/located/image/upload",
+        enctype: 'multipart/form-data',
+        data: image,
+        success: function (baseJSON) {
+            if(baseJSON.status==="SUCCESS"){
+                alert("Image was uploaded");
+            }
+            if(baseJSON.status==="FAIL"){
+                alert(baseJSON.message);
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
 
 function LoadMap() {
     var map = new OpenLayers.Map('map', mapOptions());
@@ -76,23 +103,15 @@ function LoadMap() {
         layer_style.graphicOpacity = 1;
 
         function showImage(fileKey) {
+            $("#image_container-content").empty();
             var image = getImage(fileKey);
             $("#image_container").show();
-            $("#image_container").append("<img id='ItemPreview' src='' style='width: 600px; height: 400px'/>");
+            $("#image_container-content").append("<img id='ItemPreview' src="+image+" style='width: 600px; height: 400px'/>");
 
-            console.log(image);
-            document.getElementById("ItemPreview").src = "data:image/png;base64," + image.data;
+            // console.log(image);
+            // document.getElementById("ItemPreview").src = "data:image/png;base64," + image.data;
             function getImage(fileKey) {
-                var image;
-                jQuery.ajax({
-                    url: '/located/image/' + fileKey,
-                    success: function (data) {
-                        console.log(data);
-                        image = data;
-                    },
-                    async: false
-                });
-                return image;
+                return "/images/" + fileKey + ".jpg";
             }
         }
 
@@ -109,9 +128,9 @@ function LoadMap() {
             renderers: renderer,
             eventListeners: listener
         });
-        vectorLayer.addFeatures(getPoints());
+        vectorLayer.addFeatures(getImageThumbnail());
 
-        function getPoints(){
+        function getImageThumbnail(){
             var points = [];
             jQuery.ajax({
                 url: '/located/image/coordinates',

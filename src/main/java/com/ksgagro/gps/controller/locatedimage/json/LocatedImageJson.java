@@ -8,6 +8,7 @@ import java.util.Date;
 public class LocatedImageJson {
     private byte[] data;
     private String owner;
+    private String name;
     private Date creationTime;
 
     public byte[] getData() {
@@ -32,5 +33,13 @@ public class LocatedImageJson {
 
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

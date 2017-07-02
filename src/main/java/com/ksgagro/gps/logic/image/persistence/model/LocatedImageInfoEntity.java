@@ -6,11 +6,11 @@ import java.util.Date;
  * Created by Maxim Kirichenko on 02.05.17.
  */
 
-public class LocatedImageEntity {
+public class LocatedImageInfoEntity {
 
     private Long id;
     private String name;
-    private byte[] data;
+    private Long imageId;
     private double longitude;
     private double latitude;
     private Long ownerId;
@@ -34,12 +34,12 @@ public class LocatedImageEntity {
         this.name = name;
     }
 
-    public byte[] getData() {
-        return data;
+    public Long getImageId() {
+        return imageId;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 
     public double getLongitude() {

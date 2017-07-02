@@ -1,6 +1,8 @@
 package com.ksgagro.gps.controller.locatedimage.json;
 
 import com.ksgagro.gps.logic.image.service.model.LocatedImageBO;
+import com.ksgagro.gps.logic.image.service.model.LocatedImageBytesBO;
+import com.ksgagro.gps.logic.image.service.model.LocatedImageInfoBO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,14 +14,14 @@ import java.util.List;
 @Component
 public class LocatedImageJsonMapper {
 
-    public List<LocatedImagePointJSON> toLocatedImagePointJsons(List<LocatedImageBO> list) {
+    public List<LocatedImagePointJSON> toLocatedImagePointJsons(List<LocatedImageInfoBO> list) {
         List<LocatedImagePointJSON> ret = new ArrayList<>();
-        for(LocatedImageBO bo: list)
+        for(LocatedImageInfoBO bo: list)
             ret.add(toLocatedImagePointJson(bo));
         return ret;
     }
 
-    public LocatedImagePointJSON toLocatedImagePointJson(LocatedImageBO bo){
+    public LocatedImagePointJSON toLocatedImagePointJson(LocatedImageInfoBO bo){
         return new LocatedImagePointJSON(){{
             setLongitude(bo.getCoordinate().getLongitude());
             setLatitude(bo.getCoordinate().getLatitude());
@@ -29,11 +31,16 @@ public class LocatedImageJsonMapper {
     }
 
     public LocatedImageJson toLocatedImageJson(LocatedImageBO bo) {
-
-        return new LocatedImageJson(){{
-            setCreationTime(bo.getCreationTime());
-            setOwner("ADMIN");
-            setData(bo.getData());
-        }};
+        LocatedImageJson ret = new LocatedImageJson();
+        LocatedImageInfoBO info = bo.getLocatedImageInfo();
+        LocatedImageBytesBO bytes = bo.getLocatedImageBytes();
+        if (info != null) {
+            ret.setOwner("ADMIN");
+            ret.setCreationTime(info.getCreationTime());
+            ret.setName(info.getName());
+        }
+        if(bytes != null)
+            ret.setData(bytes.getImage());
+        return ret;
     }
 }
