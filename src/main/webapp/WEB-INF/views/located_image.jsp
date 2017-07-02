@@ -49,18 +49,18 @@
 			</div>
 		</div>
 	</div>
-	<%--<div class="left-col">--%>
-		<%--<input type="checkbox" name="showCheckbox" value="showCheckbox"> Показывать выделенное--%>
-		<%--<div id="cars_select_menu">--%>
-			<%--<div id="image_links">--%>
-				<%--<ul>--%>
-					<%--<c:forEach var="item" items="${images_info}">--%>
-						<%--<li><a id="${item.key}" class="image_item">${item.name}</a></li>--%>
-					<%--</c:forEach>--%>
-				<%--</ul>--%>
-			<%--</div>--%>
-		<%--</div>--%>
-	<%--</div>--%>
+		<div class="left-col">
+			<input type="checkbox" name="showCheckbox" value="showCheckbox"> Показывать выделенное
+			<div id="cars_select_menu">
+				<div id="image_links">
+					<ul>
+						<c:forEach var="item" items="${images_info}">
+							<li><a id="${item.key}" class="image_item">${item.name}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</div>
 	<div class="right-col">
 		<div>
 			File to upload: <input id="imageUpload" type="file" name="image">
