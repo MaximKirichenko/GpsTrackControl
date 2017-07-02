@@ -9,7 +9,9 @@ import com.ksgagro.gps.logic.image.service.mapper.LocatedImageBOMapper;
 import com.ksgagro.gps.logic.image.service.model.LocatedImageBO;
 import com.ksgagro.gps.logic.image.service.model.LocatedImageBytesBO;
 import com.ksgagro.gps.logic.image.service.model.LocatedImageInfoBO;
+import com.ksgagro.gps.utils.MyInputStreamUtils;
 import javaxt.io.Image;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,24 +29,19 @@ import java.util.List;
 @Service
 public class LocatedImageServiceImpl implements LocatedImageService {
 
-    @Autowired
-    LocatedImageBOMapper boMapper;
-    @Autowired
-    LocatedImageManager manager;
-    @Autowired
-    LocatedImageEntityMapper entityMapper;
+    @Autowired LocatedImageBOMapper boMapper;
+    @Autowired LocatedImageManager manager;
+    @Autowired LocatedImageEntityMapper entityMapper;
 
-    @Override
-    public void save(Image image) {
-        LocatedImageEntity imageEntity = entityMapper.toImage(boMapper.toImageBO(image));
-        Long imageId = manager.save(imageEntity);
-
-        LocatedImageInfoEntity infoEntity = entityMapper.toEntity(boMapper.toInfoBO(image, imageId));
-        manager.save(infoEntity);
+    public void save(LocatedImageBO image, InputStream inputStream) throws IOException {
+        LocatedImageBO img = new LocatedImageBO();
+        BeanUtils.copyProperties(image, img);
+        saveToDatabase(img);
+        saveToDisk(img, MyInputStreamUtils.clone(inputStream));
     }
 
     @Override
-    public void save(LocatedImageBO image) {
+    public void saveToDatabase(LocatedImageBO image) {
         LocatedImageEntity imageEntity = entityMapper.toImage(image.getLocatedImageBytes());
         Long imageId = manager.save(imageEntity);
 
@@ -57,7 +54,6 @@ public class LocatedImageServiceImpl implements LocatedImageService {
     @Override
     public void saveToDisk(LocatedImageBO image, InputStream inputStream) throws IOException {
         LocatedImageInfoBO info = image.getLocatedImageInfo();
-        String sRootPath = new File("").getAbsolutePath();
         String fileName = "c:/located_image/" + info.getName() + ".jpg";
         BufferedImage bufferedImage = ImageIO.read(inputStream);
         ImageIO.write(bufferedImage, "jpg", new File(fileName));

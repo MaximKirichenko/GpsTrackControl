@@ -43,4 +43,19 @@ public class LocatedImageJsonMapper {
             ret.setData(bytes.getImage());
         return ret;
     }
+
+    public List<LocatedImageMenuItemJson> toJSONs(List<LocatedImageInfoBO> list) {
+        List<LocatedImageMenuItemJson> ret = new ArrayList<>();
+        for(LocatedImageInfoBO bo: list)
+            ret.add(toJSON(bo));
+        return ret;
+    }
+
+    private LocatedImageMenuItemJson toJSON(LocatedImageInfoBO bo) {
+        LocatedImageMenuItemJson ret = new LocatedImageMenuItemJson();
+        String name = bo.getCoordinate().getLongitude() + " " + bo.getCoordinate().getLatitude() + " " + bo.getCreationTime();
+        ret.setName(name);
+        ret.setKey(bo.getName());
+        return ret;
+    }
 }

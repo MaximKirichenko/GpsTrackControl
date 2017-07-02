@@ -1,6 +1,9 @@
 /**
  * Created by kma on 14.05.17.
  */
+// var map;
+var selectedImage;
+
 $("document").ready(function(){
     LoadMap();
     $("#image_container").hide();
@@ -12,6 +15,9 @@ $("document").ready(function(){
         uploadImage();
         e.preventDefault();
     });
+    // $(".image_item").click(function(e){
+    //     findImage(e.target.id);
+    // });
 });
 
 function uploadImage(){
@@ -35,6 +41,45 @@ function uploadImage(){
         processData: false
     });
 }
+
+function findImage(imageKey){
+
+    // setColorsToDefault();
+    // var currentFeature = findFeature(imageKey);
+    // currentFeature.style.strokeColor = '#FF0022';
+    //
+    // var center = new OpenLayers.LonLat(currentFeature.geometry.x, currentFeature.geometry.y);
+    // map.setCenter(center, 14);
+    // console.log(currentFeature);
+    //
+    // function setColorsToDefault() {
+    //     var imgLayer = imageLayer();
+    //     for(var i = 0; i<imgLayer.features.length; i++){
+    //         console.log(imgLayer.features[i].style.strokeColor);
+    //         if(imgLayer.features[i].style.strokeColor==="#FF0022"){
+    //             imgLayer.features[i].style.strokeColor = "#00FF00";
+    //             console.log("Color updated");
+    //         }
+    //
+    //     }
+    // }
+    // function findFeature(imageKey) {
+    //     var imgLayer = imageLayer();
+    //     for(var i = 0; i<imgLayer.features.length; i++)
+    //         if(imgLayer.features[i].imageName===imageKey)
+    //             return imgLayer.features[i];
+    // }
+    //
+    // function imageLayer(){
+    //     for(var i = 0; i<map.layers.length; i++){
+    //         if(map.layers[i].name==='Images')
+    //             return map.layers[i];
+    //     }
+    // }
+    //
+    // return currentFeature;
+}
+
 
 
 function LoadMap() {
@@ -128,6 +173,7 @@ function LoadMap() {
             renderers: renderer,
             eventListeners: listener
         });
+        console.log(vectorLayer);
         vectorLayer.addFeatures(getImageThumbnail());
 
         function getImageThumbnail(){
@@ -156,7 +202,6 @@ function LoadMap() {
         };
         return new OpenLayers.Feature.Vector(transformedCoordinate(longitude, latitude),null,style);
     }
-
     function transformedCoordinate(longitude, latitude) {
         var point = new OpenLayers.Geometry.Point(latitude, longitude);
         point.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));

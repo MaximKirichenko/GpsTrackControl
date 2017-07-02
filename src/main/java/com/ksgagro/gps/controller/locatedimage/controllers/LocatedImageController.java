@@ -1,10 +1,5 @@
 package com.ksgagro.gps.controller.locatedimage.controllers;
 
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.Directory;
-import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
 import com.ksgagro.gps.controller.JSON.BasicJSON;
 import com.ksgagro.gps.controller.JSON.FailJSON;
 import com.ksgagro.gps.controller.JSON.SuccessJSON;
@@ -14,10 +9,7 @@ import com.ksgagro.gps.controller.locatedimage.json.LocatedImagePointJSON;
 import com.ksgagro.gps.logic.image.service.LocatedImageService;
 import com.ksgagro.gps.logic.image.service.mapper.LocatedImageBOMapper;
 import com.ksgagro.gps.logic.image.service.model.LocatedImageBO;
-import com.ksgagro.gps.logic.image.service.model.LocatedImageBytesBO;
-import com.ksgagro.gps.logic.image.service.model.LocatedImageInfoBO;
 import com.ksgagro.gps.utils.exception.BrokenGeoTagException;
-import javaxt.io.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -54,8 +40,9 @@ public class LocatedImageController {
     }
 
     @RequestMapping(value = "/located/image")
-    public ModelAndView buildChartPage(){
+    public ModelAndView init(){
         ModelAndView model = new ModelAndView("located_image");
+        model.addObject("images_info", mapper.toJSONs(imageService.list()));
         return model;
     }
 
@@ -63,12 +50,11 @@ public class LocatedImageController {
     public @ResponseBody BasicJSON upload(@RequestParam MultipartFile image){
         try {
             LocatedImageBO bo = locatedImageBOMapper.toBO(image.getInputStream());
-            imageService.save(bo);
-            imageService.saveToDisk(bo, image.getInputStream());
-        } catch (IOException | ImageProcessingException e) {
-            return new FailJSON("Saving error. Please contact administrator");
-        } catch (BrokenGeoTagException e) {
+            imageService.save(bo, image.getInputStream());
+        }catch (BrokenGeoTagException e) {
             return new FailJSON("No GeoTag in file. Please select image with GeoTag");
+        }catch (Exception e) {
+            return new FailJSON("Saving error. Please contact administrator");
         }
         return new SuccessJSON("Saving success");
     }

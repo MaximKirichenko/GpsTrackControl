@@ -13,10 +13,9 @@ import java.util.List;
  * Created by Maxim Kirichenko on 02.05.17.
  */
 public interface LocatedImageService {
+    void save(LocatedImageBO image, InputStream inputStream) throws IOException;
 
-    void save(Image image);
-
-    void save(LocatedImageBO image);
+    void saveToDatabase(LocatedImageBO image);
 
     void saveToDisk(LocatedImageBO image, InputStream inputStream) throws IOException;
 
