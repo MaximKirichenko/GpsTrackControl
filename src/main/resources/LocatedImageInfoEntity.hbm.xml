@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ksgagro.gps.logic.image.persistence.model">
+    <class name="com.ksgagro.gps.logic.image.persistence.model.LocatedImageInfoEntity" table="LOCATED_IMAGE_INFO">
+        <id name="id" column="LOCATED_IMAGE_INFO_ID">
+            <generator class="sequence">
+                <param name="sequence">LOCATED_IMAGE_INFO_SEQ</param>
+            </generator>
+        </id>
+        <property name="name" column="IMAGE_NAME"/>
+        <property name="imageId" column="LOCATED_IMAGE_ID" />
+        <property name="longitude" column="LONGITUDE" />
+        <property name="latitude" column="LATITUDE" />
+        <property name="ownerId" column="OWNER_ID" />
+        <property name="creatorId" column="CREATOR_ID" />
+        <property name="creationTime" column="CREATION_TIME" />
+        <property name="updatedTime" column="UPDATE_TIME" />
+    </class>
+</hibernate-mapping>
