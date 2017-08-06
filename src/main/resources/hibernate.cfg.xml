@@ -26,6 +26,7 @@
         <mapping resource="TerminalDateDTO.hbm.xml" />
         <mapping resource="LocatedImageEntity.hbm.xml" />
         <mapping resource="LocatedImageInfoEntity.hbm.xml" />
+        <mapping resource="LastDeviceDate.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

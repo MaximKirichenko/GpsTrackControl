@@ -1,9 +1,6 @@
 package com.ksgagro.gps.service.impl;
 
-import com.ksgagro.gps.domain.Terminal;
-import com.ksgagro.gps.domain.TrackEntity;
-import com.ksgagro.gps.domain.Vehicle;
-import com.ksgagro.gps.domain.VehicleMenuItem;
+import com.ksgagro.gps.domain.*;
 import com.ksgagro.gps.repository.VehicleRepository;
 import com.ksgagro.gps.service.RoleFilter;
 import com.ksgagro.gps.service.TrackService;
@@ -73,12 +70,13 @@ public class VehicleServiceImpl implements VehicleService{
 		
 		
 		List<Vehicle> listVehicle = getFilteredList();
-		List<TrackEntity> listOfLastSignals = trackService.last();
+		List<Terminal> terminals = terminalService.all();
+		List<LastDeviceDateEntity> listOfLastSignals = trackService.last();
 		List<VehicleMenuItem> vehicleMenuItems = new ArrayList<>();
 		
 		for(Vehicle vehicle: listVehicle){
 			try{
-				TrackEntity terminalDate = getItemByVehicleFromLastSignalDate(vehicle, listOfLastSignals);
+				LastDeviceDateEntity terminalDate = getItemByVehicleFromLastSignalDate(getTerminal(terminals, vehicle.getTerminalNumber()), listOfLastSignals);
 				vehicleMenuItems.add(new VehicleMenuItem(vehicle, terminalDate));
 			}catch(RuntimeException exception){
 				System.err.println(exception.getMessage());
@@ -87,19 +85,20 @@ public class VehicleServiceImpl implements VehicleService{
 		}
 		return vehicleMenuItems;
 	}
-	
-	private TrackEntity getItemByVehicleFromLastSignalDate(Vehicle vehicle, List<TrackEntity> terminalDates){
-		Terminal terminal = terminalService.getTerminalByVehicle(vehicle.getId());
-		if(terminal==null){
-			throw new NullPointerException("No terminal on vehicle with ID: " + vehicle.getId());
-		}
-		for(TrackEntity date: terminalDates){
+
+	private Terminal getTerminal(List<Terminal> terminals, int terminalNumber) {
+		return terminals.stream().filter(terminal -> terminal.getId() == terminalNumber).findFirst().get();
+	}
+
+	private LastDeviceDateEntity getItemByVehicleFromLastSignalDate(Terminal terminal, List<LastDeviceDateEntity> terminalDates){
+
+		for(LastDeviceDateEntity date: terminalDates){
 			if(terminal.getImei().equals(date.getImei())){
 				return date;
 			}
 				
 		}
-		throw new RuntimeException("Not dates for vehicle with id: " + vehicle.getId());
+		return null;
 	}
 
 	@Override

@@ -61,7 +61,7 @@ public class TerminalRepositoryImpl implements TerminalRepository{
     }
 
     @Override
-	@javax.transaction.Transactional
+	@Transactional
     public List<TerminalDateDTO> getTerminals() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "SELECT imei, MIN(MESSAGE_DATE) AS MESSAGE_DATE FROM DEVICE_DATE GROUP BY IMEI";
@@ -80,4 +80,12 @@ public class TerminalRepositoryImpl implements TerminalRepository{
 
 		return (Terminal)criteria.uniqueResult();
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+    public List<Terminal> all() {
+		return sessionFactory.getCurrentSession().createCriteria(Terminal.class).add(Restrictions.eq("uninstal_date", 0l)).list();
+	}
+
 }

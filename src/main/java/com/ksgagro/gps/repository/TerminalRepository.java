@@ -18,4 +18,6 @@ public interface TerminalRepository {
     List<TerminalDateDTO> getTerminals();
 
     Terminal byVehicle(int vehicleId);
+
+    List<Terminal> all();
 }

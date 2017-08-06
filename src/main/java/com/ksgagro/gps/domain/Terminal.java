@@ -11,7 +11,7 @@ public class Terminal implements Serializable{
 	private String name;
 	private String soft;
 	private String telephone;
-	private int vehicle;
+	private Integer vehicle;
 	private long instal_date;
 	private long uninstal_date;
 	
@@ -54,16 +54,20 @@ public class Terminal implements Serializable{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	
-	
-	public int getVehicle() {
+
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Integer getVehicle() {
 		return vehicle;
 	}
-	public void setVehicle(int vehicle) {
+
+	public void setVehicle(Integer vehicle) {
 		this.vehicle = vehicle;
 	}
-	
-	
+
 	public long getInstal_date() {
 		return instal_date;
 	}

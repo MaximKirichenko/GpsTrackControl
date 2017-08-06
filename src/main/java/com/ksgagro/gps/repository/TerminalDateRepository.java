@@ -2,6 +2,7 @@ package com.ksgagro.gps.repository;
 
 import java.util.List;
 
+import com.ksgagro.gps.domain.LastDeviceDateEntity;
 import com.ksgagro.gps.domain.TrackEntity;
 
 public interface TerminalDateRepository {
@@ -13,5 +14,5 @@ public interface TerminalDateRepository {
 
 	TrackEntity getLastSignal(String imei);
 
-	List<TrackEntity> getLastSignals();
+	List<LastDeviceDateEntity> getLastSignals();
 }

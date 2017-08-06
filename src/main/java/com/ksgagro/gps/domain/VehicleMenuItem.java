@@ -3,28 +3,30 @@ package com.ksgagro.gps.domain;
 public class VehicleMenuItem {
 	
 	private Vehicle vehicle;
-	private TrackEntity lastSignal;
-	
-	public VehicleMenuItem() {
-		super();
-	}
-	public VehicleMenuItem(Vehicle vehicle, TrackEntity lastSignal) {
+	private LastDeviceDateEntity lastSignal;
+
+	public VehicleMenuItem(Vehicle vehicle, LastDeviceDateEntity lastSignal) {
 		super();
 		this.vehicle = vehicle;
 		this.lastSignal = lastSignal;
 	}
+
 	public Vehicle getVehicle() {
 		return vehicle;
 	}
+
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	public TrackEntity getLastSignal() {
+
+	public LastDeviceDateEntity getLastSignal() {
 		return lastSignal;
 	}
-	public void setLastSignal(TrackEntity lastSignal) {
+
+	public void setLastSignal(LastDeviceDateEntity lastSignal) {
 		this.lastSignal = lastSignal;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -32,6 +34,7 @@ public class VehicleMenuItem {
 		result = prime * result + ((vehicle == null) ? 0 : vehicle.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

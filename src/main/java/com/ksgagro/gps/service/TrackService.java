@@ -3,6 +3,7 @@ package com.ksgagro.gps.service;
 import java.util.Date;
 import java.util.List;
 
+import com.ksgagro.gps.domain.LastDeviceDateEntity;
 import com.ksgagro.gps.dto.MultiTrackQuery;
 import com.ksgagro.gps.dto.TrackBO;
 import com.ksgagro.gps.domain.Refueling;
@@ -32,7 +33,7 @@ public interface TrackService {
 
 	List<Refueling> getRefulingDate(List<List<TrackEntity>> stops, int terminalNumber);
 
-	List<TrackEntity> last();
+	List<LastDeviceDateEntity> last();
 
 	TrackEntity last(String imei);
 }

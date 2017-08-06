@@ -2,6 +2,7 @@ package com.ksgagro.gps.repository.impl;
 
 import java.util.List;
 
+import com.ksgagro.gps.domain.LastDeviceDateEntity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,14 +50,9 @@ public class TerminalDateRepositoryImpl implements TerminalDateRepository {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
-	public List<TrackEntity> getLastSignals() {
-		DetachedCriteria  groupingCriteria = DetachedCriteria.forClass(TrackEntity.class);
-		groupingCriteria.setProjection(Projections.projectionList().
-				add(Projections.groupProperty("imei")).
-				add(Projections.max("messageDate")));
+	public List<LastDeviceDateEntity> getLastSignals() {
 		
-		return sessionFactory.getCurrentSession().createCriteria(TrackEntity.class)
-				.add(Subqueries.propertiesIn(new String[]{"imei", "messageDate"},  groupingCriteria)).list();
+		return sessionFactory.getCurrentSession().createCriteria(LastDeviceDateEntity.class).list();
 
 	}
 	@SuppressWarnings("unchecked")

@@ -8,14 +8,10 @@
 		<id name="id" column="ID">
 			<generator class="native" />
 		</id>
+		<property name="terminalNumber" column="NUMBERTERMINAL" />
 		<property name="name" column="NAME" />
 		<property name="regNumber" column="REG_NUMBER" />
-		
-		
-		<many-to-one name="group" column="GROUP_VEHICLE" unique="false" 
-		class="VehicleGroup" not-null="true" lazy="false"/>
-		
-		<many-to-one name="enterprise" column="ENTERPRISE" unique="false"
-		class="Location" not-null="true" lazy="false"/>
+		<many-to-one name="group" column="GROUP_VEHICLE" class="VehicleGroup" not-null="true" lazy="false"/>
+		<many-to-one name="enterprise" column="ENTERPRISE" class="Location" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

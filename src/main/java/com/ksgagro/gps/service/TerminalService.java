@@ -19,4 +19,6 @@ public interface TerminalService {
     List<Terminal> getTerminalsByVehicles(List<Integer> vehicleIds);
 
     Terminal getTerminalByVehicle(int vehicleId);
+
+    List<Terminal> all();
 }

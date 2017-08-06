@@ -134,7 +134,7 @@ public class TrackServiceImpl implements TrackService {
 	}
 	
 	@Override
-	public List<TrackEntity> last(){
+	public List<LastDeviceDateEntity> last(){
 		return trackRepository.getLastSignals();
 	}
 	

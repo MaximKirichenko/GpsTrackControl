@@ -7,6 +7,7 @@ public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 4604304450106985899L;
 	
 	private int id;
+	private int terminalNumber;
 	private String name;
 	private String regNumber;
 	private VehicleGroup group;
@@ -23,28 +24,46 @@ public class Vehicle implements Serializable{
 		this.id = id;
 	}
 
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public int getTerminalNumber() {
+		return terminalNumber;
+	}
+
+	public void setTerminalNumber(int terminalNumber) {
+		this.terminalNumber = terminalNumber;
+	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getRegNumber() {
 		return regNumber;
 	}
+
 	public void setRegNumber(String regNumber) {
 		this.regNumber = regNumber;
 	}
+
 	public VehicleGroup getGroup() {
 		return group;
 	}
+
 	public void setGroup(VehicleGroup group) {
 		this.group = group;
 	}
+
 	public Location getEnterprise() {
 		return enterprise;
 	}
+
 	public void setEnterprise(Location enterprise) {
 		this.enterprise = enterprise;
 	}

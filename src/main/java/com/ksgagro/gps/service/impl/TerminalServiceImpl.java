@@ -45,4 +45,9 @@ public class TerminalServiceImpl implements TerminalService{
         return terminalRepository.byVehicle(vehicleId);
     }
 
+    @Override
+    public List<Terminal> all() {
+        return terminalRepository.all();
+    }
+
 }
